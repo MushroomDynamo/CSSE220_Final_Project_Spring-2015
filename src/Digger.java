@@ -1,4 +1,4 @@
 
-public class Digger {
-
+public class Digger{
+	//test
 }
