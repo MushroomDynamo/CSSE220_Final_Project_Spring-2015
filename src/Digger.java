@@ -11,10 +11,8 @@ public class Digger extends JFrame {
 		gameFrame.setPreferredSize(new Dimension(640,480));
 		gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		gameFrame.pack();
-		gameFrame.setLayout(null);
-		
+		gameRenderer gameRenderer = new gameRenderer();
+		gameFrame.add(gameRenderer);
 		gameFrame.setVisible(true);
-//		Graphics gameRenderer = new Graphics2D();
-//		gameFrame.paint(gameRenderer.draw3DRect(64, 64, 64, 64, true));
 	}
 }
