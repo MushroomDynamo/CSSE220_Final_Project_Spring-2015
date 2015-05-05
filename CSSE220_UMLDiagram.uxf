@@ -1,0 +1,397 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="13.2">
+  <zoom_level>13</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>468</x>
+      <y>221</y>
+      <w>273</w>
+      <h>143</h>
+    </coordinates>
+    <panel_attributes>GameObject
+--
+FIELDS
+-int xCoordinate
+-int yCoordinate
+--
+METHODS
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>429</x>
+      <y>351</y>
+      <w>169</w>
+      <h>104</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+&lt;&lt;instanceOf&gt;&gt;</panel_attributes>
+    <additional_attributes>10.0;60.0;60.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>299</x>
+      <y>429</y>
+      <w>273</w>
+      <h>104</h>
+    </coordinates>
+    <panel_attributes>TerrainObject
+--
+FIELDS
+--
+METHODS</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>598</x>
+      <y>351</y>
+      <w>182</w>
+      <h>104</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+&lt;&lt;instanceOf&gt;&gt;</panel_attributes>
+    <additional_attributes>120.0;60.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1209</x>
+      <y>611</y>
+      <w>273</w>
+      <h>104</h>
+    </coordinates>
+    <panel_attributes>playerCharacter
+--
+FIELDS
+--
+METHODS</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1508</x>
+      <y>611</y>
+      <w>273</w>
+      <h>104</h>
+    </coordinates>
+    <panel_attributes>enemyCharacter
+--
+FIELDS
+--
+METHODS</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1729</x>
+      <y>13</y>
+      <w>273</w>
+      <h>104</h>
+    </coordinates>
+    <panel_attributes>GenericObject
+--
+FIELDS
+--
+METHODS</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>741</x>
+      <y>546</y>
+      <w>624</w>
+      <h>91</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+&lt;&lt;instanceOf&gt;&gt;</panel_attributes>
+    <additional_attributes>460.0;50.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1508</x>
+      <y>767</y>
+      <w>273</w>
+      <h>104</h>
+    </coordinates>
+    <panel_attributes>enemyNobbin
+--
+FIELDS
+--
+METHODS</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1794</x>
+      <y>767</y>
+      <w>273</w>
+      <h>104</h>
+    </coordinates>
+    <panel_attributes>enemyHobbin
+--
+FIELDS
+--
+METHODS</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1625</x>
+      <y>702</y>
+      <w>143</w>
+      <h>91</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+&lt;&lt;instanceOf&gt;&gt;</panel_attributes>
+    <additional_attributes>10.0;50.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1716</x>
+      <y>702</y>
+      <w>234</w>
+      <h>91</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+&lt;&lt;instanceOf&gt;&gt;</panel_attributes>
+    <additional_attributes>160.0;50.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>299</x>
+      <y>611</y>
+      <w>273</w>
+      <h>104</h>
+    </coordinates>
+    <panel_attributes>terrainObjectDirt
+--
+FIELDS
+--
+METHODS</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>611</x>
+      <y>429</y>
+      <w>273</w>
+      <h>130</h>
+    </coordinates>
+    <panel_attributes>MovingObject
+--
+FIELDS
+--
+METHODS
+boolean isLocationFree
+boolean isExcavatable</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>741</x>
+      <y>546</y>
+      <w>923</w>
+      <h>91</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+&lt;&lt;instanceOf&gt;&gt;</panel_attributes>
+    <additional_attributes>690.0;50.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>429</x>
+      <y>520</y>
+      <w>143</w>
+      <h>117</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+&lt;&lt;instanceOf&gt;&gt;</panel_attributes>
+    <additional_attributes>10.0;70.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>0</x>
+      <y>611</y>
+      <w>273</w>
+      <h>104</h>
+    </coordinates>
+    <panel_attributes>terrainObjectEmerald
+--
+FIELDS
+--
+METHODS</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>117</x>
+      <y>520</y>
+      <w>351</w>
+      <h>117</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+&lt;&lt;instanceOf&gt;&gt;</panel_attributes>
+    <additional_attributes>10.0;70.0;250.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>611</x>
+      <y>611</y>
+      <w>273</w>
+      <h>104</h>
+    </coordinates>
+    <panel_attributes>objectGoldBag
+--
+FIELDS
+--
+METHODS</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>741</x>
+      <y>546</y>
+      <w>143</w>
+      <h>91</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+&lt;&lt;instanceOf&gt;&gt;</panel_attributes>
+    <additional_attributes>20.0;50.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>910</x>
+      <y>611</y>
+      <w>273</w>
+      <h>104</h>
+    </coordinates>
+    <panel_attributes>objectProjectile
+--
+FIELDS
+--
+METHODS</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>741</x>
+      <y>546</y>
+      <w>338</w>
+      <h>91</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+&lt;&lt;instanceOf&gt;&gt;</panel_attributes>
+    <additional_attributes>240.0;50.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>910</x>
+      <y>221</y>
+      <w>273</w>
+      <h>104</h>
+    </coordinates>
+    <panel_attributes>GameController
+--
+FIELDS
+--
+METHODS</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1209</x>
+      <y>221</y>
+      <w>299</w>
+      <h>130</h>
+    </coordinates>
+    <panel_attributes>GameDrawer (static)
+--
+FIELDS
+ArrayList&lt;Object&gt; drawQueue
+--
+METHODS
+boolean registerObjectForDrawing</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>2080</x>
+      <y>767</y>
+      <w>273</w>
+      <h>104</h>
+    </coordinates>
+    <panel_attributes>enemyFiller
+--
+FIELDS
+--
+METHODS
+fg=red</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1768</x>
+      <y>650</y>
+      <w>481</w>
+      <h>143</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+&lt;&lt;instanceOf&gt;&gt;</panel_attributes>
+    <additional_attributes>350.0;90.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>2366</x>
+      <y>767</y>
+      <w>273</w>
+      <h>104</h>
+    </coordinates>
+    <panel_attributes>enemyFakeBlock
+--
+FIELDS
+--
+METHODS
+fg=red</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1768</x>
+      <y>624</y>
+      <w>754</w>
+      <h>169</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+&lt;&lt;instanceOf&gt;&gt;</panel_attributes>
+    <additional_attributes>560.0;110.0;10.0;10.0</additional_attributes>
+  </element>
+</diagram>
