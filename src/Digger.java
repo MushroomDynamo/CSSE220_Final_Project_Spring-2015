@@ -8,6 +8,7 @@ public class Digger extends JFrame {
 
 	public static void main(String args[]) {
 		JFrame gameFrame = new JFrame("Digger");
+		gameGrid.instantiateGameGrid(gameFrame,15,20);
 		gameFrame.setPreferredSize(new Dimension(640,480));
 		gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		gameFrame.pack();
@@ -15,4 +16,5 @@ public class Digger extends JFrame {
 		gameFrame.add(gameRenderer);
 		gameFrame.setVisible(true);
 	}
+	
 }

@@ -1,11 +1,13 @@
 import java.awt.Dimension;
 import java.util.ArrayList;
+
 import javax.swing.*;
 
-public class gameGrid {
-	ArrayList<Object> yGrid = new ArrayList<Object>();
+public abstract class gameGrid {
 	
-	public gameGrid(JFrame gameFrame,int width, int height) {
+	static ArrayList<ArrayList<objectDrawable>> yGrid = new ArrayList<ArrayList<objectDrawable>>();
+	
+	public static void instantiateGameGrid(JFrame gameFrame,int width, int height) {
 		for (int i=0;i<height;i++) {
 			ArrayList<objectDrawable> xGrid = new ArrayList<objectDrawable>();
 			yGrid.add(xGrid);

@@ -10,4 +10,8 @@ public class objectDrawable {
 		this.objectType = objectTypeToSet;
 		return true;
 	}
+	
+	public String getObjectType() {
+		return objectType;
+	}
 }
