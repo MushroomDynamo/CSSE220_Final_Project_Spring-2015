@@ -1,4 +1,3 @@
-import java.awt.Color;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
@@ -18,15 +17,14 @@ public abstract class levelManager {
 				for (int j=0;j<xGrid.size();j++) {
 					objectDrawable gameObject = xGrid.get(j);
 					int nextChar = reader.read();
-					switch (nextChar) {
-						case 1: nextChar = 48;
-							gameObject.setObjectType("null");
-							break;
-						case 2: nextChar = 49;
-							gameObject.setObjectType("not-null");
-							break;
-						case 3: nextChar = -1;
-							break;
+					if (nextChar == 48) {
+						gameObject.setObjectType("null");
+						System.out.println("null set");
+					} else if (nextChar == 49) {
+						gameObject.setObjectType("not-null");
+						System.out.println("dingbats");
+					} else if (nextChar == -1) {
+						System.out.println("eof");
 					}
 				}
 			}

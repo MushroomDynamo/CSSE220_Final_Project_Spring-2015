@@ -14,7 +14,7 @@ public class gameRenderer extends JPanel {
 					g2d.setColor(Color.black);
 					g2d.fillRect(i*32, j*32, (i*32)+32, (j*32)+32);
 				} else {
-					g2d.setColor(Color.cyan)
+					g2d.setColor(Color.cyan);
 					g2d.fillRect(i*32, j*32, (i*32)+32, (j*32)+32);
 				}
 			}
