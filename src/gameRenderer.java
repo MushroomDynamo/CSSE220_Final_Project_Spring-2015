@@ -12,7 +12,7 @@ public class gameRenderer extends JPanel {
 				String objectType = xGrid.get(j).getObjectType();
 				if (objectType == "null") {
 					g2d.setColor(Color.black);
-					g2d.drawRect(i*32, j*32, (i*32)+32, (j*32)+32);
+					g2d.fillRect(i*32, j*32, (i*32)+32, (j*32)+32);
 				}
 			}
 		}
