@@ -19,10 +19,12 @@ public abstract class levelManager {
 					int nextChar = reader.read();
 					if (nextChar == 48) {
 						gameObject.setObjectType("null");
-						System.out.println("null set");
 					} else if (nextChar == 49) {
-						gameObject.setObjectType("not-null");
-						System.out.println("dingbats");
+						gameObject.setObjectType("ground");
+					} else if (nextChar == 50) {
+						gameObject.setObjectType("emerald");
+					} else if (nextChar == 51) {
+						gameObject.setObjectType("hero");
 					} else if (nextChar == -1) {
 						System.out.println("eof");
 					}
