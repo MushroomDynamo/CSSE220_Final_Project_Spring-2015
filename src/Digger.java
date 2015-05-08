@@ -1,10 +1,11 @@
 import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.io.IOException;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
 
-import javax.swing.*;
+import javax.swing.AbstractAction;
+import javax.swing.JComponent;
+import javax.swing.JFrame;
+import javax.swing.KeyStroke;
 
 public class Digger extends JFrame {
 	
@@ -40,6 +41,7 @@ public class Digger extends JFrame {
 //				} else {
 //					System.out.println("blargh");
 //				}
+					
             }
         });
         gameRenderer.getActionMap().put("left", new AbstractAction() {
