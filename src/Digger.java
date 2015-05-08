@@ -25,7 +25,16 @@ public class Digger extends JFrame {
 	    gameRenderer.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_DOWN, 0), "down");
 	    gameRenderer.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_U, 0), "advance_level");
 	    gameRenderer.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_D, 0), "regress_level");
+	    gameRenderer.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_SPACE, 0), "attack");
 	    
+	    
+	    gameRenderer.getActionMap().put("attack", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("DIE!");
+               //implement an attacking animation
+            }
+        });
         gameRenderer.getActionMap().put("right", new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
