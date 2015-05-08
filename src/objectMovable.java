@@ -12,11 +12,15 @@ public class objectMovable {
 		}
 	}
 	
+	
+	
 	public void shiftToCoordinate(int x_position,int y_position,String objectType) {
 		gameGrid.yGrid.get(this.yPos).get(this.xPos).setObjectType("null");
 		xPos = x_position;
 		yPos = y_position;
 		gameGrid.yGrid.get(this.yPos).get(this.xPos).setObjectType(objectType);
+		
+		
 	}
 	
 }
