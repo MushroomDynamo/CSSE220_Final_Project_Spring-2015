@@ -90,7 +90,7 @@ public class Digger extends JFrame {
 		
 		new Digger();
 		gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		gameGrid.instantiateGameGrid(gameFrame,20,15);
+		gameGrid.instantiateGameGrid(gameFrame,gameWidth,gameHeight);
 		
 		gameFrame.getContentPane().add(gameRenderer);
 		gameRenderer.setPreferredSize(new Dimension(640,480));
