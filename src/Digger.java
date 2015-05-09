@@ -138,9 +138,27 @@ public class Digger extends JFrame {
 		return tickableRegistry;
 	}
 	
+	public static boolean clearTickableRegistry() {
+		for (int i=1;i<tickableRegistry.size();i++) {
+			int[] objectCoordinates = ((objectMonster) tickableRegistry.get(i)).returnCoordinates();
+			//Figure out better casting method later
+			gameGrid.yGrid.get(objectCoordinates[1]).get(objectCoordinates[0]).setObjectType("null");
+		}
+		tickableRegistry.clear();
+		return true;
+	}
+	
 	public static int[] returnHeroCoordinates() {
 		int[] coordinatePair = {Hero.xPos,Hero.yPos};
 		return coordinatePair;
+	}
+	
+	public static String[] returnLevelList() {
+		return levelList;
+	}
+	
+	public static int returnLevelPosition() {
+		return levelPosition;
 	}
 	
 }

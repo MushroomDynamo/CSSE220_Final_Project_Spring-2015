@@ -7,17 +7,17 @@ public class moneyBag extends objectMovable {
 		this.yPos = y;
 	}
 	public boolean wilBreak(int x,int y){
-		if(fall(x,y)==true && fall(x,y-1)==true){
+		if(fall(x,y)==true && fall(x,y+1)==true){
 			return true;
-		}else{
-			return false;
 		}
+			return false;
+	
 	}
 	public boolean fall(int x,int y){
-		if(checkCoordinate(x, y-1)=="dirt" ||  checkCoordinate(x, y-1)=="emerald" || checkCoordinate(x, y-1)=="moneyBag"){
+		if(checkCoordinate(x, y+1)=="dirt" ||  checkCoordinate(x, y+1)=="emerald" || checkCoordinate(x, y+1)=="moneyBag"){
 			return false;
-		}else{
-			return true;
 		}
+			return true;
+		
 	}
 }

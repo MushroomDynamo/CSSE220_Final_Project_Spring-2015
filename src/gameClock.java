@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 
 public class gameClock implements Runnable {
 	
@@ -31,11 +30,22 @@ public class gameClock implements Runnable {
 								((objectMonster) objectToTick).shiftToCoordinate(monsterCoordinates[0],monsterCoordinates[1]-1,"monster");
 							} else {
 								System.out.println("You have been dingbatted");
+								Digger.Hero.setHeroDead(true);
+								System.out.println(Digger.Hero.getHeroDead());
 							}
 						}
 					}
 				}
 			}
+			
+			if(Digger.Hero.getHeroDead()){
+				Digger.clearTickableRegistry();
+				levelManager.refresh(Digger.returnLevelList()[Digger.returnLevelPosition()]);
+				//Kind of kludgey, but we'll do this for now
+				gameGrid.yGrid.get(Digger.Hero.yPos).get(Digger.Hero.xPos).setObjectType("null");
+				Digger.Hero.setHeroDead(false);
+				
+				}
 			
 			try {
 				Thread.sleep(125);

@@ -7,9 +7,9 @@ public class objectMovable {
 	public boolean checkForCollisionAtCoordinate(int x_position,int y_position) {
 		if (gameGrid.yGrid.get(y_position).get(x_position).getObjectType() != "null") {
 			return true;
-		} else {
+		} 
 			return false;
-		}
+		
 	}
 	public String checkCoordinate(int x_position,int y_position) {
 		return gameGrid.yGrid.get(y_position).get(x_position).getObjectType(); 	
