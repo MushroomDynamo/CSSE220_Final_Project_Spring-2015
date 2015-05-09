@@ -15,6 +15,7 @@ public class Digger extends JFrame {
 	public static objectHero Hero;
 	private static String[] levelList = {"test_level.txt","test_level_2.txt"};
 	private static int levelPosition = 0;
+	public static moneyBag moneyBag;
 	public static int gameWidth = 20;
 	public static int gameHeight = 15;
 	private static ArrayList<Object> tickableRegistry = new ArrayList<Object>();
