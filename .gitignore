@@ -3,3 +3,5 @@
 .classpath
 *.classpath
 *.class
+*.class
+bin/Digger.class
