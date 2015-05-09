@@ -16,6 +16,7 @@ public class Digger extends JFrame {
 	private static int levelPosition = 0;
 	private static int gameWidth = 20;
 	private static int gameHeight = 15;
+	public static moneyBag moneyBag;
 	
 	public Digger() {
 
