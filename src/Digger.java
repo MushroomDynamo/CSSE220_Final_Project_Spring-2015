@@ -1,6 +1,7 @@
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 
 import javax.swing.AbstractAction;
 import javax.swing.JComponent;
@@ -16,6 +17,7 @@ public class Digger extends JFrame {
 	private static int levelPosition = 0;
 	public static int gameWidth = 20;
 	public static int gameHeight = 15;
+	private static ArrayList<Object> tickableRegistry = new ArrayList<Object>();
 	
 	public Digger() {
 
@@ -112,6 +114,15 @@ public class Digger extends JFrame {
 				e.printStackTrace();
 			}
 		}
+	}
+	
+	public static boolean insertObjectIntoTickableRegistry(Object object) {
+		tickableRegistry.add(object);
+		return true;
+	}
+	
+	public static int tickableRegistrySize() {
+		return tickableRegistry.size();
 	}
 	
 }

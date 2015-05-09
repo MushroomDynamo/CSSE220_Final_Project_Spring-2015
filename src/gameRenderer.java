@@ -1,6 +1,7 @@
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Random;
+
 import javax.swing.*;
 
 public class gameRenderer extends JPanel {
@@ -23,7 +24,11 @@ public class gameRenderer extends JPanel {
 				} else if (objectType == "hero") {
 					g2d.setColor(Color.magenta);
 					g2d.fillRect(j*32, i*32, (j*32)+32, (i*32)+32);
-					objectHero Hero = new objectHero(j,i);
+					new objectHero(j,i);
+				} else if (objectType == "monster") {
+					g2d.setColor(Color.red);
+					g2d.fillRect(j*32, i*32, (j*32)+32, (i*32)+32);
+					new objectMonster(j,i);
 				}
 			}
 		}
