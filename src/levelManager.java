@@ -25,9 +25,11 @@ public abstract class levelManager {
 						gameObject.setObjectType("emerald");
 					} else if (nextChar == 51) {
 						gameObject.setObjectType("hero");
+						new objectHero(j,i);
 					} else if (nextChar == 52) {
 						//Note: this should not be used in a level design context as it's a generic monster class
 						gameObject.setObjectType("monster");
+						new objectMonster(j,i);
 					} else if (nextChar == -1) {
 						System.out.println("eof");
 					}

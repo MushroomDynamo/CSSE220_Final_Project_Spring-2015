@@ -19,6 +19,7 @@ public class Digger extends JFrame {
 	public static int gameWidth = 20;
 	public static int gameHeight = 15;
 	private static ArrayList<Object> tickableRegistry = new ArrayList<Object>();
+	public static int frameInterval = 50;
 	
 	public Digger() {
 
@@ -107,10 +108,14 @@ public class Digger extends JFrame {
 		gameFrame.setVisible(true);
 		levelManager.readLevelFile("test_level.txt");
 		
+		gameClock gameClock = new gameClock();
+		Thread gameClockThread = new Thread(gameClock);
+		gameClockThread.start();
+		
 		while (true) {
 			gameFrame.repaint();
 			try {
-				Thread.sleep(50);
+				Thread.sleep(frameInterval);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
@@ -122,8 +127,13 @@ public class Digger extends JFrame {
 		return true;
 	}
 	
-	public static int tickableRegistrySize() {
-		return tickableRegistry.size();
+	public static ArrayList<Object> dumpTickableRegistry() {
+		return tickableRegistry;
+	}
+	
+	public static int[] returnHeroCoordinates() {
+		int[] coordinatePair = {Hero.xPos,Hero.yPos};
+		return coordinatePair;
 	}
 	
 }
