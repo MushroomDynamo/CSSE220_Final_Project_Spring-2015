@@ -14,8 +14,8 @@ public class Digger extends JFrame {
 	public static objectHero Hero;
 	private static String[] levelList = {"test_level.txt","test_level_2.txt"};
 	private static int levelPosition = 0;
-	private static int gameWidth = 20;
-	private static int gameHeight = 15;
+	public static int gameWidth = 20;
+	public static int gameHeight = 15;
 	
 	public Digger() {
 
