@@ -21,6 +21,9 @@ public class Digger extends JFrame {
 	private static ArrayList<Object> tickableRegistry = new ArrayList<Object>();
 	public static int frameInterval = 50;
 	
+	static gameClock gameClock = new gameClock();
+	static Thread gameClockThread = new Thread(gameClock);
+	
 	public Digger() {
 
 	    gameRenderer.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_UP, 0), "up");
@@ -84,14 +87,20 @@ public class Digger extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
             	levelPosition = levelPosition + 1;
+            	//gameClockThread.interrupt();
+            	tickableRegistry.clear();
             	levelManager.readLevelFile(levelList[levelPosition]);
+            	//gameClockThread.start();
             }
         });
         gameRenderer.getActionMap().put("regress_level", new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
             	levelPosition = levelPosition - 1;
+            	//gameClockThread.interrupt();
+            	tickableRegistry.clear();
             	levelManager.readLevelFile(levelList[levelPosition]);
+            	//gameClockThread.start();
             }
         });
 	}
@@ -106,10 +115,8 @@ public class Digger extends JFrame {
 		gameRenderer.setPreferredSize(new Dimension(640,480));
 		gameFrame.pack();
 		gameFrame.setVisible(true);
-		levelManager.readLevelFile("test_level.txt");
 		
-		gameClock gameClock = new gameClock();
-		Thread gameClockThread = new Thread(gameClock);
+		levelManager.readLevelFile("test_level.txt");
 		gameClockThread.start();
 		
 		while (true) {

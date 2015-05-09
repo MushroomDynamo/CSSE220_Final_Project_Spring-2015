@@ -6,7 +6,7 @@ public class gameClock implements Runnable {
 
 	@Override
 	public void run() {
-		while (true) {
+		while (!Thread.interrupted()) {
 			this.measuredTickClock = this.measuredTickClock + Digger.frameInterval;
 			if (this.measuredTickClock > 1000) {
 				this.measuredTickClock = 0;
@@ -40,7 +40,7 @@ public class gameClock implements Runnable {
 			try {
 				Thread.sleep(125);
 			} catch (InterruptedException e) {
-				e.printStackTrace();
+				System.out.println("Thread sleep interrupted");
 			}
 		}
 	}
