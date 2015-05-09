@@ -2,3 +2,8 @@
 /.settings/
 .classpath
 *.classpath
+*.class
+*.class
+bin/Digger.class
+*.class
+bin/Digger.class
