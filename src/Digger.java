@@ -1,8 +1,12 @@
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.imageio.ImageIO;
 import javax.swing.AbstractAction;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
@@ -15,95 +19,100 @@ public class Digger extends JFrame {
 	public static objectHero Hero;
 	private static String[] levelList = {"test_level.txt","test_level_2.txt"};
 	private static int levelPosition = 0;
-	public static moneyBag moneyBag;
+	//public static moneyBag moneyBag;
 	public static int gameWidth = 20;
 	public static int gameHeight = 15;
 	private static ArrayList<Object> tickableRegistry = new ArrayList<Object>();
-	public static int frameInterval = 50;
+	public static int frameInterval = 5;
 	
 	static gameClock gameClock = new gameClock();
 	static Thread gameClockThread = new Thread(gameClock);
 	
+	public static String bufferedAction = "null";
+	
+	//Texture fields
+	public static BufferedImage dirtImage;
+	public static BufferedImage emeraldImage;
+	public static BufferedImage moneybagImage;
+	public static BufferedImage goldImage;
+	//End texture fields
+	
 	public Digger() {
+		
+		//Load textures
+		String texturepath;
+		try {
+			texturepath = new java.io.File(".").getCanonicalPath();
+			texturepath = texturepath + "\\texture\\";
+			dirtImage = ImageIO.read(new File(texturepath + "dirt.png"));
+			emeraldImage = ImageIO.read(new File(texturepath + "emerald.png"));
+			moneybagImage = ImageIO.read(new File(texturepath + "moneybag.png"));
+			goldImage = ImageIO.read(new File(texturepath + "gold.png"));
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 
-	    gameRenderer.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_UP, 0), "up");
-	    gameRenderer.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_LEFT, 0), "left");
-	    gameRenderer.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_RIGHT, 0), "right");
-	    gameRenderer.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_DOWN, 0), "down");
-	    gameRenderer.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_U, 0), "advance_level");
-	    gameRenderer.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_D, 0), "regress_level");
-	    gameRenderer.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_SPACE, 0), "attack");
-	    
-	    
-	    gameRenderer.getActionMap().put("attack", new AbstractAction() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                System.out.println("DIE!");
-               //implement an attacking animation
-            }
-        });
-        gameRenderer.getActionMap().put("right", new AbstractAction() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-//                if (Hero.checkForCollisionAtCoordinate(Hero.xPos+1,Hero.yPos) == false) {
-					Hero.shiftToCoordinate(Hero.xPos+1,Hero.yPos,"hero");
-//				} else {
-//					System.out.println("blargh");
-//				}
-					
-            }
-        });
-        gameRenderer.getActionMap().put("left", new AbstractAction() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-//                if (Hero.checkForCollisionAtCoordinate(Hero.xPos-1,Hero.yPos) == false) {
-					Hero.shiftToCoordinate(Hero.xPos-1,Hero.yPos,"hero");
-//				} else {
-//					System.out.println("blargh");
-//				}
-            }
-        });
-        gameRenderer.getActionMap().put("up", new AbstractAction() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-//                if (Hero.checkForCollisionAtCoordinate(Hero.xPos,Hero.yPos-1) == false) {
-            	
-					Hero.shiftToCoordinate(Hero.xPos,Hero.yPos-1,"hero");
-//				} else {
-//					System.out.println("blargh");
-//				}
-            }
-        });
-        gameRenderer.getActionMap().put("down", new AbstractAction() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-//                if (Hero.checkForCollisionAtCoordinate(Hero.xPos,Hero.yPos+1) == false) {
-					Hero.shiftToCoordinate(Hero.xPos,Hero.yPos+1,"hero");
-//				} else {
-//					System.out.println("blargh");
-//				}
-            }
-        });
-        gameRenderer.getActionMap().put("advance_level", new AbstractAction() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-            	levelPosition = levelPosition + 1;
-            	//gameClockThread.interrupt();
-            	tickableRegistry.clear();
-            	levelManager.readLevelFile(levelList[levelPosition]);
-            	//gameClockThread.start();
-            }
-        });
-        gameRenderer.getActionMap().put("regress_level", new AbstractAction() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-            	levelPosition = levelPosition - 1;
-            	//gameClockThread.interrupt();
-            	tickableRegistry.clear();
-            	levelManager.readLevelFile(levelList[levelPosition]);
-            	//gameClockThread.start();
-            }
-        });
+		gameRenderer.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_UP, 0), "up");
+		gameRenderer.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_LEFT, 0), "left");
+		gameRenderer.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_RIGHT, 0), "right");
+		gameRenderer.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_DOWN, 0), "down");
+		gameRenderer.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_U, 0), "advance_level");
+		gameRenderer.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_D, 0), "regress_level");
+		gameRenderer.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_SPACE, 0), "attack");
+
+		gameRenderer.getActionMap().put("right", new AbstractAction() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				bufferedAction = "right";
+			}
+		});
+		gameRenderer.getActionMap().put("left", new AbstractAction() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				bufferedAction = "left";
+			}
+		});
+		gameRenderer.getActionMap().put("up", new AbstractAction() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				bufferedAction = "up";
+			}
+		});
+		gameRenderer.getActionMap().put("down", new AbstractAction() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				bufferedAction = "down";
+			}
+		});
+		gameRenderer.getActionMap().put("advance_level", new AbstractAction() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				levelPosition = levelPosition + 1;
+				//gameClockThread.interrupt();
+				tickableRegistry.clear();
+				levelManager.readLevelFile(levelList[levelPosition]);
+				//gameClockThread.start();
+			}
+		});
+		gameRenderer.getActionMap().put("regress_level", new AbstractAction() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				levelPosition = levelPosition - 1;
+				//gameClockThread.interrupt();
+				tickableRegistry.clear();
+				levelManager.readLevelFile(levelList[levelPosition]);
+				//gameClockThread.start();
+			}
+		});
+		gameRenderer.getActionMap().put("attack", new AbstractAction() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				//System.out.println("DIE!");
+				//implement an attacking animation
+			}
+		});
+
 	}
 
 	public static void main(String args[]) {
@@ -144,9 +153,11 @@ public class Digger extends JFrame {
 	
 	public static boolean clearTickableRegistry() {
 		for (int i=1;i<tickableRegistry.size();i++) {
-			int[] objectCoordinates = ((objectMonster) tickableRegistry.get(i)).returnCoordinates();
-			//Figure out better casting method later
-			gameGrid.yGrid.get(objectCoordinates[1]).get(objectCoordinates[0]).setObjectType("null");
+			if (tickableRegistry.get(i) instanceof objectMonster) {
+				int[] objectCoordinates = ((objectMonster) tickableRegistry.get(i)).returnCoordinates();
+				//Figure out better casting method later
+				gameGrid.yGrid.get(objectCoordinates[1]).get(objectCoordinates[0]).setObjectType("null");
+			}
 		}
 		tickableRegistry.clear();
 		return true;

@@ -37,6 +37,21 @@ public class gameClock implements Runnable {
 							}
 						}
 					}
+				} else if (objectToTick instanceof objectHero) {
+					int tickInterval = ((objectHero) objectToTick).returnTickActionInterval();
+					if (this.measuredTickClock % tickInterval == 0) {
+						String bufferedAction = Digger.bufferedAction;
+						Digger.bufferedAction = "null";
+						if (bufferedAction == "right") {
+							Digger.Hero.shiftToCoordinate(Digger.Hero.xPos+1,Digger.Hero.yPos,"hero");
+						} else if (bufferedAction == "left") {
+							Digger.Hero.shiftToCoordinate(Digger.Hero.xPos-1,Digger.Hero.yPos,"hero");
+						} else if (bufferedAction == "up") {
+							Digger.Hero.shiftToCoordinate(Digger.Hero.xPos,Digger.Hero.yPos-1,"hero");
+						} else if (bufferedAction == "down") {
+							Digger.Hero.shiftToCoordinate(Digger.Hero.xPos,Digger.Hero.yPos+1,"hero");
+						}
+					}
 				}
 			}
 			
@@ -52,7 +67,7 @@ public class gameClock implements Runnable {
 				}
 			
 			try {
-				Thread.sleep(125);
+				Thread.sleep(Digger.frameInterval);
 			} catch (InterruptedException e) {
 				System.out.println("Thread sleep interrupted");
 			}
