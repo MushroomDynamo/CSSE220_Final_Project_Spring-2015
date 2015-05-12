@@ -14,6 +14,8 @@ public class objectMonster extends objectMovable {
 		return coordinatePair;
 	}
 	
+	
+	
 	public int returnTickActionInterval() {
 		return this.tickActionInterval;
 	}

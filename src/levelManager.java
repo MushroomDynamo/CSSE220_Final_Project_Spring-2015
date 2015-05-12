@@ -45,6 +45,7 @@ public abstract class levelManager {
 			path = new java.io.File(".").getCanonicalPath();
 			path = path + "\\levels\\" + levelName;
 			Reader reader = new FileReader(path);
+			
 			for (int i=0;i<gameGrid.yGrid.size();i++) {
 				ArrayList<objectDrawable> xGrid = gameGrid.yGrid.get(i);
 				for (int j=0;j<xGrid.size();j++) {

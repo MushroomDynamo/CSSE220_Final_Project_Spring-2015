@@ -67,6 +67,7 @@ public class Digger extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
 //                if (Hero.checkForCollisionAtCoordinate(Hero.xPos,Hero.yPos-1) == false) {
+            	
 					Hero.shiftToCoordinate(Hero.xPos,Hero.yPos-1,"hero");
 //				} else {
 //					System.out.println("blargh");
@@ -121,6 +122,9 @@ public class Digger extends JFrame {
 		
 		while (true) {
 			gameFrame.repaint();
+			
+		
+			
 			try {
 				Thread.sleep(frameInterval);
 			} catch (InterruptedException e) {
