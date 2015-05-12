@@ -21,7 +21,7 @@ public class Digger extends JFrame {
 	public static objectHero Hero;
 	private static String[] levelList = {"test_level.txt","test_level_2.txt"};
 	private static int levelPosition = 0;
-	public static moneyBag moneyBag;
+	//public static moneyBag moneyBag;
 	public static int gameWidth = 20;
 	public static int gameHeight = 15;
 	private static ArrayList<Object> tickableRegistry = new ArrayList<Object>();
@@ -35,6 +35,8 @@ public class Digger extends JFrame {
 	//Texture fields
 	public static BufferedImage dirtImage;
 	public static BufferedImage emeraldImage;
+	public static BufferedImage moneybagImage;
+	public static BufferedImage goldImage;
 	//End texture fields
 	
 	public Digger() {
@@ -46,6 +48,8 @@ public class Digger extends JFrame {
 			texturepath = texturepath + "\\texture\\";
 			dirtImage = ImageIO.read(new File(texturepath + "dirt.png"));
 			emeraldImage = ImageIO.read(new File(texturepath + "emerald.png"));
+			moneybagImage = ImageIO.read(new File(texturepath + "moneybag.png"));
+			goldImage = ImageIO.read(new File(texturepath + "gold.png"));
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();

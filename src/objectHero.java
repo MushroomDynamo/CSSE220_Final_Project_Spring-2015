@@ -18,13 +18,5 @@ public class objectHero extends objectMovable {
 	public boolean getHeroDead(){
 		return this.dead;
 	}
-	
-	public int returnTickActionInterval() {
-		return this.tickActionInterval;
-	}
-	
-	public int[] returnCoordinates() {
-		int[] coordinatePair = {this.xPos,this.yPos};
-		return coordinatePair;
-	}
+
 }
