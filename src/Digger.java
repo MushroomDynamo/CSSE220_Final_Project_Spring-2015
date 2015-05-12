@@ -25,10 +25,12 @@ public class Digger extends JFrame {
 	public static int gameWidth = 20;
 	public static int gameHeight = 15;
 	private static ArrayList<Object> tickableRegistry = new ArrayList<Object>();
-	public static int frameInterval = 50;
+	public static int frameInterval = 5;
 	
 	static gameClock gameClock = new gameClock();
 	static Thread gameClockThread = new Thread(gameClock);
+	
+	public static String bufferedAction = "null";
 	
 	//Texture fields
 	public static BufferedImage dirtImage;
@@ -60,42 +62,25 @@ public class Digger extends JFrame {
 		gameRenderer.getActionMap().put("right", new AbstractAction() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-					//if (Hero.checkForCollisionAtCoordinate(Hero.xPos+1,Hero.yPos) == false) {
-					Hero.shiftToCoordinate(Hero.xPos+1,Hero.yPos,"hero");
-//				} else {
-//					System.out.println("blargh");
-//				}
-					
+				bufferedAction = "right";
 			}
 		});
 		gameRenderer.getActionMap().put("left", new AbstractAction() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				//if (Hero.checkForCollisionAtCoordinate(Hero.xPos-1,Hero.yPos) == false) {
-					Hero.shiftToCoordinate(Hero.xPos-1,Hero.yPos,"hero");
-//				} else {
-//					System.out.println("blargh");
-//				}
+				bufferedAction = "left";
 			}
 		});
 		gameRenderer.getActionMap().put("up", new AbstractAction() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				//if (Hero.checkForCollisionAtCoordinate(Hero.xPos,Hero.yPos-1) == false) {
-					Hero.shiftToCoordinate(Hero.xPos,Hero.yPos-1,"hero");
-//				} else {
-//					System.out.println("blargh");
-//				}
+				bufferedAction = "up";
 			}
 		});
 		gameRenderer.getActionMap().put("down", new AbstractAction() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				//if (Hero.checkForCollisionAtCoordinate(Hero.xPos,Hero.yPos+1) == false) {
-					Hero.shiftToCoordinate(Hero.xPos,Hero.yPos+1,"hero");
-//				} else {
-//					System.out.println("blargh");
-//				}
+				bufferedAction = "down";
 			}
 		});
 		gameRenderer.getActionMap().put("advance_level", new AbstractAction() {
@@ -162,9 +147,11 @@ public class Digger extends JFrame {
 	
 	public static boolean clearTickableRegistry() {
 		for (int i=1;i<tickableRegistry.size();i++) {
-			int[] objectCoordinates = ((objectMonster) tickableRegistry.get(i)).returnCoordinates();
-			//Figure out better casting method later
-			gameGrid.yGrid.get(objectCoordinates[1]).get(objectCoordinates[0]).setObjectType("null");
+			if (tickableRegistry.get(i) instanceof objectMonster) {
+				int[] objectCoordinates = ((objectMonster) tickableRegistry.get(i)).returnCoordinates();
+				//Figure out better casting method later
+				gameGrid.yGrid.get(objectCoordinates[1]).get(objectCoordinates[0]).setObjectType("null");
+			}
 		}
 		tickableRegistry.clear();
 		return true;
