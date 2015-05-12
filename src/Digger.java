@@ -49,83 +49,82 @@ public class Digger extends JFrame {
 			e1.printStackTrace();
 		}
 
-	    gameRenderer.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_UP, 0), "up");
-	    gameRenderer.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_LEFT, 0), "left");
-	    gameRenderer.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_RIGHT, 0), "right");
-	    gameRenderer.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_DOWN, 0), "down");
-	    gameRenderer.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_U, 0), "advance_level");
-	    gameRenderer.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_D, 0), "regress_level");
-	    gameRenderer.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_SPACE, 0), "attack");
-	    
-	    
-	    gameRenderer.getActionMap().put("attack", new AbstractAction() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                System.out.println("DIE!");
-               //implement an attacking animation
-            }
-        });
-        gameRenderer.getActionMap().put("right", new AbstractAction() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-//                if (Hero.checkForCollisionAtCoordinate(Hero.xPos+1,Hero.yPos) == false) {
+		gameRenderer.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_UP, 0), "up");
+		gameRenderer.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_LEFT, 0), "left");
+		gameRenderer.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_RIGHT, 0), "right");
+		gameRenderer.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_DOWN, 0), "down");
+		gameRenderer.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_U, 0), "advance_level");
+		gameRenderer.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_D, 0), "regress_level");
+		gameRenderer.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_SPACE, 0), "attack");
+
+		gameRenderer.getActionMap().put("right", new AbstractAction() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+					//if (Hero.checkForCollisionAtCoordinate(Hero.xPos+1,Hero.yPos) == false) {
 					Hero.shiftToCoordinate(Hero.xPos+1,Hero.yPos,"hero");
 //				} else {
 //					System.out.println("blargh");
 //				}
 					
-            }
-        });
-        gameRenderer.getActionMap().put("left", new AbstractAction() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-//                if (Hero.checkForCollisionAtCoordinate(Hero.xPos-1,Hero.yPos) == false) {
+			}
+		});
+		gameRenderer.getActionMap().put("left", new AbstractAction() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				//if (Hero.checkForCollisionAtCoordinate(Hero.xPos-1,Hero.yPos) == false) {
 					Hero.shiftToCoordinate(Hero.xPos-1,Hero.yPos,"hero");
 //				} else {
 //					System.out.println("blargh");
 //				}
-            }
-        });
-        gameRenderer.getActionMap().put("up", new AbstractAction() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-//                if (Hero.checkForCollisionAtCoordinate(Hero.xPos,Hero.yPos-1) == false) {
+			}
+		});
+		gameRenderer.getActionMap().put("up", new AbstractAction() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				//if (Hero.checkForCollisionAtCoordinate(Hero.xPos,Hero.yPos-1) == false) {
 					Hero.shiftToCoordinate(Hero.xPos,Hero.yPos-1,"hero");
 //				} else {
 //					System.out.println("blargh");
 //				}
-            }
-        });
-        gameRenderer.getActionMap().put("down", new AbstractAction() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-//                if (Hero.checkForCollisionAtCoordinate(Hero.xPos,Hero.yPos+1) == false) {
+			}
+		});
+		gameRenderer.getActionMap().put("down", new AbstractAction() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				//if (Hero.checkForCollisionAtCoordinate(Hero.xPos,Hero.yPos+1) == false) {
 					Hero.shiftToCoordinate(Hero.xPos,Hero.yPos+1,"hero");
 //				} else {
 //					System.out.println("blargh");
 //				}
-            }
-        });
-        gameRenderer.getActionMap().put("advance_level", new AbstractAction() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-            	levelPosition = levelPosition + 1;
-            	//gameClockThread.interrupt();
-            	tickableRegistry.clear();
-            	levelManager.readLevelFile(levelList[levelPosition]);
-            	//gameClockThread.start();
-            }
-        });
-        gameRenderer.getActionMap().put("regress_level", new AbstractAction() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-            	levelPosition = levelPosition - 1;
-            	//gameClockThread.interrupt();
-            	tickableRegistry.clear();
-            	levelManager.readLevelFile(levelList[levelPosition]);
-            	//gameClockThread.start();
-            }
-        });
+			}
+		});
+		gameRenderer.getActionMap().put("advance_level", new AbstractAction() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				levelPosition = levelPosition + 1;
+				//gameClockThread.interrupt();
+				tickableRegistry.clear();
+				levelManager.readLevelFile(levelList[levelPosition]);
+				//gameClockThread.start();
+			}
+		});
+		gameRenderer.getActionMap().put("regress_level", new AbstractAction() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				levelPosition = levelPosition - 1;
+				//gameClockThread.interrupt();
+				tickableRegistry.clear();
+				levelManager.readLevelFile(levelList[levelPosition]);
+				//gameClockThread.start();
+			}
+		});
+		gameRenderer.getActionMap().put("attack", new AbstractAction() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				//System.out.println("DIE!");
+				//implement an attacking animation
+			}
+		});
 	}
 
 	public static void main(String args[]) {
