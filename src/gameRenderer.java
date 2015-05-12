@@ -1,4 +1,6 @@
 import java.awt.*;
+import java.io.FileReader;
+import java.io.Reader;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -16,11 +18,13 @@ public class gameRenderer extends JPanel {
 					g2d.setColor(Color.black);
 					g2d.fillRect(j*32, i*32, (j*32)+32, (i*32)+32);
 				} else if (objectType == "ground") {
-					g2d.setColor(Color.orange);
-					g2d.fillRect(j*32, i*32, (j*32)+32, (i*32)+32);
+					//g2d.setColor(Color.orange);
+					//g2d.fillRect(j*32, i*32, (j*32)+32, (i*32)+32);
+					g2d.drawImage(Digger.dirtImage,j*32,i*32,Color.orange,null);
 				} else if (objectType == "emerald") {
-					g2d.setColor(Color.green);
-					g2d.fillRect(j*32, i*32, (j*32)+32, (i*32)+32);
+					//g2d.setColor(Color.green);
+					//g2d.fillRect(j*32, i*32, (j*32)+32, (i*32)+32);
+					g2d.drawImage(Digger.emeraldImage,j*32,i*32,Color.green,null);
 				} else if (objectType == "hero") {
 					g2d.setColor(Color.magenta);
 					g2d.fillRect(j*32, i*32, (j*32)+32, (i*32)+32);

@@ -1,8 +1,14 @@
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.Reader;
 import java.util.ArrayList;
 
+import javax.imageio.ImageIO;
 import javax.swing.AbstractAction;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
@@ -24,7 +30,24 @@ public class Digger extends JFrame {
 	static gameClock gameClock = new gameClock();
 	static Thread gameClockThread = new Thread(gameClock);
 	
+	//Texture fields
+	public static BufferedImage dirtImage;
+	public static BufferedImage emeraldImage;
+	//End texture fields
+	
 	public Digger() {
+		
+		//Load textures
+		String texturepath;
+		try {
+			texturepath = new java.io.File(".").getCanonicalPath();
+			texturepath = texturepath + "\\texture\\";
+			dirtImage = ImageIO.read(new File(texturepath + "dirt.png"));
+			emeraldImage = ImageIO.read(new File(texturepath + "emerald.png"));
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 
 	    gameRenderer.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_UP, 0), "up");
 	    gameRenderer.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_LEFT, 0), "left");
