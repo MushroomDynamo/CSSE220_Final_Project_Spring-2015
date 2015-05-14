@@ -20,6 +20,9 @@ public class gameClock implements Runnable {
 					if (this.measuredTickClock % tickInterval == 0) {
 						int[] heroCoordinates = Digger.returnHeroCoordinates();
 						int[] monsterCoordinates = ((objectMonster) objectToTick).returnCoordinates();
+						int points = score.score(monsterCoordinates[0],monsterCoordinates[1]);
+						points = score.score(points, monsterCoordinates[0],monsterCoordinates[1]); //////fix the points variable that is to the right;
+						System.out.println(points);
 						if (heroCoordinates[0] > monsterCoordinates[0]) {
 							((objectMonster) objectToTick).shiftToCoordinate(monsterCoordinates[0]+1,monsterCoordinates[1],"monster");
 						} else if (heroCoordinates[0] < monsterCoordinates[0]) {
