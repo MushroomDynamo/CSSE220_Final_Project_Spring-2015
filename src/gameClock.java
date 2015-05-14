@@ -2,7 +2,6 @@
 public class gameClock implements Runnable {
 	
 	private int measuredTickClock = 0;
-	public boolean check = false;
 	private boolean doGameTicks = true;
 
 	@Override
@@ -36,7 +35,8 @@ public class gameClock implements Runnable {
 								} else {
 									System.out.println("You have been dingbatted");
 									Digger.Hero.setHeroDead(true);
-									check = true;
+									Digger.Hero.removeHeroLives();
+									System.out.println(Digger.Hero.getHeroLives());
 									System.out.println(Digger.Hero.getHeroDead());
 								}
 							}
@@ -74,9 +74,10 @@ public class gameClock implements Runnable {
 					e.printStackTrace();
 				}
 				Digger.clearTickableRegistry();
+				
 				//Kind of kludgey, but we'll do this for now
 				gameGrid.yGrid.get(Digger.Hero.yPos).get(Digger.Hero.xPos).setObjectType("null");
-
+				
 				levelManager.refresh(Digger.returnLevelList()[Digger.returnLevelPosition()]);
 	
 				Digger.Hero.setHeroDead(false);
