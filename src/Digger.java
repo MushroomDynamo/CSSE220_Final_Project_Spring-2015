@@ -5,6 +5,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+
 import javax.imageio.ImageIO;
 import javax.swing.AbstractAction;
 import javax.swing.JComponent;
@@ -22,6 +23,8 @@ public class Digger extends JFrame {
 	public static int gameHeight = 15;
 	private static ArrayList<Object> tickableRegistry = new ArrayList<Object>();
 	public static int frameInterval = 5;
+	private static boolean dead;
+	private static int lives = 3;
 	
 	static gameClock gameClock = new gameClock();
 	static Thread gameClockThread = new Thread(gameClock);
@@ -139,7 +142,8 @@ public class Digger extends JFrame {
 			
 			
 			
-			if(Hero.getHeroLives()==0){
+			if(getHeroLives()==0){
+				System.out.println("You are dead.");
 				break;
 			}
 		}
@@ -157,7 +161,7 @@ public class Digger extends JFrame {
 	}
 	
 	public static boolean clearTickableRegistry() {
-		for (int i=1;i<tickableRegistry.size();i++) {
+		for (int i=0;i<tickableRegistry.size();i++) {
 			if (tickableRegistry.get(i) instanceof objectMonster) {
 				int[] objectCoordinates = ((objectMonster) tickableRegistry.get(i)).returnCoordinates();
 				//Figure out better casting method later
@@ -179,6 +183,24 @@ public class Digger extends JFrame {
 	
 	public static int returnLevelPosition() {
 		return levelPosition;
+	}
+	
+	public static void setHeroDead(boolean state){
+		
+		dead = state;
+		
+	}
+	
+	public static void removeHeroLives(){
+			lives = lives - 1;
+	}
+	
+	public static boolean getHeroDead(){
+		return dead;
+	}
+	
+	public static int getHeroLives(){
+		return lives;
 	}
 	
 }

@@ -2,8 +2,7 @@
 public class objectHero extends objectMovable {
 	
 	protected int tickActionInterval = 200;
-	public boolean dead;
-	private int lives = 3;
+
 	
 	public objectHero(int x,int y) {
 		Digger.Hero = this;
@@ -12,23 +11,7 @@ public class objectHero extends objectMovable {
 		this.yPos = y;
 	}
 	
-	public void setHeroDead(boolean state){
-		
-		this.dead = state;
-		
-	}
-	
-	public void removeHeroLives(){
-		this.lives = this.lives - 1;
-	}
-	
-	public boolean getHeroDead(){
-		return this.dead;
-	}
-	
-	public int getHeroLives(){
-		return this.lives;
-	}
+
 	
 	
 

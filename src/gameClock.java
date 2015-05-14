@@ -22,7 +22,7 @@ public class gameClock implements Runnable {
 							int[] monsterCoordinates = ((objectMonster) objectToTick).returnCoordinates();
 							int points = score.score(monsterCoordinates[0],monsterCoordinates[1]);
 							points = score.score(points, monsterCoordinates[0],monsterCoordinates[1]); //////fix the points variable that is to the right;
-							System.out.println(points);
+							//System.out.println(points);
 							if (heroCoordinates[0] > monsterCoordinates[0]) {
 								((objectMonster) objectToTick).shiftToCoordinate(monsterCoordinates[0]+1,monsterCoordinates[1],"monster");
 							} else if (heroCoordinates[0] < monsterCoordinates[0]) {
@@ -34,10 +34,9 @@ public class gameClock implements Runnable {
 									((objectMonster) objectToTick).shiftToCoordinate(monsterCoordinates[0],monsterCoordinates[1]-1,"monster");
 								} else {
 									System.out.println("You have been dingbatted");
-									Digger.Hero.setHeroDead(true);
-									Digger.Hero.removeHeroLives();
-									System.out.println(Digger.Hero.getHeroLives());
-									System.out.println(Digger.Hero.getHeroDead());
+									Digger.setHeroDead(true);
+									Digger.removeHeroLives();
+								
 								}
 							}
 						}
@@ -65,7 +64,7 @@ public class gameClock implements Runnable {
 				}
 			}
 			
-			if(Digger.Hero.getHeroDead()){
+			if(Digger.getHeroDead()){
 				this.doGameTicks = false;
 				try {
 					Thread.sleep(Digger.frameInterval);
@@ -80,7 +79,7 @@ public class gameClock implements Runnable {
 				
 				levelManager.refresh(Digger.returnLevelList()[Digger.returnLevelPosition()]);
 	
-				Digger.Hero.setHeroDead(false);
+				Digger.setHeroDead(false);
 				this.doGameTicks = true;
 				}
 			
