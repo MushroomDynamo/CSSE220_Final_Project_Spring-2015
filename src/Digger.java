@@ -118,6 +118,9 @@ public class Digger extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("DIE!");
 				//implement an attacking animation
+				
+					
+				
 			}
 		});
 
