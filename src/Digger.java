@@ -139,7 +139,15 @@ public class Digger extends JFrame {
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
+			
+			
+			
+			if(Hero.getHeroLives()==0){
+				break;
+			}
 		}
+		
+		
 	}
 	
 	public static boolean insertObjectIntoTickableRegistry(Object object) {
