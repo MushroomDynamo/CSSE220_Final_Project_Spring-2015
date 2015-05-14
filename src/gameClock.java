@@ -9,7 +9,7 @@ public class gameClock implements Runnable {
 	public void run() {
 		while (!Thread.interrupted()) {
 			this.measuredTickClock = this.measuredTickClock + Digger.frameInterval;
-			if (this.measuredTickClock > 100000) {
+			if (this.measuredTickClock > 1000) {
 				this.measuredTickClock = 0;
 			}
 			if (doGameTicks == true) {
