@@ -32,8 +32,11 @@ public abstract class levelManager {
 						new objectMonster(j,i);
 					} else if (nextChar == 53) {
 						gameObject.setObjectType("moneybag");
+						new objectMoneyBag(j,i);
 					} else if (nextChar == 54) {
 						gameObject.setObjectType("gold");
+					} else if (nextChar == 55) {
+						gameObject.setObjectType("moneybag_lethal");
 					} else if (nextChar == -1) {
 						System.out.println("eof");
 					}
@@ -67,6 +70,7 @@ public abstract class levelManager {
 					}
 				}
 			}
+			reader.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

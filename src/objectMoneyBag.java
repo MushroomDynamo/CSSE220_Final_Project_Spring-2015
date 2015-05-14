@@ -1,4 +1,9 @@
 
 public class objectMoneyBag extends objectMovable {
-	//stuff
+	
+	public objectMoneyBag(int x,int y) {
+		Digger.insertObjectIntoTickableRegistry(this);
+		this.xPos = x;
+		this.yPos = y;
+	}
 }

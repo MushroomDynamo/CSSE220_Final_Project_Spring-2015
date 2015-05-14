@@ -5,7 +5,6 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-
 import javax.imageio.ImageIO;
 import javax.swing.AbstractAction;
 import javax.swing.JComponent;
@@ -19,7 +18,6 @@ public class Digger extends JFrame {
 	public static objectHero Hero;
 	private static String[] levelList = {"test_level.txt","test_level_2.txt"};
 	private static int levelPosition = 0;
-	//public static moneyBag moneyBag;
 	public static int gameWidth = 20;
 	public static int gameHeight = 15;
 	private static ArrayList<Object> tickableRegistry = new ArrayList<Object>();
@@ -35,6 +33,7 @@ public class Digger extends JFrame {
 	public static BufferedImage emeraldImage;
 	public static BufferedImage moneybagImage;
 	public static BufferedImage goldImage;
+	public static BufferedImage moneybagspaceImage;
 	//End texture fields
 	
 	public Digger() {
@@ -48,6 +47,7 @@ public class Digger extends JFrame {
 			emeraldImage = ImageIO.read(new File(texturepath + "emerald.png"));
 			moneybagImage = ImageIO.read(new File(texturepath + "moneybag.png"));
 			goldImage = ImageIO.read(new File(texturepath + "gold.png"));
+			moneybagspaceImage = ImageIO.read(new File(texturepath + "moneybag_space.png"));
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -131,9 +131,6 @@ public class Digger extends JFrame {
 		
 		while (true) {
 			gameFrame.repaint();
-			
-		
-			
 			try {
 				Thread.sleep(frameInterval);
 			} catch (InterruptedException e) {

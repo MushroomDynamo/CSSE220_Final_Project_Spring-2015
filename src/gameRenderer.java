@@ -31,6 +31,8 @@ public class gameRenderer extends JPanel {
 					g2d.drawImage(Digger.moneybagImage,j*32,i*32,Color.yellow,null);
 				} else if (objectType == "gold") {
 					g2d.drawImage(Digger.goldImage,j*32,i*32,Color.yellow,null);
+				} else if (objectType == "moneybag_lethal") {
+					g2d.drawImage(Digger.moneybagspaceImage,j*32,i*32,Color.yellow,null);
 				}
 			}
 		}
