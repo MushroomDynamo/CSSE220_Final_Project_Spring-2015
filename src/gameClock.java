@@ -9,7 +9,7 @@ public class gameClock implements Runnable {
 	public void run() {
 		while (!Thread.interrupted()) {
 			this.measuredTickClock = this.measuredTickClock + Digger.frameInterval;
-			if (this.measuredTickClock > 1000) {
+			if (this.measuredTickClock > 100000) {
 				this.measuredTickClock = 0;
 			}
 			if (doGameTicks == true) {
@@ -24,7 +24,7 @@ public class gameClock implements Runnable {
 							//int points = score.getScore(monsterCoordinates[0],monsterCoordinates[1]);
 							//this.points += score.getScore(points, monsterCoordinates[0],monsterCoordinates[1]); //////fix the points variable that is to the right;
 							//System.out.println(points);
-							System.out.println(this.points);
+							//System.out.println(this.points);
 							if (heroCoordinates[0] > monsterCoordinates[0]) {
 								((objectMonster) objectToTick).shiftToCoordinate(monsterCoordinates[0]+1,monsterCoordinates[1],"monster");
 							} else if (heroCoordinates[0] < monsterCoordinates[0]) {
@@ -47,14 +47,56 @@ public class gameClock implements Runnable {
 						if (this.measuredTickClock % tickInterval == 0) {
 							String bufferedAction = Digger.bufferedAction;
 							Digger.bufferedAction = "null";
+							
 							if (bufferedAction == "right") {
 								Digger.Hero.shiftToCoordinate(Digger.Hero.xPos+1,Digger.Hero.yPos,"hero");
+								
 							} else if (bufferedAction == "left") {
 								Digger.Hero.shiftToCoordinate(Digger.Hero.xPos-1,Digger.Hero.yPos,"hero");
+								
 							} else if (bufferedAction == "up") {
 								Digger.Hero.shiftToCoordinate(Digger.Hero.xPos,Digger.Hero.yPos-1,"hero");
+								
 							} else if (bufferedAction == "down") {
 								Digger.Hero.shiftToCoordinate(Digger.Hero.xPos,Digger.Hero.yPos+1,"hero");
+								
+							} else if (bufferedAction == "attack"){
+								
+								for(int j = 0; j < Digger.dumpTickableRegistry().size(); j++){
+								
+							
+								Object objectToTick1 = Digger.dumpTickableRegistry().get(j);
+								if (objectToTick1 instanceof objectMonster){
+								int[] heroCoordinates = Digger.returnHeroCoordinates();
+								int[] monsterCoordinates = ((objectMonster) objectToTick1).returnCoordinates();
+								System.out.println(Digger.facing);
+							
+								
+//Digger.facing == "right" &&								
+									if( heroCoordinates[0] == monsterCoordinates[0]-1 && heroCoordinates[1] == monsterCoordinates[1]){
+										
+
+										gameGrid.yGrid.get(monsterCoordinates[1]).get(monsterCoordinates[0]).setObjectType("null");
+										Digger.dumpTickableRegistry().remove(j);
+									}else if(heroCoordinates[0] == monsterCoordinates[0]+1 && heroCoordinates[1] == monsterCoordinates[1]){
+										
+										gameGrid.yGrid.get(monsterCoordinates[1]).get(monsterCoordinates[0]).setObjectType("null");
+										Digger.dumpTickableRegistry().remove(j);
+									}else if(heroCoordinates[1] == monsterCoordinates[1]-1 && heroCoordinates[0] == monsterCoordinates[0]){
+										
+										gameGrid.yGrid.get(monsterCoordinates[1]).get(monsterCoordinates[0]).setObjectType("null");
+										Digger.dumpTickableRegistry().remove(j);
+									}else if(heroCoordinates[1] == monsterCoordinates[1]+1 && heroCoordinates[0] == monsterCoordinates[0]){
+										
+										gameGrid.yGrid.get(monsterCoordinates[1]).get(monsterCoordinates[0]).setObjectType("null");
+										Digger.dumpTickableRegistry().remove(j);
+									}
+								
+			
+							}
+								}
+					
+								
 							}
 						}
 					} else if (objectToTick instanceof objectMoneyBag) {

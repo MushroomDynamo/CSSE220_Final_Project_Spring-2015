@@ -113,18 +113,42 @@ public class Digger extends JFrame {
 				//gameClockThread.start();
 			}
 		});
-		gameRenderer.getActionMap().put("attack", new AbstractAction() {
+		gameRenderer.getActionMap().put("attack", new AbstractAction(){
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("DIE!");
+				bufferedAction = "attack";
+				//System.out.println("DIE!");
 				//implement an attacking animation
-				
-					
-				
-			}
+//				for(int i = 0; i < tickableRegistry.size(); i++){
+//					
+//				
+//					Object objectToTick = dumpTickableRegistry().get(i);
+//					if (objectToTick instanceof objectMonster){
+//					int[] heroCoordinates = returnHeroCoordinates();
+//					int[] monsterCoordinates = ((objectMonster) objectToTick).returnCoordinates();
+//					
+//					
+//						if(facing == "right" && heroCoordinates[0] == monsterCoordinates[0]-1 && heroCoordinates[1] == monsterCoordinates[1]){
+//							System.out.println("Yay");
+//						}else if(facing == "left"){
+//							//
+//						}else if(facing == "up"){
+//							//
+//						}else if(facing == "down"){
+//							//
+//						}
+//					
+//
+//				}
+//					}
+		
+		
+			}		
 		});
-
+		
 	}
+
+	
 
 	public static void main(String args[]) {
 		
