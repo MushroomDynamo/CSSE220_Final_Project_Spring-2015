@@ -12,10 +12,12 @@ public class objectHero extends objectMovable {
 		this.yPos = y;
 	}
 	
+	public int returnTickActionInterval() {
+		return this.tickActionInterval;
+	}
+	
 	public void setHeroDead(boolean state){
-		
 		this.dead = state;
-		
 	}
 	
 	public void removeHeroLives(){

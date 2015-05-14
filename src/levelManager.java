@@ -37,6 +37,9 @@ public abstract class levelManager {
 						gameObject.setObjectType("gold");
 					} else if (nextChar == 55) {
 						gameObject.setObjectType("moneybag_lethal");
+					} else if (nextChar == 56) {
+						gameObject.setObjectType("monster2");
+						new objectMonsterNonDigging(j,i);
 					} else if (nextChar == -1) {
 						System.out.println("eof");
 					}
@@ -65,6 +68,9 @@ public abstract class levelManager {
 						//Note: this should not be used in a level design context as it's a generic monster class
 						gameObject.setObjectType("monster");
 						new objectMonster(j,i);
+					} else if (nextChar == 56) {
+						gameObject.setObjectType("monster2");
+						new objectMonsterNonDigging(j,i);
 					} else if (nextChar == -1) {
 						System.out.println("eof");
 					}

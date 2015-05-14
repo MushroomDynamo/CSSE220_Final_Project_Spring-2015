@@ -13,6 +13,8 @@ import javax.swing.KeyStroke;
 
 public class Digger extends JFrame {
 	
+	public static int seed = 24367599;
+	
 	public static JFrame gameFrame = new JFrame("Digger");
 	public static gameRenderer gameRenderer = new gameRenderer();
 	public static objectHero Hero;
@@ -157,7 +159,7 @@ public class Digger extends JFrame {
 	}
 	
 	public static boolean clearTickableRegistry() {
-		for (int i=1;i<tickableRegistry.size();i++) {
+		for (int i=0;i<tickableRegistry.size();i++) {
 			if (tickableRegistry.get(i) instanceof objectMonster) {
 				int[] objectCoordinates = ((objectMonster) tickableRegistry.get(i)).returnCoordinates();
 				//Figure out better casting method later

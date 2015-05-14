@@ -1,8 +1,10 @@
+import java.util.Random;
 
 public class gameClock implements Runnable {
 	
 	private int measuredTickClock = 0;
 	private boolean doGameTicks = true;
+	public Random randomGenerator = new Random();
 
 	@Override
 	public void run() {
@@ -20,24 +22,94 @@ public class gameClock implements Runnable {
 						if (this.measuredTickClock % tickInterval == 0) {
 							int[] heroCoordinates = Digger.returnHeroCoordinates();
 							int[] monsterCoordinates = ((objectMonster) objectToTick).returnCoordinates();
-							int points = score.score(monsterCoordinates[0],monsterCoordinates[1]);
-							points = score.score(points, monsterCoordinates[0],monsterCoordinates[1]); //////fix the points variable that is to the right;
-							System.out.println(points);
-							if (heroCoordinates[0] > monsterCoordinates[0]) {
-								((objectMonster) objectToTick).shiftToCoordinate(monsterCoordinates[0]+1,monsterCoordinates[1],"monster");
-							} else if (heroCoordinates[0] < monsterCoordinates[0]) {
-								((objectMonster) objectToTick).shiftToCoordinate(monsterCoordinates[0]-1,monsterCoordinates[1],"monster");
-							} else {
-								if (heroCoordinates[1] > monsterCoordinates[1]) {
-									((objectMonster) objectToTick).shiftToCoordinate(monsterCoordinates[0],monsterCoordinates[1]+1,"monster");
-								} else if (heroCoordinates[1] < monsterCoordinates[1]) {
-									((objectMonster) objectToTick).shiftToCoordinate(monsterCoordinates[0],monsterCoordinates[1]-1,"monster");
-								} else {
+							//int points = score.score(monsterCoordinates[0],monsterCoordinates[1]);
+							//points = score.score(points, monsterCoordinates[0],monsterCoordinates[1]); //////fix the points variable that is to the right;
+							//System.out.println(points);
+							if (objectToTick instanceof objectMonsterNonDigging) {
+								objectMonsterNonDigging monsterNonDigging = ((objectMonsterNonDigging) objectToTick);
+								randomGenerator.setSeed((long) Digger.seed+monsterCoordinates[0]*monsterCoordinates[1]+heroCoordinates[0]*heroCoordinates[1]);
+								if (heroCoordinates[0] == monsterCoordinates[0] && heroCoordinates[1] == monsterCoordinates[1]) {
 									System.out.println("You have been dingbatted");
 									Digger.Hero.setHeroDead(true);
 									Digger.Hero.removeHeroLives();
 									System.out.println(Digger.Hero.getHeroLives());
 									System.out.println(Digger.Hero.getHeroDead());
+								}
+								while (true) {
+									if (monsterNonDigging.movementDirection == 4) {
+										monsterNonDigging.movementDirection = 0;
+									}
+									if (monsterNonDigging.movementDirection == 0) {
+										if (monsterCoordinates[1]+1 != Digger.gameHeight) {
+											if (monsterNonDigging.checkCoordinate(monsterCoordinates[0],monsterCoordinates[1]+1) == "null" || monsterNonDigging.checkCoordinate(monsterCoordinates[0],monsterCoordinates[1]+1) == "hero") {
+												monsterNonDigging.shiftToCoordinate(monsterCoordinates[0],monsterCoordinates[1]+1,"monster2");
+												break;
+											} else {
+												monsterNonDigging.movementDirection = monsterNonDigging.movementDirection + 1;
+												break;
+											}
+										} else {
+											monsterNonDigging.movementDirection = monsterNonDigging.movementDirection - 1;
+											break;
+										}
+									} else if (monsterNonDigging.movementDirection == 1) {
+										if (monsterCoordinates[0]+1 != Digger.gameWidth) {
+											if (monsterNonDigging.checkCoordinate(monsterCoordinates[0]+1,monsterCoordinates[1]) == "null" || monsterNonDigging.checkCoordinate(monsterCoordinates[0]+1,monsterCoordinates[1]) == "hero") {
+												monsterNonDigging.shiftToCoordinate(monsterCoordinates[0]+1,monsterCoordinates[1],"monster2");
+												break;
+											} else {
+												monsterNonDigging.movementDirection = monsterNonDigging.movementDirection + 1;
+												break;
+											}
+										} else {
+											monsterNonDigging.movementDirection = monsterNonDigging.movementDirection - 1;
+											break;
+										}
+									} else if (monsterNonDigging.movementDirection == 2) {
+										if (monsterCoordinates[1]-1 != -1) {
+											if (monsterNonDigging.checkCoordinate(monsterCoordinates[0],monsterCoordinates[1]-1) == "null" || monsterNonDigging.checkCoordinate(monsterCoordinates[0],monsterCoordinates[1]-1) == "hero") {
+												monsterNonDigging.shiftToCoordinate(monsterCoordinates[0],monsterCoordinates[1]-1,"monster2");
+												break;
+											} else {
+												monsterNonDigging.movementDirection = monsterNonDigging.movementDirection + 1;
+												break;
+											}
+										} else {
+											monsterNonDigging.movementDirection = monsterNonDigging.movementDirection - 1;
+											break;
+										}
+									} else {
+										if (monsterCoordinates[0]-1 != -1) {
+											if (monsterNonDigging.checkCoordinate(monsterCoordinates[0]-1,monsterCoordinates[1]) == "null" || monsterNonDigging.checkCoordinate(monsterCoordinates[0]-1,monsterCoordinates[1]) == "hero") {
+												monsterNonDigging.shiftToCoordinate(monsterCoordinates[0]-1,monsterCoordinates[1],"monster2");
+												break;
+											} else {
+												monsterNonDigging.movementDirection = monsterNonDigging.movementDirection + 1;
+												break;
+											}
+										} else {
+											monsterNonDigging.movementDirection = monsterNonDigging.movementDirection - 1;
+											break;
+										}
+									}
+								}
+							} else {
+								if (heroCoordinates[0] > monsterCoordinates[0]) {
+									((objectMonster) objectToTick).shiftToCoordinate(monsterCoordinates[0]+1,monsterCoordinates[1],"monster");
+								} else if (heroCoordinates[0] < monsterCoordinates[0]) {
+									((objectMonster) objectToTick).shiftToCoordinate(monsterCoordinates[0]-1,monsterCoordinates[1],"monster");
+								} else {
+									if (heroCoordinates[1] > monsterCoordinates[1]) {
+										((objectMonster) objectToTick).shiftToCoordinate(monsterCoordinates[0],monsterCoordinates[1]+1,"monster");
+									} else if (heroCoordinates[1] < monsterCoordinates[1]) {
+										((objectMonster) objectToTick).shiftToCoordinate(monsterCoordinates[0],monsterCoordinates[1]-1,"monster");
+									} else {
+										System.out.println("You have been dingbatted");
+										Digger.Hero.setHeroDead(true);
+										Digger.Hero.removeHeroLives();
+										System.out.println(Digger.Hero.getHeroLives());
+										System.out.println(Digger.Hero.getHeroDead());
+									}
 								}
 							}
 						}
