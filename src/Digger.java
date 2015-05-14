@@ -25,6 +25,7 @@ public class Digger extends JFrame {
 	public static int frameInterval = 5;
 	private static boolean dead;
 	private static int lives = 3;
+	public static String facing = "down";
 	
 	static gameClock gameClock = new gameClock();
 	static Thread gameClockThread = new Thread(gameClock);
@@ -68,24 +69,28 @@ public class Digger extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				bufferedAction = "right";
+				facing = "right";
 			}
 		});
 		gameRenderer.getActionMap().put("left", new AbstractAction() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				bufferedAction = "left";
+				facing = "left";
 			}
 		});
 		gameRenderer.getActionMap().put("up", new AbstractAction() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				bufferedAction = "up";
+				facing = "up";
 			}
 		});
 		gameRenderer.getActionMap().put("down", new AbstractAction() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				bufferedAction = "down";
+				facing = "down";
 			}
 		});
 		gameRenderer.getActionMap().put("advance_level", new AbstractAction() {
@@ -111,7 +116,7 @@ public class Digger extends JFrame {
 		gameRenderer.getActionMap().put("attack", new AbstractAction() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				//System.out.println("DIE!");
+				System.out.println("DIE!");
 				//implement an attacking animation
 			}
 		});
