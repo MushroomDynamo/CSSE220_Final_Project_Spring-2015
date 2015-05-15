@@ -22,11 +22,9 @@ public class gameRenderer extends JPanel {
 				} else if (objectType == "emerald") {
 					g2d.drawImage(Digger.emeraldImage,j*32,i*32,Color.green,null);
 				} else if (objectType == "hero") {
-					g2d.setColor(Color.magenta);
-					g2d.fillRect(j*32, i*32, (j*32)+32, (i*32)+32);
+					g2d.drawImage(Digger.playerImage,j*32,i*32,Color.magenta,null);
 				} else if (objectType == "monster") {
-					g2d.setColor(Color.red);
-					g2d.fillRect(j*32, i*32, (j*32)+32, (i*32)+32);
+					g2d.drawImage(Digger.monsterImage,j*32,i*32,Color.red,null);
 				} else if (objectType == "moneybag") {
 					g2d.drawImage(Digger.moneybagImage,j*32,i*32,Color.yellow,null);
 				} else if (objectType == "gold") {
@@ -34,8 +32,7 @@ public class gameRenderer extends JPanel {
 				} else if (objectType == "moneybag_lethal") {
 					g2d.drawImage(Digger.moneybagspaceImage,j*32,i*32,Color.yellow,null);
 				} else if (objectType == "monster2") {
-					g2d.setColor(Color.blue);
-					g2d.fillRect(j*32, i*32, (j*32)+32, (i*32)+32);
+					g2d.drawImage(Digger.monster2Image,j*32,i*32,Color.blue,null);
 				}
 			}
 		}

@@ -40,6 +40,9 @@ public class Digger extends JFrame {
 	public static BufferedImage moneybagImage;
 	public static BufferedImage goldImage;
 	public static BufferedImage moneybagspaceImage;
+	public static BufferedImage playerImage;
+	public static BufferedImage monsterImage;
+	public static BufferedImage monster2Image;
 	//End texture fields
 	
 	public Digger() {
@@ -54,6 +57,9 @@ public class Digger extends JFrame {
 			moneybagImage = ImageIO.read(new File(texturepath + "moneybag.png"));
 			goldImage = ImageIO.read(new File(texturepath + "gold.png"));
 			moneybagspaceImage = ImageIO.read(new File(texturepath + "moneybag_space.png"));
+			playerImage = ImageIO.read(new File(texturepath + "player.png"));
+			monsterImage = ImageIO.read(new File(texturepath + "monster.png"));
+			monster2Image = ImageIO.read(new File(texturepath + "monster2.png"));
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
