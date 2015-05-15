@@ -28,6 +28,7 @@ public class Digger extends JFrame {
 	private static boolean dead;
 	private static int lives = 3;
 	public static String facing = "down";
+	private static boolean shutdown = false;
 	
 	static gameClock gameClock = new gameClock();
 	static Thread gameClockThread = new Thread(gameClock);
@@ -179,17 +180,33 @@ public class Digger extends JFrame {
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-			
-			
-			
-			if(getHeroLives()==0){
-				System.out.println("You are dead.");
-				gameFrame.setVisible(false);
-				gameFrame.dispose();
-				gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+			if(shutdown == true){
 				break;
 			}
+			
+			
+			
+//			if(getHeroLives()<0){
+//				gameClockThread.stop();
+//				System.out.println("You are dead.");
+//				gameFrame.setVisible(false);
+//				gameFrame.dispose();
+//				gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//				
+//				break;
+//			}
 		}
+		gameClockThread.stop();
+		System.out.println("You are dead.");
+		gameFrame.setVisible(false);
+		gameFrame.dispose();
+		gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		
+	}
+	
+	public static void closeGame(){
+		shutdown = true;
 		
 		
 	}
@@ -237,9 +254,8 @@ public class Digger extends JFrame {
 	public static void removeHeroLives(){
 			if(lives>=1){
 			lives = lives - 1;}
-			if(lives<=0){
-				lives = 0;
-			}
+			
+			
 	}
 	
 	public static boolean getHeroDead(){
