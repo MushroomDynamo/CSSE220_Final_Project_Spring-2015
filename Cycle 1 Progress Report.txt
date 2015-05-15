@@ -1,0 +1,9 @@
+Progress Report 1
+	Cycle 2 User Stories Committed to Repository
+		-Covers basic functionality beyond engine work such as lives, monster behaviors, and level terrain features
+	Primary Completed Features
+		-Engine Set-up (12:00:00) (estimated time 4:00:00)
+			-Subtask GRID-BASED-OBJECT-MANAGEMENT-SYSTEM
+			-Subtask FRAME-BASED-RENDERER
+		-Basic Artwork (1:00:00) (estimated time 2:00:00)
+		-Basic Player Movement + Screen Wrapping (2:00:00) (estimated time 1:00:00)

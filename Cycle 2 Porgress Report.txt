@@ -1,0 +1,11 @@
+Progress Report 2
+	Cycle 3 User Stories Committed to Repository
+		-Covers advanced features interlinked to the new game clock, such as falling moneybags, as well as a small amount of polish before Cycle 4
+	Primary Completed Features
+		-Engine Refining (6:00:00) (estimated time 8:00:00)
+			-Subtask GAME-CLOCK-GOVERNOR
+			-Subtask GAME-GRID-REFRESHING
+		-Additional Terrain Objects Added (1:00:00) (estimated time 1:00:00)
+		-More Artwork (1:00:00) (estimated time 2:00:00)
+		-Both types of monster AI implemented (8:00:00) (estimated time 4:00:00)
+		-Monster death and player death (6:00:00) (estimated time 4:00:00)
