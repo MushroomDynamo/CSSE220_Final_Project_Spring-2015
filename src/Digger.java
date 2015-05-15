@@ -184,6 +184,9 @@ public class Digger extends JFrame {
 			
 			if(getHeroLives()==0){
 				System.out.println("You are dead.");
+				gameFrame.setVisible(false);
+				gameFrame.dispose();
+				gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 				break;
 			}
 		}
@@ -232,7 +235,11 @@ public class Digger extends JFrame {
 	}
 	
 	public static void removeHeroLives(){
-			lives = lives - 1;
+			if(lives>=1){
+			lives = lives - 1;}
+			if(lives<=0){
+				lives = 0;
+			}
 	}
 	
 	public static boolean getHeroDead(){
