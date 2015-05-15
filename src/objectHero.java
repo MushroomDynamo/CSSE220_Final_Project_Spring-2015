@@ -2,8 +2,9 @@
 public class objectHero extends objectMovable {
 	
 	protected int tickActionInterval = 200;
-	public boolean dead;
-	private int lives = 3;
+	private int lives;
+	private boolean dead;
+
 	
 	public objectHero(int x,int y) {
 		Digger.Hero = this;
@@ -11,7 +12,7 @@ public class objectHero extends objectMovable {
 		this.xPos = x;
 		this.yPos = y;
 	}
-	
+
 	public int returnTickActionInterval() {
 		return this.tickActionInterval;
 	}
@@ -31,7 +32,5 @@ public class objectHero extends objectMovable {
 	public int getHeroLives(){
 		return this.lives;
 	}
-	
-	
 
 }

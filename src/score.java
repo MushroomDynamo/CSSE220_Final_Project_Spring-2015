@@ -8,7 +8,7 @@ public class score extends Digger{
 			return 50;
 		} else if (gameGrid.yGrid.get(y).get(x).getObjectType() == "emerald"){
 			//remove emerald in list
-			return- 25;
+			return -25;
 		}
 		return 0;
 	}

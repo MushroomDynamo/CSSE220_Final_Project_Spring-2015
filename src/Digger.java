@@ -5,6 +5,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+
 import javax.imageio.ImageIO;
 import javax.swing.AbstractAction;
 import javax.swing.JComponent;
@@ -24,6 +25,9 @@ public class Digger extends JFrame {
 	public static int gameHeight = 15;
 	private static ArrayList<Object> tickableRegistry = new ArrayList<Object>();
 	public static int frameInterval = 5;
+	private static boolean dead;
+	private static int lives = 3;
+	public static String facing = "down";
 	
 	static gameClock gameClock = new gameClock();
 	static Thread gameClockThread = new Thread(gameClock);
@@ -67,24 +71,28 @@ public class Digger extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				bufferedAction = "right";
+				facing = "right";
 			}
 		});
 		gameRenderer.getActionMap().put("left", new AbstractAction() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				bufferedAction = "left";
+				facing = "left";
 			}
 		});
 		gameRenderer.getActionMap().put("up", new AbstractAction() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				bufferedAction = "up";
+				facing = "up";
 			}
 		});
 		gameRenderer.getActionMap().put("down", new AbstractAction() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				bufferedAction = "down";
+				facing = "down";
 			}
 		});
 		gameRenderer.getActionMap().put("advance_level", new AbstractAction() {
@@ -107,15 +115,42 @@ public class Digger extends JFrame {
 				//gameClockThread.start();
 			}
 		});
-		gameRenderer.getActionMap().put("attack", new AbstractAction() {
+		gameRenderer.getActionMap().put("attack", new AbstractAction(){
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				bufferedAction = "attack";
 				//System.out.println("DIE!");
 				//implement an attacking animation
-			}
+//				for(int i = 0; i < tickableRegistry.size(); i++){
+//					
+//				
+//					Object objectToTick = dumpTickableRegistry().get(i);
+//					if (objectToTick instanceof objectMonster){
+//					int[] heroCoordinates = returnHeroCoordinates();
+//					int[] monsterCoordinates = ((objectMonster) objectToTick).returnCoordinates();
+//					
+//					
+//						if(facing == "right" && heroCoordinates[0] == monsterCoordinates[0]-1 && heroCoordinates[1] == monsterCoordinates[1]){
+//							System.out.println("Yay");
+//						}else if(facing == "left"){
+//							//
+//						}else if(facing == "up"){
+//							//
+//						}else if(facing == "down"){
+//							//
+//						}
+//					
+//
+//				}
+//					}
+		
+		
+			}		
 		});
-
+		
 	}
+
+	
 
 	public static void main(String args[]) {
 		
@@ -141,7 +176,8 @@ public class Digger extends JFrame {
 			
 			
 			
-			if(Hero.getHeroLives()==0){
+			if(getHeroLives()==0){
+				System.out.println("You are dead.");
 				break;
 			}
 		}
@@ -181,6 +217,24 @@ public class Digger extends JFrame {
 	
 	public static int returnLevelPosition() {
 		return levelPosition;
+	}
+	
+	public static void setHeroDead(boolean state){
+		
+		dead = state;
+		
+	}
+	
+	public static void removeHeroLives(){
+			lives = lives - 1;
+	}
+	
+	public static boolean getHeroDead(){
+		return dead;
+	}
+	
+	public static int getHeroLives(){
+		return lives;
 	}
 	
 }

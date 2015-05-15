@@ -5,6 +5,7 @@ public class gameClock implements Runnable {
 	private int measuredTickClock = 0;
 	private boolean doGameTicks = true;
 	public Random randomGenerator = new Random();
+	private int points = 0;
 
 	@Override
 	public void run() {
@@ -30,10 +31,9 @@ public class gameClock implements Runnable {
 								randomGenerator.setSeed((long) Digger.seed+monsterCoordinates[0]*monsterCoordinates[1]+heroCoordinates[0]*heroCoordinates[1]);
 								if (heroCoordinates[0] == monsterCoordinates[0] && heroCoordinates[1] == monsterCoordinates[1]) {
 									System.out.println("You have been dingbatted");
-									Digger.Hero.setHeroDead(true);
-									Digger.Hero.removeHeroLives();
-									System.out.println(Digger.Hero.getHeroLives());
-									System.out.println(Digger.Hero.getHeroDead());
+									Digger.setHeroDead(true);
+									Digger.removeHeroLives();
+								
 								}
 								while (true) {
 									if (monsterNonDigging.movementDirection == 4) {
@@ -126,6 +126,29 @@ public class gameClock implements Runnable {
 								Digger.Hero.shiftToCoordinate(Digger.Hero.xPos,Digger.Hero.yPos-1,"hero");
 							} else if (bufferedAction == "down") {
 								Digger.Hero.shiftToCoordinate(Digger.Hero.xPos,Digger.Hero.yPos+1,"hero");
+							} else if (bufferedAction == "attack") {
+								for (int j=0;j<Digger.dumpTickableRegistry().size();j++) {
+									Object objectToTick1 = Digger.dumpTickableRegistry().get(j);
+									if (objectToTick1 instanceof objectMonster) {
+										int[] heroCoordinates = Digger.returnHeroCoordinates();
+										int[] monsterCoordinates = ((objectMonster) objectToTick1).returnCoordinates();
+										System.out.println(Digger.facing);
+										//Digger.facing == "right" &&								
+										if (heroCoordinates[0] == monsterCoordinates[0]-1 && heroCoordinates[1] == monsterCoordinates[1]) {
+											gameGrid.yGrid.get(monsterCoordinates[1]).get(monsterCoordinates[0]).setObjectType("null");
+											Digger.dumpTickableRegistry().remove(j);
+										} else if (heroCoordinates[0] == monsterCoordinates[0]+1 && heroCoordinates[1] == monsterCoordinates[1]) {
+											gameGrid.yGrid.get(monsterCoordinates[1]).get(monsterCoordinates[0]).setObjectType("null");
+											Digger.dumpTickableRegistry().remove(j);
+										} else if (heroCoordinates[1] == monsterCoordinates[1]-1 && heroCoordinates[0] == monsterCoordinates[0]) {
+											gameGrid.yGrid.get(monsterCoordinates[1]).get(monsterCoordinates[0]).setObjectType("null");
+											Digger.dumpTickableRegistry().remove(j);
+										} else if (heroCoordinates[1] == monsterCoordinates[1]+1 && heroCoordinates[0] == monsterCoordinates[0]) {
+											gameGrid.yGrid.get(monsterCoordinates[1]).get(monsterCoordinates[0]).setObjectType("null");
+											Digger.dumpTickableRegistry().remove(j);
+										}
+									}
+								}
 							}
 						}
 					} else if (objectToTick instanceof objectMoneyBag) {
@@ -137,7 +160,7 @@ public class gameClock implements Runnable {
 				}
 			}
 			
-			if(Digger.Hero.getHeroDead()){
+			if(Digger.getHeroDead()){
 				this.doGameTicks = false;
 				try {
 					Thread.sleep(Digger.frameInterval);
@@ -152,7 +175,7 @@ public class gameClock implements Runnable {
 				
 				levelManager.refresh(Digger.returnLevelList()[Digger.returnLevelPosition()]);
 	
-				Digger.Hero.setHeroDead(false);
+				Digger.setHeroDead(false);
 				this.doGameTicks = true;
 				}
 			
