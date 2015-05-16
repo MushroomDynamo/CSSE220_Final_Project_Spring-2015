@@ -20,7 +20,7 @@ public class Digger extends JFrame {
 	
 	public static JFrame gameFrame = new JFrame("Digger");
 	public static gameRenderer gameRenderer = new gameRenderer();
-	public static InfoPanel menu = new InfoPanel(gameFrame);
+	public static InfoPanel menu = new InfoPanel();
 	public static objectHero Hero;
 	private static String[] levelList = {"test_level.txt","test_level_2.txt","test_level_3.txt"};
 	private static int levelPosition = 0;

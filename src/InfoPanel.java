@@ -1,7 +1,6 @@
 import java.awt.Color;
 import java.awt.FlowLayout;
 
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -10,7 +9,7 @@ public class InfoPanel extends JPanel{
 	public JLabel heroLives = new JLabel();
 	public JLabel gameScore = new JLabel();
 
-	public InfoPanel(JFrame gp) {
+	public InfoPanel() {
 		setBackground(Color.blue);
 		setLayout(new FlowLayout(5, 5, 5));
 
