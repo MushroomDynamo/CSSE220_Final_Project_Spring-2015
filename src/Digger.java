@@ -22,7 +22,7 @@ public class Digger extends JFrame {
 	public static gameRenderer gameRenderer = new gameRenderer();
 	public static InfoPanel menu = new InfoPanel();
 	public static objectHero Hero;
-	private static String[] levelList = {"test_level.txt","test_level_2.txt","test_level_3.txt"};
+	private static String[] levelList = {"lvl0.txt","lvl1.txt","lvl2.txt","lvl3.txt","lvl4.txt","lvl5.txt","lvl6.txt","lvl7.txt","lvl8.txt","lvl9.txt"};
 	private static int levelPosition = 0;
 	public static int gameWidth = 20;
 	public static int gameHeight = 15;
@@ -181,7 +181,7 @@ public class Digger extends JFrame {
 		gameFrame.pack();
 		gameFrame.setVisible(true);
 		
-		levelManager.readLevelFile("test_level.txt");
+		levelManager.readLevelFile("lvl0.txt");
 		gameClockThread.start();
 		
 		while (true) {
