@@ -1,7 +1,7 @@
 
 public class objectMonster extends objectMovable {
 	
-	protected int tickActionInterval = 180;
+	protected int tickActionInterval = 270;
 	
 	public objectMonster(int x,int y) {
 		Digger.insertObjectIntoTickableRegistry(this);
@@ -13,9 +13,7 @@ public class objectMonster extends objectMovable {
 		int[] coordinatePair = {this.xPos,this.yPos};
 		return coordinatePair;
 	}
-	
-	
-	
+
 	public int returnTickActionInterval() {
 		return this.tickActionInterval;
 	}
