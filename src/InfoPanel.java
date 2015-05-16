@@ -15,18 +15,18 @@ public class InfoPanel extends JPanel{
 
 		
 		
-		heroLives.setOpaque(true);
-	    heroLives.setBackground(Color.GRAY);
-	    heroLives.setForeground(Color.WHITE);
-	    add(heroLives);
+		this.heroLives.setOpaque(true);
+	    this.heroLives.setBackground(Color.GRAY);
+	    this.heroLives.setForeground(Color.WHITE);
+	    add(this.heroLives);
 	    setLifeLabel(Digger.getHeroLives());
 	      
 	      
 
-	      gameScore.setOpaque(true);
-	      gameScore.setBackground(Color.GRAY);
-	      gameScore.setForeground(Color.WHITE);
-	      add(gameScore);
+	      this.gameScore.setOpaque(true);
+	      this.gameScore.setBackground(Color.GRAY);
+	      this.gameScore.setForeground(Color.WHITE);
+	      add(this.gameScore);
 	      setgameScore(0);
 	      
 	}
