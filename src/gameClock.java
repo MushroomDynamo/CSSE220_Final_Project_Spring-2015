@@ -1,4 +1,3 @@
-import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -17,6 +16,9 @@ public class gameClock implements Runnable {
 				this.measuredTickClock = 0;
 			}
 			if (doGameTicks == true) {
+				InfoPanel.setLifeLabel(Digger.getHeroLives());
+				InfoPanel.setgameScore(this.points);
+
 				for (int i=0;i<Digger.dumpTickableRegistry().size();i++) {
 					//Monster logic in here
 					Object objectToTick = Digger.dumpTickableRegistry().get(i);
@@ -41,8 +43,12 @@ public class gameClock implements Runnable {
 										System.out.println("YOU WIN!");
 									}else{
 									System.out.println("level "+levelPosition);
-									Digger.clearTickableRegistry();
+									Digger.dumpTickableRegistry().clear();
+
+
 									levelManager.readLevelFile(levelList[levelPosition]);
+									
+
 									}
 									}
 						
@@ -234,7 +240,7 @@ public class gameClock implements Runnable {
 						}
 					} else if (objectToTick instanceof objectMoneyBag) {
 						int tickInterval = ((objectMoneyBag) objectToTick).returnTickActionInterval();
-//						if (this.measuredTickClock % tickInterval == 0) {
+						if (this.measuredTickClock % tickInterval == 0) {
 //							int[] bagCoordinates = ((objectMoneyBag) objectToTick).returnCoordinates();
 //							if (((objectMoneyBag) objectToTick).fall(bagCoordinates[0], bagCoordinates[1])){
 //								((objectMoneyBag) objectToTick).shiftToCoordinate(bagCoordinates[0], bagCoordinates[1]+1, "moneybag");
@@ -244,7 +250,7 @@ public class gameClock implements Runnable {
 //									}
 //								}
 //							}
-//						}
+						}
 					}
 				}
 			}

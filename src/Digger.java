@@ -1,3 +1,5 @@
+import java.awt.BorderLayout;
+import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
@@ -18,6 +20,7 @@ public class Digger extends JFrame {
 	
 	public static JFrame gameFrame = new JFrame("Digger");
 	public static gameRenderer gameRenderer = new gameRenderer();
+	private static InfoPanel menu;
 	public static objectHero Hero;
 	private static String[] levelList = {"test_level.txt","test_level_2.txt","test_level_3.txt"};
 	private static int levelPosition = 0;
@@ -165,7 +168,14 @@ public class Digger extends JFrame {
 		gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		gameGrid.instantiateGameGrid(gameFrame,gameWidth,gameHeight);
 		
-		gameFrame.getContentPane().add(gameRenderer);
+		
+		menu = new InfoPanel(gameFrame);
+		Container pane = gameFrame.getContentPane();
+		pane.setLayout(new BorderLayout());
+		pane.add(gameRenderer, BorderLayout.CENTER);
+		pane.add(menu, BorderLayout.NORTH);
+		
+		//gameFrame.getContentPane().add(gameRenderer);
 		gameRenderer.setPreferredSize(new Dimension(640,480));
 		gameFrame.pack();
 		gameFrame.setVisible(true);
@@ -174,7 +184,7 @@ public class Digger extends JFrame {
 		gameClockThread.start();
 		
 		while (true) {
-			gameFrame.repaint();
+			pane.repaint();
 		
 			try {
 				Thread.sleep(frameInterval);
