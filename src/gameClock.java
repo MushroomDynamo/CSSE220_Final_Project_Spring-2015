@@ -1,3 +1,5 @@
+import java.awt.Color;
+import java.util.ArrayList;
 import java.util.Random;
 
 public class gameClock implements Runnable {
@@ -6,7 +8,7 @@ public class gameClock implements Runnable {
 	private boolean doGameTicks = true;
 	public Random randomGenerator = new Random();
 	private int points = 0;
-
+	private boolean done = true;
 	@Override
 	public void run() {
 		while (!Thread.interrupted()) {
@@ -26,6 +28,25 @@ public class gameClock implements Runnable {
 							//int points = score.score(monsterCoordinates[0],monsterCoordinates[1]);
 							//points = score.score(points, monsterCoordinates[0],monsterCoordinates[1]); //////fix the points variable that is to the right;
 							//System.out.println(points);
+							done = true;
+							for (int b=0;b<gameGrid.yGrid.size();b++) {
+								ArrayList<objectDrawable> xGrid = gameGrid.yGrid.get(b);
+								for (int j=0;j<xGrid.size();j++) {
+									String objectType = xGrid.get(j).getObjectType();
+									if (objectType == "emerald") {
+										done = false;
+									}}} if (done) {int levelPosition = Digger.advanceLevelPosition();
+									String levelList[] = Digger.returnLevelList();
+									if (levelPosition >= levelList.length){
+										System.out.println("YOU WIN!");
+									}else{
+									System.out.println("level "+levelPosition);
+									Digger.clearTickableRegistry();
+									levelManager.readLevelFile(levelList[levelPosition]);
+									}
+									}
+						
+								
 							if (objectToTick instanceof objectMonsterNonDigging) {
 								objectMonsterNonDigging monsterNonDigging = ((objectMonsterNonDigging) objectToTick);
 								randomGenerator.setSeed((long) Digger.seed+monsterCoordinates[0]*monsterCoordinates[1]+heroCoordinates[0]*heroCoordinates[1]);
@@ -153,9 +174,17 @@ public class gameClock implements Runnable {
 						}
 					} else if (objectToTick instanceof objectMoneyBag) {
 						int tickInterval = ((objectMoneyBag) objectToTick).returnTickActionInterval();
-						if (this.measuredTickClock % tickInterval == 0) {
-							
-						}
+//						if (this.measuredTickClock % tickInterval == 0) {
+//							int[] bagCoordinates = ((objectMoneyBag) objectToTick).returnCoordinates();
+//							if (((objectMoneyBag) objectToTick).fall(bagCoordinates[0], bagCoordinates[1])){
+//								((objectMoneyBag) objectToTick).shiftToCoordinate(bagCoordinates[0], bagCoordinates[1]+1, "moneybag");
+//								if (((objectMoneyBag) objectToTick).willBreak(bagCoordinates[0], bagCoordinates[1])){
+//									if(!((objectMoneyBag) objectToTick).fall(bagCoordinates[0], bagCoordinates[1])){
+//										((objectMoneyBag) objectToTick).shiftToCoordinate(bagCoordinates[0], bagCoordinates[1], "gold");
+//									}
+//								}
+//							}
+//						}
 					}
 				}
 			}

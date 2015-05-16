@@ -19,7 +19,7 @@ public class Digger extends JFrame {
 	public static JFrame gameFrame = new JFrame("Digger");
 	public static gameRenderer gameRenderer = new gameRenderer();
 	public static objectHero Hero;
-	private static String[] levelList = {"test_level.txt","test_level_2.txt"};
+	private static String[] levelList = {"test_level.txt","test_level_2.txt","test_level_3.txt"};
 	private static int levelPosition = 0;
 	public static int gameWidth = 20;
 	public static int gameHeight = 15;
@@ -190,7 +190,9 @@ public class Digger extends JFrame {
 		
 		
 	}
-	
+	public int returnLevel(){
+		return levelPosition;
+	}
 	public static boolean insertObjectIntoTickableRegistry(Object object) {
 		tickableRegistry.add(object);
 		return true;
@@ -224,7 +226,12 @@ public class Digger extends JFrame {
 	public static int returnLevelPosition() {
 		return levelPosition;
 	}
-	
+	public static int advanceLevelPosition() {
+		return levelPosition = levelPosition +1;
+	}
+	public static int retreatLevelPosition() {
+		return levelPosition = levelPosition -1;
+	}
 	public static void setHeroDead(boolean state){
 		
 		dead = state;

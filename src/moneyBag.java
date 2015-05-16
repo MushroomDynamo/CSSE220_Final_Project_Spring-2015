@@ -6,7 +6,7 @@ public class moneyBag extends objectMovable {
 		this.xPos = x;
 		this.yPos = y;
 	}
-	public boolean wilBreak(int x,int y){
+	public boolean willBreak(int x,int y){
 		if(fall(x,y)==true && fall(x,y+1)==true){
 			return true;
 		}
