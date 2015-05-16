@@ -1,9 +1,9 @@
 
 public class objectHero extends objectMovable {
 	
-	protected int tickActionInterval = 200;
-	private int lives;
-	private boolean dead;
+	@SuppressWarnings("hiding")
+	protected int tickActionInterval = 200; //Movement speed
+
 
 	
 	public objectHero(int x,int y) {
@@ -13,24 +13,9 @@ public class objectHero extends objectMovable {
 		this.yPos = y;
 	}
 
+	@Override
 	public int returnTickActionInterval() {
 		return this.tickActionInterval;
 	}
-	
-//	public void setHeroDead(boolean state){
-//		this.dead = state;
-//	}
-//	
-//	public void removeHeroLives(){
-//		this.lives = this.lives - 1;
-//	}
-//	
-//	public boolean getHeroDead(){
-//		return this.dead;
-//	}
-//	
-//	public int getHeroLives(){
-//		return this.lives;
-//	}
 
 }

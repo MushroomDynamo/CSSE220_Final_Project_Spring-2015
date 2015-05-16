@@ -1,44 +1,44 @@
 import java.awt.Color;
 import java.awt.FlowLayout;
 
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class InfoPanel extends JPanel{
 	
-	private static JLabel heroLives;
-	private static JLabel gameScore;
+	public JLabel heroLives = new JLabel();
+	public JLabel gameScore = new JLabel();
 
-	public InfoPanel(JFrame gp) {
+	public InfoPanel() {
 		setBackground(Color.blue);
 		setLayout(new FlowLayout(5, 5, 5));
 
 		
-		heroLives = new JLabel("# Lives: " + Digger.getHeroLives());
-
-		  heroLives.setOpaque(true);
-	      heroLives.setBackground(Color.GRAY);
-	      heroLives.setForeground(Color.WHITE);
-	      add(heroLives);
-	      
-	      gameScore = new JLabel("Score: " + Digger.getHeroLives());
-
-	      gameScore.setOpaque(true);
-	      gameScore.setBackground(Color.GRAY);
-	      gameScore.setForeground(Color.WHITE);
-	      add(gameScore);
-	      
-	}
-	
-	public static void setLifeLabel(int lives){
-
-		heroLives.setText("# Lives: " + lives);
-	}
-	
-	public static void setgameScore(int score){
 		
-		gameScore.setText("Score: " + score);
+		this.heroLives.setOpaque(true);
+	    this.heroLives.setBackground(Color.GRAY);
+	    this.heroLives.setForeground(Color.WHITE);
+	    add(this.heroLives);
+	    setLifeLabel(Digger.getHeroLives());
+	      
+	      
+
+	      this.gameScore.setOpaque(true);
+	      this.gameScore.setBackground(Color.GRAY);
+	      this.gameScore.setForeground(Color.WHITE);
+	      add(this.gameScore);
+	      setgameScore(0);
+	      
+	}
+	
+	public void setLifeLabel(int lives){
+
+		this.heroLives.setText("# Lives: " + lives);
+	}
+	
+	public void setgameScore(int score){
+		
+		this.gameScore.setText("Score: " + score);
 	}
 	
 	

@@ -20,7 +20,7 @@ public class Digger extends JFrame {
 	
 	public static JFrame gameFrame = new JFrame("Digger");
 	public static gameRenderer gameRenderer = new gameRenderer();
-	private static InfoPanel menu;
+	public static InfoPanel menu = new InfoPanel();
 	public static objectHero Hero;
 	private static String[] levelList = {"lvl0.txt","lvl1.txt","lvl2.txt","lvl3.txt","lvl4.txt","lvl5.txt","lvl6.txt","lvl7.txt","lvl8.txt","lvl9.txt"};
 	private static int levelPosition = 0;
@@ -110,6 +110,7 @@ public class Digger extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				levelPosition = levelPosition + 1;
 				//gameClockThread.interrupt();
+				//Hello World
 				tickableRegistry.clear();
 				levelManager.readLevelFile(levelList[levelPosition]);
 				//gameClockThread.start();
@@ -169,7 +170,7 @@ public class Digger extends JFrame {
 		gameGrid.instantiateGameGrid(gameFrame,gameWidth,gameHeight);
 		
 		
-		menu = new InfoPanel(gameFrame);
+		
 		Container pane = gameFrame.getContentPane();
 		pane.setLayout(new BorderLayout());
 		pane.add(gameRenderer, BorderLayout.CENTER);

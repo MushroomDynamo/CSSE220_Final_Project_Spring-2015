@@ -7,7 +7,7 @@ public class gameClock implements Runnable {
 	private boolean doGameTicks = true;
 	public Random randomGenerator = new Random();
 	private int points = 0;
-	private boolean done = true;
+	private boolean allEmeraldsCollected = true;
 	@Override
 	public void run() {
 		while (!Thread.interrupted()) {
@@ -15,9 +15,10 @@ public class gameClock implements Runnable {
 			if (this.measuredTickClock > 1000) {
 				this.measuredTickClock = 0;
 			}
-			if (doGameTicks == true) {
-				InfoPanel.setLifeLabel(Digger.getHeroLives());
-				InfoPanel.setgameScore(this.points);
+			if (this.doGameTicks == true) {
+				
+				Digger.menu.setLifeLabel(Digger.getHeroLives());
+				Digger.menu.setgameScore(this.points);
 
 				for (int i=0;i<Digger.dumpTickableRegistry().size();i++) {
 					//Monster logic in here
@@ -30,20 +31,22 @@ public class gameClock implements Runnable {
 							//int points = score.score(monsterCoordinates[0],monsterCoordinates[1]);
 							//points = score.score(points, monsterCoordinates[0],monsterCoordinates[1]); //////fix the points variable that is to the right;
 							//System.out.println(points);
-							done = true;
+							this.allEmeraldsCollected = true;
 							for (int b=0;b<gameGrid.yGrid.size();b++) {
 								ArrayList<objectDrawable> xGrid = gameGrid.yGrid.get(b);
 								for (int j=0;j<xGrid.size();j++) {
 									String objectType = xGrid.get(j).getObjectType();
 									if (objectType == "emerald") {
-										done = false;
-									}}} if (done) {int levelPosition = Digger.advanceLevelPosition();
+										this.allEmeraldsCollected = false;
+									}}} 
+							if (this.allEmeraldsCollected) {int levelPosition = Digger.advanceLevelPosition();
 									String levelList[] = Digger.returnLevelList();
 									if (levelPosition >= levelList.length){
 										System.out.println("YOU WIN!");
 									}else{
 									System.out.println("level "+levelPosition);
-									Digger.dumpTickableRegistry().clear();
+									Digger.clearTickableRegistry();
+									Digger.clearTickableRegistry();
 
 
 									levelManager.readLevelFile(levelList[levelPosition]);
@@ -55,7 +58,7 @@ public class gameClock implements Runnable {
 								
 							if (objectToTick instanceof objectMonsterNonDigging) {
 								objectMonsterNonDigging monsterNonDigging = ((objectMonsterNonDigging) objectToTick);
-								randomGenerator.setSeed((long) Digger.seed+monsterCoordinates[0]*monsterCoordinates[1]+heroCoordinates[0]*heroCoordinates[1]);
+								this.randomGenerator.setSeed((long) Digger.seed+monsterCoordinates[0]*monsterCoordinates[1]+heroCoordinates[0]*heroCoordinates[1]);
 								if (heroCoordinates[0] == monsterCoordinates[0] && heroCoordinates[1] == monsterCoordinates[1]) {
 									//System.out.println("You have been dingbatted");
 									Digger.setHeroDead(true);
@@ -157,81 +160,81 @@ public class gameClock implements Runnable {
 							if (bufferedAction == "right") {
 								if (Digger.Hero.xPos == Digger.gameWidth-1){
 									if(gameGrid.yGrid.get(Digger.Hero.yPos).get(0).getObjectType() == "emerald"){
-										points = points + 50;
-										System.out.println(points);
+										this.points = this.points + 50;
+										System.out.println(this.points);
 									}
 									else if(gameGrid.yGrid.get(Digger.Hero.yPos).get(0).getObjectType() == "gold"){
-										points = points + 200;
-										System.out.println(points);
+										this.points = this.points + 200;
+										System.out.println(this.points);
 									}
 								}
 									else if (gameGrid.yGrid.get(Digger.Hero.yPos).get(Digger.Hero.xPos+1).getObjectType() == "emerald"){
-									points = points + 50;
-									System.out.println(points);
+									this.points = this.points + 50;
+									System.out.println(this.points);
 									}
 									else if (gameGrid.yGrid.get(Digger.Hero.yPos).get(Digger.Hero.xPos+1).getObjectType() == "gold"){
-										points = points + 200;
-										System.out.println(points);
+										this.points = this.points + 200;
+										System.out.println(this.points);
 								}
 								Digger.Hero.shiftToCoordinate(Digger.Hero.xPos+1,Digger.Hero.yPos,"hero");
 							} else if (bufferedAction == "left") {
 								if (Digger.Hero.xPos == 0){
 									if(gameGrid.yGrid.get(Digger.Hero.yPos).get(Digger.gameWidth-1).getObjectType() == "emerald"){
-										points = points + 50;
-										System.out.println(points);
+										this.points = this.points + 50;
+										System.out.println(this.points);
 									}
 									if(gameGrid.yGrid.get(Digger.Hero.yPos).get(Digger.gameWidth-1).getObjectType() == "gold"){
-										points = points + 200;
-										System.out.println(points);
+										this.points = this.points + 200;
+										System.out.println(this.points);
 									}
 								}
 								else if (gameGrid.yGrid.get(Digger.Hero.yPos).get(Digger.Hero.xPos-1).getObjectType() == "emerald"){
-									points = points + 50;
-									System.out.println(points);
+									this.points = this.points + 50;
+									System.out.println(this.points);
 								}
 								else if (gameGrid.yGrid.get(Digger.Hero.yPos).get(Digger.Hero.xPos-1).getObjectType() == "gold"){
-									points = points + 200;
-									System.out.println(points);
+									this.points = this.points + 200;
+									System.out.println(this.points);
 								}
 								Digger.Hero.shiftToCoordinate(Digger.Hero.xPos-1,Digger.Hero.yPos,"hero");
 							} else if (bufferedAction == "up") {
 								if (Digger.Hero.yPos == 0){
 									if(gameGrid.yGrid.get(Digger.gameHeight-1).get(Digger.Hero.xPos).getObjectType() == "emerald"){
-										points = points + 50;
-										System.out.println(points);
+										this.points = this.points + 50;
+										System.out.println(this.points);
 									}
 									else if(gameGrid.yGrid.get(Digger.gameHeight-1).get(Digger.Hero.xPos).getObjectType() == "gold"){
-										points = points + 200;
-										System.out.println(points);
+										this.points = this.points + 200;
+										System.out.println(this.points);
 									}
 								}
 								else if (gameGrid.yGrid.get(Digger.Hero.yPos-1).get(Digger.Hero.xPos).getObjectType() == "emerald"){
-									points = points + 50;
-									System.out.println(points);
+									this.points = this.points + 50;
+									System.out.println(this.points);
 								}
 								else if (gameGrid.yGrid.get(Digger.Hero.yPos-1).get(Digger.Hero.xPos).getObjectType() == "gold"){
-									points = points + 200;
-									System.out.println(points);
+									this.points = this.points + 200;
+									System.out.println(this.points);
 								}
 								Digger.Hero.shiftToCoordinate(Digger.Hero.xPos,Digger.Hero.yPos-1,"hero");
 							} else if (bufferedAction == "down") {
 								if (Digger.Hero.yPos == Digger.gameHeight-1){
 									if(gameGrid.yGrid.get(0).get(Digger.Hero.xPos).getObjectType() == "emerald"){
-										points = points + 50;
-										System.out.println(points);
+										this.points = this.points + 50;
+										System.out.println(this.points);
 									}
 									if(gameGrid.yGrid.get(0).get(Digger.Hero.xPos).getObjectType() == "gold"){
-										points = points + 200;
-										System.out.println(points);
+										this.points = this.points + 200;
+										System.out.println(this.points);
 									}
 								}
 								else if (gameGrid.yGrid.get(Digger.Hero.yPos+1).get(Digger.Hero.xPos).getObjectType() == "emerald"){
-									points = points + 50;
-									System.out.println(points);
+									this.points = this.points + 50;
+									System.out.println(this.points);
 								}
 								else if (gameGrid.yGrid.get(Digger.Hero.yPos+1).get(Digger.Hero.xPos).getObjectType() == "gold"){
-									points = points + 200;
-									System.out.println(points);
+									this.points = this.points + 200;
+									System.out.println(this.points);
 								}
 								Digger.Hero.shiftToCoordinate(Digger.Hero.xPos,Digger.Hero.yPos+1,"hero");
 							} else if (bufferedAction == "attack") {
@@ -295,6 +298,7 @@ public class gameClock implements Runnable {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+				Digger.clearTickableRegistry();
 				Digger.clearTickableRegistry();
 				
 				//Kind of kludgey, but we'll do this for now
