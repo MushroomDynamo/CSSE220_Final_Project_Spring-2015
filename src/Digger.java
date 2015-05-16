@@ -233,14 +233,38 @@ public class Digger extends JFrame {
 	}
 	
 	public static boolean clearTickableRegistry() {
-		for (int i=0;i<tickableRegistry.size();i++) {
-			if (tickableRegistry.get(i) instanceof objectMonster) {
-				int[] objectCoordinates = ((objectMonster) tickableRegistry.get(i)).returnCoordinates();
-				//Figure out better casting method later
-				gameGrid.yGrid.get(objectCoordinates[1]).get(objectCoordinates[0]).setObjectType("null");
+//		gameClock.doGameTicks = false;
+//		for (int i=0;i<tickableRegistry.size();i++) {
+//			if (tickableRegistry.get(i) instanceof objectMonster) {
+//				int[] objectCoordinates = ((objectMonster) tickableRegistry.get(i)).returnCoordinates();
+//				//Figure out better casting method later
+//				gameGrid.yGrid.get(objectCoordinates[1]).get(objectCoordinates[0]).setObjectType("null");
+//				System.out.println("Deleted tickable entity at (" + objectCoordinates[0] + "," + objectCoordinates[1] + ")");
+//			}
+//		}
+		for (int i=0;i<gameHeight;i++){
+			for (int j=0;j<gameWidth;j++) {
+				String objectType = gameGrid.yGrid.get(i).get(j).getObjectType();
+				switch (objectType) {
+				case "monster": gameGrid.yGrid.get(i).get(j).setObjectType("null");
+					break;
+				case "monster2": gameGrid.yGrid.get(i).get(j).setObjectType("null");
+					break;
+				case "hero": gameGrid.yGrid.get(i).get(j).setObjectType("null");
+					break;
+				case "moneybag": gameGrid.yGrid.get(i).get(j).setObjectType("null");
+					break;
+				case "moneybag_lethal": gameGrid.yGrid.get(i).get(j).setObjectType("null");
+					break;
+				default:
+					break;
+				}
 			}
 		}
+//		System.out.println(tickableRegistry.size());
 		tickableRegistry.clear();
+		
+//		gameClock.doGameTicks = true;
 		return true;
 	}
 	
