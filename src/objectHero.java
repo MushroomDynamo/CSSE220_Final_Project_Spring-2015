@@ -17,20 +17,20 @@ public class objectHero extends objectMovable {
 		return this.tickActionInterval;
 	}
 	
-	public void setHeroDead(boolean state){
-		this.dead = state;
-	}
-	
-	public void removeHeroLives(){
-		this.lives = this.lives - 1;
-	}
-	
-	public boolean getHeroDead(){
-		return this.dead;
-	}
-	
-	public int getHeroLives(){
-		return this.lives;
-	}
+//	public void setHeroDead(boolean state){
+//		this.dead = state;
+//	}
+//	
+//	public void removeHeroLives(){
+//		this.lives = this.lives - 1;
+//	}
+//	
+//	public boolean getHeroDead(){
+//		return this.dead;
+//	}
+//	
+//	public int getHeroLives(){
+//		return this.lives;
+//	}
 
 }

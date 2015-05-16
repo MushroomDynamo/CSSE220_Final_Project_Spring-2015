@@ -28,6 +28,7 @@ public class Digger extends JFrame {
 	private static boolean dead;
 	private static int lives = 3;
 	public static String facing = "down";
+	private static boolean shutdown = false;
 	
 	static gameClock gameClock = new gameClock();
 	static Thread gameClockThread = new Thread(gameClock);
@@ -174,25 +175,43 @@ public class Digger extends JFrame {
 		
 		while (true) {
 			gameFrame.repaint();
+		
 			try {
 				Thread.sleep(frameInterval);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-			
-			
-			
-			if(getHeroLives()==0){
-				System.out.println("You are dead.");
+			if(shutdown == true){
 				break;
 			}
+			
+			
+			
+//			if(getHeroLives()<0){
+//				gameClockThread.stop();
+//				System.out.println("You are dead.");
+//				gameFrame.setVisible(false);
+//				gameFrame.dispose();
+//				gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//				
+//				break;
+//			}
 		}
-		
-		
+		gameClockThread.stop();
+		System.out.println("You are dead.");
+		gameFrame.setVisible(false);
+		gameFrame.dispose();
+		gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
+
 	public int returnLevel(){
 		return levelPosition;
 	}
+	
+	public static void closeGame(){
+		shutdown = true;
+	 	}
+
 	public static boolean insertObjectIntoTickableRegistry(Object object) {
 		tickableRegistry.add(object);
 		return true;
@@ -239,7 +258,10 @@ public class Digger extends JFrame {
 	}
 	
 	public static void removeHeroLives(){
-			lives = lives - 1;
+			if(lives>=1){
+			lives = lives - 1;}
+			
+			
 	}
 	
 	public static boolean getHeroDead(){
