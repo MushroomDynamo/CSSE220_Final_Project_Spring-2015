@@ -20,7 +20,7 @@ public class Digger extends JFrame {
 	
 	public static JFrame gameFrame = new JFrame("Digger");
 	public static gameRenderer gameRenderer = new gameRenderer();
-	private static InfoPanel menu;
+	private static InfoPanel menu = new InfoPanel(gameFrame);
 	public static objectHero Hero;
 	private static String[] levelList = {"test_level.txt","test_level_2.txt","test_level_3.txt"};
 	private static int levelPosition = 0;
@@ -169,7 +169,7 @@ public class Digger extends JFrame {
 		gameGrid.instantiateGameGrid(gameFrame,gameWidth,gameHeight);
 		
 		
-		menu = new InfoPanel(gameFrame);
+		
 		Container pane = gameFrame.getContentPane();
 		pane.setLayout(new BorderLayout());
 		pane.add(gameRenderer, BorderLayout.CENTER);

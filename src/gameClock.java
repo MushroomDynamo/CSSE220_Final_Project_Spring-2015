@@ -16,6 +16,7 @@ public class gameClock implements Runnable {
 				this.measuredTickClock = 0;
 			}
 			if (doGameTicks == true) {
+				
 				InfoPanel.setLifeLabel(Digger.getHeroLives());
 				InfoPanel.setgameScore(this.points);
 
