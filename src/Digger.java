@@ -110,6 +110,7 @@ public class Digger extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				levelPosition = levelPosition + 1;
 				//gameClockThread.interrupt();
+				//Hello World
 				tickableRegistry.clear();
 				levelManager.readLevelFile(levelList[levelPosition]);
 				//gameClockThread.start();
