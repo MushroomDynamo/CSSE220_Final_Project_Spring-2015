@@ -175,6 +175,7 @@ public class Digger extends JFrame {
 		
 		while (true) {
 			gameFrame.repaint();
+		
 			try {
 				Thread.sleep(frameInterval);
 			} catch (InterruptedException e) {
@@ -207,9 +208,7 @@ public class Digger extends JFrame {
 	
 	public static void closeGame(){
 		shutdown = true;
-		
-		
-	}
+	 	}
 	
 	public static boolean insertObjectIntoTickableRegistry(Object object) {
 		tickableRegistry.add(object);
