@@ -17,8 +17,8 @@ public class gameClock implements Runnable {
 			}
 			if (doGameTicks == true) {
 				
-				InfoPanel.setLifeLabel(Digger.getHeroLives());
-				InfoPanel.setgameScore(this.points);
+				Digger.menu.setLifeLabel(Digger.getHeroLives());
+				Digger.menu.setgameScore(this.points);
 
 				for (int i=0;i<Digger.dumpTickableRegistry().size();i++) {
 					//Monster logic in here

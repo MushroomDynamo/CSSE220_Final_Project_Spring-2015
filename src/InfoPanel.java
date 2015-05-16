@@ -7,38 +7,39 @@ import javax.swing.JPanel;
 
 public class InfoPanel extends JPanel{
 	
-	private static JLabel heroLives;
-	private static JLabel gameScore;
+	public JLabel heroLives = new JLabel();
+	public JLabel gameScore = new JLabel();
 
 	public InfoPanel(JFrame gp) {
 		setBackground(Color.blue);
 		setLayout(new FlowLayout(5, 5, 5));
 
 		
-		heroLives = new JLabel("# Lives: " + Digger.getHeroLives());
-
-		  heroLives.setOpaque(true);
-	      heroLives.setBackground(Color.GRAY);
-	      heroLives.setForeground(Color.WHITE);
-	      add(heroLives);
+		
+		heroLives.setOpaque(true);
+	    heroLives.setBackground(Color.GRAY);
+	    heroLives.setForeground(Color.WHITE);
+	    add(heroLives);
+	    setLifeLabel(Digger.getHeroLives());
 	      
-	      gameScore = new JLabel("Score: " + Digger.getHeroLives());
+	      
 
 	      gameScore.setOpaque(true);
 	      gameScore.setBackground(Color.GRAY);
 	      gameScore.setForeground(Color.WHITE);
 	      add(gameScore);
+	      setgameScore(0);
 	      
 	}
 	
-	public static void setLifeLabel(int lives){
+	public void setLifeLabel(int lives){
 
-		heroLives.setText("# Lives: " + lives);
+		this.heroLives.setText("# Lives: " + lives);
 	}
 	
-	public static void setgameScore(int score){
+	public void setgameScore(int score){
 		
-		gameScore.setText("Score: " + score);
+		this.gameScore.setText("Score: " + score);
 	}
 	
 	
