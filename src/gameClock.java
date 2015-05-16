@@ -160,10 +160,18 @@ public class gameClock implements Runnable {
 										points = points + 50;
 										System.out.println(points);
 									}
+									else if(gameGrid.yGrid.get(Digger.Hero.yPos).get(0).getObjectType() == "gold"){
+										points = points + 200;
+										System.out.println(points);
+									}
 								}
 									else if (gameGrid.yGrid.get(Digger.Hero.yPos).get(Digger.Hero.xPos+1).getObjectType() == "emerald"){
 									points = points + 50;
 									System.out.println(points);
+									}
+									else if (gameGrid.yGrid.get(Digger.Hero.yPos).get(Digger.Hero.xPos+1).getObjectType() == "gold"){
+										points = points + 200;
+										System.out.println(points);
 								}
 								Digger.Hero.shiftToCoordinate(Digger.Hero.xPos+1,Digger.Hero.yPos,"hero");
 							} else if (bufferedAction == "left") {
@@ -172,9 +180,17 @@ public class gameClock implements Runnable {
 										points = points + 50;
 										System.out.println(points);
 									}
+									if(gameGrid.yGrid.get(Digger.Hero.yPos).get(Digger.gameWidth-1).getObjectType() == "gold"){
+										points = points + 200;
+										System.out.println(points);
+									}
 								}
 								else if (gameGrid.yGrid.get(Digger.Hero.yPos).get(Digger.Hero.xPos-1).getObjectType() == "emerald"){
 									points = points + 50;
+									System.out.println(points);
+								}
+								else if (gameGrid.yGrid.get(Digger.Hero.yPos).get(Digger.Hero.xPos-1).getObjectType() == "gold"){
+									points = points + 200;
 									System.out.println(points);
 								}
 								Digger.Hero.shiftToCoordinate(Digger.Hero.xPos-1,Digger.Hero.yPos,"hero");
@@ -184,9 +200,17 @@ public class gameClock implements Runnable {
 										points = points + 50;
 										System.out.println(points);
 									}
+									else if(gameGrid.yGrid.get(Digger.gameHeight-1).get(Digger.Hero.xPos).getObjectType() == "gold"){
+										points = points + 200;
+										System.out.println(points);
+									}
 								}
 								else if (gameGrid.yGrid.get(Digger.Hero.yPos-1).get(Digger.Hero.xPos).getObjectType() == "emerald"){
 									points = points + 50;
+									System.out.println(points);
+								}
+								else if (gameGrid.yGrid.get(Digger.Hero.yPos-1).get(Digger.Hero.xPos).getObjectType() == "gold"){
+									points = points + 200;
 									System.out.println(points);
 								}
 								Digger.Hero.shiftToCoordinate(Digger.Hero.xPos,Digger.Hero.yPos-1,"hero");
@@ -196,9 +220,17 @@ public class gameClock implements Runnable {
 										points = points + 50;
 										System.out.println(points);
 									}
+									if(gameGrid.yGrid.get(0).get(Digger.Hero.xPos).getObjectType() == "gold"){
+										points = points + 200;
+										System.out.println(points);
+									}
 								}
 								else if (gameGrid.yGrid.get(Digger.Hero.yPos+1).get(Digger.Hero.xPos).getObjectType() == "emerald"){
 									points = points + 50;
+									System.out.println(points);
+								}
+								else if (gameGrid.yGrid.get(Digger.Hero.yPos+1).get(Digger.Hero.xPos).getObjectType() == "gold"){
+									points = points + 200;
 									System.out.println(points);
 								}
 								Digger.Hero.shiftToCoordinate(Digger.Hero.xPos,Digger.Hero.yPos+1,"hero");
