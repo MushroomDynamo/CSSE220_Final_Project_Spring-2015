@@ -149,12 +149,52 @@ public class gameClock implements Runnable {
 							String bufferedAction = Digger.bufferedAction;
 							Digger.bufferedAction = "null";
 							if (bufferedAction == "right") {
+								if (Digger.Hero.xPos == Digger.gameWidth-1){
+									if(gameGrid.yGrid.get(Digger.Hero.yPos).get(0).getObjectType() == "emerald"){
+										points = points + 50;
+										System.out.println(points);
+									}
+								}
+									else if (gameGrid.yGrid.get(Digger.Hero.yPos).get(Digger.Hero.xPos+1).getObjectType() == "emerald"){
+									points = points + 50;
+									System.out.println(points);
+								}
 								Digger.Hero.shiftToCoordinate(Digger.Hero.xPos+1,Digger.Hero.yPos,"hero");
 							} else if (bufferedAction == "left") {
+								if (Digger.Hero.xPos == 0){
+									if(gameGrid.yGrid.get(Digger.Hero.yPos).get(Digger.gameWidth-1).getObjectType() == "emerald"){
+										points = points + 50;
+										System.out.println(points);
+									}
+								}
+								else if (gameGrid.yGrid.get(Digger.Hero.yPos).get(Digger.Hero.xPos-1).getObjectType() == "emerald"){
+									points = points + 50;
+									System.out.println(points);
+								}
 								Digger.Hero.shiftToCoordinate(Digger.Hero.xPos-1,Digger.Hero.yPos,"hero");
 							} else if (bufferedAction == "up") {
+								if (Digger.Hero.yPos == 0){
+									if(gameGrid.yGrid.get(Digger.gameHeight-1).get(Digger.Hero.xPos).getObjectType() == "emerald"){
+										points = points + 50;
+										System.out.println(points);
+									}
+								}
+								else if (gameGrid.yGrid.get(Digger.Hero.yPos-1).get(Digger.Hero.xPos).getObjectType() == "emerald"){
+									points = points + 50;
+									System.out.println(points);
+								}
 								Digger.Hero.shiftToCoordinate(Digger.Hero.xPos,Digger.Hero.yPos-1,"hero");
 							} else if (bufferedAction == "down") {
+								if (Digger.Hero.yPos == Digger.gameHeight-1){
+									if(gameGrid.yGrid.get(0).get(Digger.Hero.xPos).getObjectType() == "emerald"){
+										points = points + 50;
+										System.out.println(points);
+									}
+								}
+								else if (gameGrid.yGrid.get(Digger.Hero.yPos+1).get(Digger.Hero.xPos).getObjectType() == "emerald"){
+									points = points + 50;
+									System.out.println(points);
+								}
 								Digger.Hero.shiftToCoordinate(Digger.Hero.xPos,Digger.Hero.yPos+1,"hero");
 							} else if (bufferedAction == "attack") {
 								for (int j=0;j<Digger.dumpTickableRegistry().size();j++) {
