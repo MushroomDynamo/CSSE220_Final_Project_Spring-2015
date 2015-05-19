@@ -24,6 +24,26 @@ public class gameClock implements Runnable {
 				}
 				Digger.menu.setLifeLabel(Digger.getHeroLives());
 				Digger.menu.setgameScore(this.points);
+				
+				this.allEmeraldsCollected = true;
+				for (int b=0;b<gameGrid.yGrid.size();b++) {
+					ArrayList<objectDrawable> xGrid = gameGrid.yGrid.get(b);
+					for (int j=0;j<xGrid.size();j++) {
+						String objectType = xGrid.get(j).getObjectType();
+						if (objectType == "emerald") {
+							this.allEmeraldsCollected = false;
+						}}} 
+				if (this.allEmeraldsCollected == true) { 
+						int levelPosition = Digger.advanceLevelPosition();
+						String levelList[] = Digger.returnLevelList();
+						if (levelPosition >= levelList.length) {
+							//
+						} else {
+						System.out.println("level "+levelPosition);
+						Digger.clearTickableRegistry();
+						levelManager.readLevelFile(levelList[levelPosition]);
+						}
+					}
 
 				for (int i=0;i<Digger.dumpTickableRegistry().size();i++) {
 					//Monster logic in here
@@ -33,7 +53,6 @@ public class gameClock implements Runnable {
 						if (this.measuredTickClock % tickInterval == 0) {
 							int[] heroCoordinates = Digger.returnHeroCoordinates();
 							int[] monsterCoordinates = ((objectMonster) objectToTick).returnCoordinates();
-							this.allEmeraldsCollected = true;
 							if (heroCoordinates[0] > monsterCoordinates[0]) {
 								((objectMonster) objectToTick).shiftToCoordinate(monsterCoordinates[0]+1,monsterCoordinates[1],"monster");
 							} else if (heroCoordinates[0] < monsterCoordinates[0]) {
@@ -52,23 +71,6 @@ public class gameClock implements Runnable {
 								
 								}
 							}
-							for (int b=0;b<gameGrid.yGrid.size();b++) {
-								ArrayList<objectDrawable> xGrid = gameGrid.yGrid.get(b);
-								for (int j=0;j<xGrid.size();j++) {
-									String objectType = xGrid.get(j).getObjectType();
-									if (objectType == "emerald") {
-										this.allEmeraldsCollected = false;
-									}}} 
-							if (this.allEmeraldsCollected) {int levelPosition = Digger.advanceLevelPosition();
-									String levelList[] = Digger.returnLevelList();
-									if (levelPosition >= levelList.length){
-										//
-									} else {
-									System.out.println("level "+levelPosition);
-									Digger.clearTickableRegistry();
-									levelManager.readLevelFile(levelList[levelPosition]);
-									}
-									}
 								}
 					} else if (objectToTick instanceof objectMonsterNonDigging) {
 								int[] heroCoordinates = Digger.returnHeroCoordinates();
