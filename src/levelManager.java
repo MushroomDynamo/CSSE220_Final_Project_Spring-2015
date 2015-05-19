@@ -74,6 +74,9 @@ public abstract class levelManager {
 					} else if (nextChar == 56) {
 						gameObject.setObjectType("monster2");
 						new objectMonsterNonDigging(j,i);
+					} else if (nextChar == 53) {
+						gameObject.setObjectType("moneybag");
+						new objectMoneyBag(j,i);
 					} else if (nextChar == -1) {
 						System.out.println("eof");
 					}
