@@ -1,7 +1,7 @@
 
 public class objectHero extends objectMovable {
 	
-	protected int tickActionInterval = 300;
+	protected int tickActionInterval = 200;
 	//private int lives;
 	//private boolean dead;
 
