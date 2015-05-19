@@ -1,0 +1,12 @@
+Progress Report 3
+	Cycle 3 User Stories Committed to Repository
+		-Covers advanced feature functionality mostly governing polish and meeting final requirements
+	Primary Completed Features
+		-Monster Respawning Mechanic (0:30:00) (estimated time 1:00:00)
+		-Pause Function (0:30:00) (estimated time 1:00:00)
+		-Moneybags (4:00:00) (estimated time 2:00:00)
+		-Expanded Level List (1:00:00) (estimated time 2:00:00)
+	Notes
+		-There are still some bugs and difficulties with the moneybag code; it proved more difficult to implement than expected.
+		-Music is composed, but currently unimplemented.
+		-There were some issues merging the latest branch changes, so some issues may persist (however, I believe all of them have been fixed)
