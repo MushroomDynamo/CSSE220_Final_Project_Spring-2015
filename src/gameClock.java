@@ -267,8 +267,9 @@ public class gameClock implements Runnable {
 										//Falling logic
 										if (objectType == "monster" || objectType == "monster2") {
 											System.out.println("shoobily doobily");
-										} else if (objectType == "objectHero") {
+										} else if (objectType == "hero") {
 											System.out.println("shoobily doobily doodily flanders");
+											Digger.setHeroDead(true);
 										} else {
 											//Just fall downwards
 											moneyBag.yPos = moneyBag.yPos + 1;
