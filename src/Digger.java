@@ -1,3 +1,5 @@
+import java.awt.BorderLayout;
+import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
@@ -18,8 +20,9 @@ public class Digger extends JFrame {
 	
 	public static JFrame gameFrame = new JFrame("Digger");
 	public static gameRenderer gameRenderer = new gameRenderer();
+	public static InfoPanel menu = new InfoPanel();
 	public static objectHero Hero;
-	private static String[] levelList = {"test_level.txt","test_level_2.txt","test_level_3.txt"};
+	private static String[] levelList = {"lvl0.txt","lvl1.txt","lvl2.txt","lvl3.txt","lvl4.txt","lvl5.txt","lvl6.txt","lvl7.txt","lvl8.txt","lvl9.txt"};
 	private static int levelPosition = 0;
 	public static int gameWidth = 20;
 	public static int gameHeight = 15;
@@ -108,6 +111,7 @@ public class Digger extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				levelPosition = levelPosition + 1;
 				//gameClockThread.interrupt();
+				//Hello World
 				tickableRegistry.clear();
 				levelManager.readLevelFile(levelList[levelPosition]);
 				//gameClockThread.start();
@@ -146,16 +150,23 @@ public class Digger extends JFrame {
 		gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		gameGrid.instantiateGameGrid(gameFrame,gameWidth,gameHeight);
 		
-		gameFrame.getContentPane().add(gameRenderer);
+		
+		
+		Container pane = gameFrame.getContentPane();
+		pane.setLayout(new BorderLayout());
+		pane.add(gameRenderer, BorderLayout.CENTER);
+		pane.add(menu, BorderLayout.NORTH);
+		
+		//gameFrame.getContentPane().add(gameRenderer);
 		gameRenderer.setPreferredSize(new Dimension(640,480));
 		gameFrame.pack();
 		gameFrame.setVisible(true);
 		
-		levelManager.readLevelFile("test_level.txt");
+		levelManager.readLevelFile("lvl0.txt");
 		gameClockThread.start();
 		
 		while (true) {
-			gameFrame.repaint();
+			pane.repaint();
 			try {
 				Thread.sleep(frameInterval);
 			} catch (InterruptedException e) {
@@ -191,14 +202,38 @@ public class Digger extends JFrame {
 	}
 	
 	public static boolean clearTickableRegistry() {
-		for (int i=0;i<tickableRegistry.size();i++) {
-			if (tickableRegistry.get(i) instanceof objectMonster) {
-				int[] objectCoordinates = ((objectMonster) tickableRegistry.get(i)).returnCoordinates();
-				//Figure out better casting method later
-				gameGrid.yGrid.get(objectCoordinates[1]).get(objectCoordinates[0]).setObjectType("null");
+//		gameClock.doGameTicks = false;
+//		for (int i=0;i<tickableRegistry.size();i++) {
+//			if (tickableRegistry.get(i) instanceof objectMonster) {
+//				int[] objectCoordinates = ((objectMonster) tickableRegistry.get(i)).returnCoordinates();
+//				//Figure out better casting method later
+//				gameGrid.yGrid.get(objectCoordinates[1]).get(objectCoordinates[0]).setObjectType("null");
+//				System.out.println("Deleted tickable entity at (" + objectCoordinates[0] + "," + objectCoordinates[1] + ")");
+//			}
+//		}
+		for (int i=0;i<gameHeight;i++){
+			for (int j=0;j<gameWidth;j++) {
+				String objectType = gameGrid.yGrid.get(i).get(j).getObjectType();
+				switch (objectType) {
+				case "monster": gameGrid.yGrid.get(i).get(j).setObjectType("null");
+					break;
+				case "monster2": gameGrid.yGrid.get(i).get(j).setObjectType("null");
+					break;
+				case "hero": gameGrid.yGrid.get(i).get(j).setObjectType("null");
+					break;
+				case "moneybag": gameGrid.yGrid.get(i).get(j).setObjectType("null");
+					break;
+				case "moneybag_lethal": gameGrid.yGrid.get(i).get(j).setObjectType("null");
+					break;
+				default:
+					break;
+				}
 			}
 		}
+//		System.out.println(tickableRegistry.size());
 		tickableRegistry.clear();
+		
+//		gameClock.doGameTicks = true;
 		return true;
 	}
 	public static int[] returnHeroCoordinates() {

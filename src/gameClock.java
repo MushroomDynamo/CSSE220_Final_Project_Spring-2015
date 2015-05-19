@@ -1,4 +1,3 @@
-import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -8,7 +7,7 @@ public class gameClock implements Runnable {
 	public boolean doGameTicks = true;
 	public Random randomGenerator = new Random();
 	private int points = 0;
-	private boolean done = true;
+	private boolean allEmeraldsCollected = true;
 	@Override
 	public void run() {
 		while (!Thread.interrupted()) {
@@ -19,54 +18,70 @@ public class gameClock implements Runnable {
 			if (doGameTicks == true) {
 				for (int k=0;k<Digger.dumpTickableRegistry().size();k++) {
 					//
-				}
+				}			
+				Digger.menu.setLifeLabel(Digger.getHeroLives());
+				Digger.menu.setgameScore(this.points);
+
 				for (int i=0;i<Digger.dumpTickableRegistry().size();i++) {
 					//Monster logic in here
 					Object objectToTick = Digger.dumpTickableRegistry().get(i);
-					if (objectToTick instanceof objectMonster) {
+					if ((objectToTick instanceof objectMonster) & (!(objectToTick instanceof objectMonsterNonDigging))) {
 						int tickInterval = ((objectMonster) objectToTick).returnTickActionInterval();
 						if (this.measuredTickClock % tickInterval == 0) {
 							int[] heroCoordinates = Digger.returnHeroCoordinates();
 							int[] monsterCoordinates = ((objectMonster) objectToTick).returnCoordinates();
-							//int points = score.score(monsterCoordinates[0],monsterCoordinates[1]);
-							//points = score.score(points, monsterCoordinates[0],monsterCoordinates[1]); //////fix the points variable that is to the right;
-							//System.out.println(points);
-							done = true;
+							this.allEmeraldsCollected = true;
+							if (heroCoordinates[0] > monsterCoordinates[0]) {
+								((objectMonster) objectToTick).shiftToCoordinate(monsterCoordinates[0]+1,monsterCoordinates[1],"monster");
+							} else if (heroCoordinates[0] < monsterCoordinates[0]) {
+								((objectMonster) objectToTick).shiftToCoordinate(monsterCoordinates[0]-1,monsterCoordinates[1],"monster");
+							} else {
+								if (heroCoordinates[1] > monsterCoordinates[1]) {
+									((objectMonster) objectToTick).shiftToCoordinate(monsterCoordinates[0],monsterCoordinates[1]+1,"monster");
+								} else if (heroCoordinates[1] < monsterCoordinates[1]) {
+									((objectMonster) objectToTick).shiftToCoordinate(monsterCoordinates[0],monsterCoordinates[1]-1,"monster");
+								} else {
+									Digger.setHeroDead(true);
+									Digger.removeHeroLives();
+									if(Digger.getHeroLives()<=0){
+										Digger.closeGame();
+									}
+								
+								}
+							}
 							for (int b=0;b<gameGrid.yGrid.size();b++) {
 								ArrayList<objectDrawable> xGrid = gameGrid.yGrid.get(b);
 								for (int j=0;j<xGrid.size();j++) {
 									String objectType = xGrid.get(j).getObjectType();
 									if (objectType == "emerald") {
-										done = false;
+										this.allEmeraldsCollected = false;
+									}}} 
+							if (this.allEmeraldsCollected) {int levelPosition = Digger.advanceLevelPosition();
+									String levelList[] = Digger.returnLevelList();
+									if (levelPosition >= levelList.length){
+										//
+									} else {
+									System.out.println("level "+levelPosition);
+									Digger.clearTickableRegistry();
+									levelManager.readLevelFile(levelList[levelPosition]);
+									}
 									}
 								}
-							}
-							if (done) {int levelPosition = Digger.advanceLevelPosition();
-							String levelList[] = Digger.returnLevelList();
-							if (levelPosition >= levelList.length){
-								System.out.println("YOU WIN!");
-							} else {
-								System.out.println("level "+levelPosition);
-								Digger.clearTickableRegistry();
-								levelManager.readLevelFile(levelList[levelPosition]);
-								}
-							}
-								
-							if (objectToTick instanceof objectMonsterNonDigging) {
+					} else if (objectToTick instanceof objectMonsterNonDigging) {
+								int[] heroCoordinates = Digger.returnHeroCoordinates();
+								int[] monsterCoordinates = ((objectMonster) objectToTick).returnCoordinates();
 								objectMonsterNonDigging monsterNonDigging = ((objectMonsterNonDigging) objectToTick);
-								randomGenerator.setSeed((long) Digger.seed+monsterCoordinates[0]*monsterCoordinates[1]+heroCoordinates[0]*heroCoordinates[1]);
-								if (heroCoordinates[0] == monsterCoordinates[0] && heroCoordinates[1] == monsterCoordinates[1]) {
-									//System.out.println("You have been dingbatted");
-									Digger.setHeroDead(true);
-									Digger.removeHeroLives();
-									System.out.println(Digger.getHeroLives());
-
-									if(Digger.getHeroLives()<=0){
-										System.out.println(Digger.getHeroLives());
+								int tickInterval = ((objectMonster) objectToTick).returnTickActionInterval();
+								if (this.measuredTickClock % tickInterval == 0) {
+									
+									if ((heroCoordinates[0] == monsterCoordinates[0]) && (heroCoordinates[1] == monsterCoordinates[1])) {
+										Digger.setHeroDead(true);
+										Digger.removeHeroLives();
+										if(Digger.getHeroLives()<=0){
 										Digger.closeGame();
+										}
 									}
 								
-								}
 								while (true) {
 									if (monsterNonDigging.movementDirection == 4) {
 										monsterNonDigging.movementDirection = 0;
@@ -125,40 +140,75 @@ public class gameClock implements Runnable {
 										}
 									}
 								}
-							} else {
-								if (heroCoordinates[0] > monsterCoordinates[0]) {
-									((objectMonster) objectToTick).shiftToCoordinate(monsterCoordinates[0]+1,monsterCoordinates[1],"monster");
-								} else if (heroCoordinates[0] < monsterCoordinates[0]) {
-									((objectMonster) objectToTick).shiftToCoordinate(monsterCoordinates[0]-1,monsterCoordinates[1],"monster");
-								} else {
-									if (heroCoordinates[1] > monsterCoordinates[1]) {
-										((objectMonster) objectToTick).shiftToCoordinate(monsterCoordinates[0],monsterCoordinates[1]+1,"monster");
-									} else if (heroCoordinates[1] < monsterCoordinates[1]) {
-										((objectMonster) objectToTick).shiftToCoordinate(monsterCoordinates[0],monsterCoordinates[1]-1,"monster");
-									} else {
-										Digger.setHeroDead(true);
-										Digger.removeHeroLives();
-										if(Digger.getHeroLives()<=0){
-											System.out.println(Digger.getHeroLives());
-											Digger.closeGame();
-										}
-									
-									}
-								}
 							}
-						}
 					} else if (objectToTick instanceof objectHero) {
 						int tickInterval = ((objectHero) objectToTick).returnTickActionInterval();
 						if (this.measuredTickClock % tickInterval == 0) {
 							String bufferedAction = Digger.bufferedAction;
 							Digger.bufferedAction = "null";
 							if (bufferedAction == "right") {
+								if (Digger.Hero.xPos == Digger.gameWidth-1){
+									if(gameGrid.yGrid.get(Digger.Hero.yPos).get(0).getObjectType() == "emerald"){
+										this.points = this.points + 50;
+									}
+									else if(gameGrid.yGrid.get(Digger.Hero.yPos).get(0).getObjectType() == "gold"){
+										this.points = this.points + 200;
+									}
+								}
+									else if (gameGrid.yGrid.get(Digger.Hero.yPos).get(Digger.Hero.xPos+1).getObjectType() == "emerald"){
+									this.points = this.points + 50;
+									}
+									else if (gameGrid.yGrid.get(Digger.Hero.yPos).get(Digger.Hero.xPos+1).getObjectType() == "gold"){
+										this.points = this.points + 200;
+								}
 								Digger.Hero.shiftToCoordinate(Digger.Hero.xPos+1,Digger.Hero.yPos,"hero");
 							} else if (bufferedAction == "left") {
+								if (Digger.Hero.xPos == 0){
+									if(gameGrid.yGrid.get(Digger.Hero.yPos).get(Digger.gameWidth-1).getObjectType() == "emerald"){
+										this.points = this.points + 50;
+									}
+									if(gameGrid.yGrid.get(Digger.Hero.yPos).get(Digger.gameWidth-1).getObjectType() == "gold"){
+										this.points = this.points + 200;
+									}
+								}
+								else if (gameGrid.yGrid.get(Digger.Hero.yPos).get(Digger.Hero.xPos-1).getObjectType() == "emerald"){
+									this.points = this.points + 50;
+								}
+								else if (gameGrid.yGrid.get(Digger.Hero.yPos).get(Digger.Hero.xPos-1).getObjectType() == "gold"){
+									this.points = this.points + 200;
+								}
 								Digger.Hero.shiftToCoordinate(Digger.Hero.xPos-1,Digger.Hero.yPos,"hero");
 							} else if (bufferedAction == "up") {
+								if (Digger.Hero.yPos == 0){
+									if(gameGrid.yGrid.get(Digger.gameHeight-1).get(Digger.Hero.xPos).getObjectType() == "emerald"){
+										this.points = this.points + 50;
+									}
+									else if(gameGrid.yGrid.get(Digger.gameHeight-1).get(Digger.Hero.xPos).getObjectType() == "gold"){
+										this.points = this.points + 200;
+									}
+								}
+								else if (gameGrid.yGrid.get(Digger.Hero.yPos-1).get(Digger.Hero.xPos).getObjectType() == "emerald"){
+									this.points = this.points + 50;
+								}
+								else if (gameGrid.yGrid.get(Digger.Hero.yPos-1).get(Digger.Hero.xPos).getObjectType() == "gold"){
+									this.points = this.points + 200;
+								}
 								Digger.Hero.shiftToCoordinate(Digger.Hero.xPos,Digger.Hero.yPos-1,"hero");
 							} else if (bufferedAction == "down") {
+								if (Digger.Hero.yPos == Digger.gameHeight-1){
+									if(gameGrid.yGrid.get(0).get(Digger.Hero.xPos).getObjectType() == "emerald"){
+										this.points = this.points + 50;
+									}
+									if(gameGrid.yGrid.get(0).get(Digger.Hero.xPos).getObjectType() == "gold"){
+										this.points = this.points + 200;
+									}
+								}
+								else if (gameGrid.yGrid.get(Digger.Hero.yPos+1).get(Digger.Hero.xPos).getObjectType() == "emerald"){
+									this.points = this.points + 50;
+								}
+								else if (gameGrid.yGrid.get(Digger.Hero.yPos+1).get(Digger.Hero.xPos).getObjectType() == "gold"){
+									this.points = this.points + 200;
+								}
 								Digger.Hero.shiftToCoordinate(Digger.Hero.xPos,Digger.Hero.yPos+1,"hero");
 							} else if (bufferedAction == "attack") {
 								for (int j=0;j<Digger.dumpTickableRegistry().size();j++) {
@@ -245,6 +295,7 @@ public class gameClock implements Runnable {
 					e.printStackTrace();
 				}
 				Digger.clearTickableRegistry();
+				
 				
 				//Kind of kludgey, but we'll do this for now
 				gameGrid.yGrid.get(Digger.Hero.yPos).get(Digger.Hero.xPos).setObjectType("null");

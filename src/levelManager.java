@@ -46,9 +46,11 @@ public abstract class levelManager {
 					}
 				}
 			}
+			reader.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
 	}
 	
 	public static void refresh(String levelName) {
