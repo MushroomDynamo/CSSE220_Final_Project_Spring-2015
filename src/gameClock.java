@@ -291,13 +291,13 @@ public class gameClock implements Runnable {
 									} else {
 										//Falling logic
 										if (objectType == "monster" || objectType == "monster2") {
-											for (int j=0;j<Digger.dumpTickableRegistry().size();j++) {
-												int[] monsterCoordinates = ((objectMonster) objectToTick).returnCoordinates();
-												if ((bagCoordinates[0] == monsterCoordinates[0]) && (bagCoordinates[1] == monsterCoordinates[1])) {
-													gameGrid.yGrid.get(monsterCoordinates[1]).get(monsterCoordinates[0]).setObjectType("null");
-													Digger.dumpTickableRegistry().remove(j);
-												}
-											}
+//											for (int j=0;j<Digger.dumpTickableRegistry().size();j++) {
+//												int[] monsterCoordinates = ((objectMonster) objectToTick).returnCoordinates();
+//												if ((bagCoordinates[0] == monsterCoordinates[0]) && (bagCoordinates[1] == monsterCoordinates[1])) {
+//													gameGrid.yGrid.get(monsterCoordinates[1]).get(monsterCoordinates[0]).setObjectType("null");
+//													Digger.dumpTickableRegistry().remove(j);
+//												}
+//											}
 											System.out.println("shoobily doobily");
 										} else if (objectType == "hero") {
 											System.out.println("shoobily doobily doodily flanders");
