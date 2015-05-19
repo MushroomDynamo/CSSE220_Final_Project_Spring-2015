@@ -4,6 +4,7 @@ import java.util.Random;
 public class gameClock implements Runnable {
 	
 	private int measuredTickClock = 0;
+	private int tickLoopCounter = 1;
 	public boolean doGameTicks = true;
 	public Random randomGenerator = new Random();
 	private int points = 0;
@@ -14,11 +15,13 @@ public class gameClock implements Runnable {
 			this.measuredTickClock = this.measuredTickClock + Digger.frameInterval;
 			if (this.measuredTickClock == 1000) {
 				this.measuredTickClock = 0;
+				this.tickLoopCounter = this.tickLoopCounter + 1;
 			}
 			if (doGameTicks == true) {
-				for (int k=0;k<Digger.dumpTickableRegistry().size();k++) {
-					//
-				}			
+				if (this.tickLoopCounter % 60 == 0) {
+					levelManager.refreshNoHeroes(Digger.returnLevelList()[Digger.returnLevelPosition()]);
+					this.tickLoopCounter = 1;
+				}
 				Digger.menu.setLifeLabel(Digger.getHeroLives());
 				Digger.menu.setgameScore(this.points);
 

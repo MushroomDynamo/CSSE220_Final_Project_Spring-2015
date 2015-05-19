@@ -84,4 +84,33 @@ public abstract class levelManager {
 			e.printStackTrace();
 		}
 	}
+	
+	public static void refreshNoHeroes(String levelName) {
+		try {
+			path = new java.io.File(".").getCanonicalPath();
+			path = path + "\\levels\\" + levelName;
+			Reader reader = new FileReader(path);
+			
+			for (int i=0;i<gameGrid.yGrid.size();i++) {
+				ArrayList<objectDrawable> xGrid = gameGrid.yGrid.get(i);
+				for (int j=0;j<xGrid.size();j++) {
+					objectDrawable gameObject = xGrid.get(j);
+					int nextChar = reader.read();
+					if (nextChar == 52) {
+						//Note: this should not be used in a level design context as it's a generic monster class
+						gameObject.setObjectType("monster");
+						new objectMonster(j,i);
+					} else if (nextChar == 56) {
+						gameObject.setObjectType("monster2");
+						new objectMonsterNonDigging(j,i);
+					} else if (nextChar == -1) {
+						System.out.println("eof");
+					}
+				}
+			}
+			reader.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 }
