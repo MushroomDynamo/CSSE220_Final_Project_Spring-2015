@@ -9,6 +9,8 @@ public class gameClock implements Runnable {
 	public Random randomGenerator = new Random();
 	private int points = 0;
 	private boolean allEmeraldsCollected = true;
+	private boolean changedMonsterThisStep = false;
+	
 	@Override
 	public void run() {
 		while (!Thread.interrupted()) {
@@ -18,6 +20,8 @@ public class gameClock implements Runnable {
 				this.tickLoopCounter = this.tickLoopCounter + 1;
 			}
 			if (doGameTicks == true) {
+				this.changedMonsterThisStep = false;
+				
 				if (this.tickLoopCounter % 60 == 0) {
 					levelManager.refreshNoHeroes(Digger.returnLevelList()[Digger.returnLevelPosition()]);
 					this.tickLoopCounter = 1;
@@ -48,6 +52,27 @@ public class gameClock implements Runnable {
 				for (int i=0;i<Digger.dumpTickableRegistry().size();i++) {
 					//Monster logic in here
 					Object objectToTick = Digger.dumpTickableRegistry().get(i);
+					
+					randomGenerator.setSeed(System.currentTimeMillis());
+					int newInt = randomGenerator.nextInt(1999);
+					if (newInt == 56 && this.changedMonsterThisStep == false) {
+						if (objectToTick instanceof objectMonster) {
+							if (objectToTick instanceof objectMonsterNonDigging) {
+								this.changedMonsterThisStep = true;
+								objectMonsterNonDigging objectMonsterNonDigging = (objectMonsterNonDigging) objectToTick;
+								int[] monsterCoordinates = objectMonsterNonDigging.returnCoordinates();
+								Digger.dumpTickableRegistry().remove(i);
+								objectMonster objectMonster = new objectMonster(monsterCoordinates[0],monsterCoordinates[1]);
+							} else {
+								this.changedMonsterThisStep = true;
+								objectMonster objectMonster = (objectMonster) objectToTick;
+								int[] monsterCoordinates = objectMonster.returnCoordinates();
+								Digger.dumpTickableRegistry().remove(i);
+								objectMonsterNonDigging objectMonsterNonDigging = new objectMonsterNonDigging(monsterCoordinates[0],monsterCoordinates[1]);
+							}
+						}
+					}
+					
 					if ((objectToTick instanceof objectMonster) & (!(objectToTick instanceof objectMonsterNonDigging))) {
 						int tickInterval = ((objectMonster) objectToTick).returnTickActionInterval();
 						if (this.measuredTickClock % tickInterval == 0) {
