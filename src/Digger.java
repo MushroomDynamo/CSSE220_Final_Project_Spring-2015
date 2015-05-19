@@ -34,7 +34,9 @@ public class Digger extends JFrame {
 	private static boolean shutdown = false;
 	
 	static gameClock gameClock = new gameClock();
+	static gameAudio gameAudio = new gameAudio();
 	static Thread gameClockThread = new Thread(gameClock);
+	static Thread gameAudioThread = new Thread(gameAudio);
 	
 	public static String bufferedAction = "null";
 	
@@ -164,6 +166,7 @@ public class Digger extends JFrame {
 		
 		levelManager.readLevelFile("lvl0.txt");
 		gameClockThread.start();
+		gameAudioThread.start();
 		
 		while (true) {
 			pane.repaint();
