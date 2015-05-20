@@ -32,6 +32,8 @@ public class Digger extends JFrame {
 	private static int lives = 3;
 	public static String facing = "down";
 	private static boolean shutdown = false;
+	private static boolean gameStart = false;
+	private static Container pane;
 	
 	static gameClock gameClock = new gameClock();
 	static gameAudio gameAudio = new gameAudio();
@@ -145,46 +147,92 @@ public class Digger extends JFrame {
 			}
 		});
 	}
-
-	public static void main(String args[]) {
+	
+	public static void main(String[] args){
+		mainMenu mainFrame = new mainMenu();
 		
-		new Digger();
-		gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		gameGrid.instantiateGameGrid(gameFrame,gameWidth,gameHeight);
+		mainFrame.setSize(600, 600);
+		mainFrame.setTitle("LightsOut- Jayanth Shankar");
+		mainFrame.setVisible(true);
 		
-		
-		
-		Container pane = gameFrame.getContentPane();
-		pane.setLayout(new BorderLayout());
-		pane.add(gameRenderer, BorderLayout.CENTER);
-		pane.add(menu, BorderLayout.NORTH);
-		
-		//gameFrame.getContentPane().add(gameRenderer);
-		gameRenderer.setPreferredSize(new Dimension(640,480));
-		gameFrame.pack();
-		gameFrame.setVisible(true);
-		
-		levelManager.readLevelFile("lvl0.txt");
-		gameClockThread.start();
-		gameAudioThread.start();
-		
-		while (true) {
-			pane.repaint();
+		while(!gameStart){
 			try {
-				Thread.sleep(frameInterval);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-			if(shutdown == true){
-				break;
+				Thread.sleep((long) .001);
+			} catch (InterruptedException exception) {
+				// TODO Auto-generated catch-block stub.
+				exception.printStackTrace();
 			}
 		}
-		gameClockThread.stop();
-		System.out.println("You are dead.");
-		gameFrame.setVisible(false);
-		gameFrame.dispose();
-		gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		shutdown = true;
+		if(gameStart){
+			System.out.println("Running");
+			
+			new Digger();
+			gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+			gameGrid.instantiateGameGrid(gameFrame,gameWidth,gameHeight);		
+			
+			
+			pane = gameFrame.getContentPane();
+			pane.setLayout(new BorderLayout());
+			pane.add(gameRenderer, BorderLayout.CENTER);
+			pane.add(menu, BorderLayout.NORTH);
+			
+			//gameFrame.getContentPane().add(gameRenderer);
+			gameRenderer.setPreferredSize(new Dimension(640,480));
+			gameFrame.pack();
+			gameFrame.setVisible(true);
+			
+			
+			levelManager.readLevelFile("lvl0.txt");
+			gameClockThread.start();
+			gameAudioThread.start();
+			gameStart = true;
+			
+			while (true) {
+				pane.repaint();
+				try {
+					Thread.sleep(frameInterval);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				if(shutdown == true){
+					break;
+				}
+			}
+			gameClockThread.stop();
+			System.out.println("You are dead.");
+			gameFrame.setVisible(false);
+			gameFrame.dispose();
+			gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+			shutdown = true;
+		}
+		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		gameStart = false;
+	}
+
+	public static void gameStart() {
+		
+//		new Digger();
+//		gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//		gameGrid.instantiateGameGrid(gameFrame,gameWidth,gameHeight);		
+//		
+//		
+//		pane = gameFrame.getContentPane();
+//		pane.setLayout(new BorderLayout());
+//		pane.add(gameRenderer, BorderLayout.CENTER);
+//		pane.add(menu, BorderLayout.NORTH);
+//		
+//		//gameFrame.getContentPane().add(gameRenderer);
+//		gameRenderer.setPreferredSize(new Dimension(640,480));
+//		gameFrame.pack();
+//		gameFrame.setVisible(true);
+//		
+//		
+//		levelManager.readLevelFile("lvl0.txt");
+//		gameClockThread.start();
+//		gameAudioThread.start();
+		gameStart = true;
+		
+	
 	}
 
 	public int returnLevel(){
