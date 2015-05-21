@@ -25,8 +25,9 @@ public class mainMenu extends JFrame{
 		this.startButton = new JButton("Start!");
 		this.startButton.setPreferredSize(new Dimension(50, 50));
 		add(this.startButton,BorderLayout.NORTH);
-		add(this.titlePanel,BorderLayout.CENTER);
 		this.startButton.addActionListener(new gameStartListener());
+		add(this.titlePanel,BorderLayout.CENTER);
+		this.titlePanel.setVisible(true);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 
