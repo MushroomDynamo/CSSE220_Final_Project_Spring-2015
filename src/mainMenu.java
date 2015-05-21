@@ -5,11 +5,12 @@ import java.awt.image.BufferedImage;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+
+
+
+
 public class mainMenu extends JFrame{
 
-	/**
-	 * TODO Put here a description of this field.
-	 */
 	private static final long serialVersionUID = 1L;
 	private JButton startButton;
 		
@@ -28,8 +29,5 @@ public class mainMenu extends JFrame{
 		this.startButton.addActionListener(new gameStartListener());
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
-		
-	
-	
 
 }

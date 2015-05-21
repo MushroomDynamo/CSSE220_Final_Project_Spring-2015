@@ -14,4 +14,5 @@ public class objectDrawable {
 	public String getObjectType() {
 		return objectType;
 	}
+
 }

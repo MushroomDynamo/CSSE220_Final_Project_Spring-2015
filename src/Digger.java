@@ -139,10 +139,8 @@ public class Digger extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				levelPosition = levelPosition - 1;
-				//gameClockThread.interrupt();
 				tickableRegistry.clear();
 				levelManager.readLevelFile(levelList[levelPosition]);
-				//gameClockThread.start();
 			}
 		});
 		gameRenderer.getActionMap().put("attack", new AbstractAction() {
@@ -188,13 +186,11 @@ public class Digger extends JFrame {
 			//Construct the game grid that stores all of the necessary information about where to render objects to the screen
 			gameGrid.instantiateGameGrid(gameFrame,gameWidth,gameHeight);		
 			
-			
 			pane = gameFrame.getContentPane();
 			pane.setLayout(new BorderLayout());
 			pane.add(gameRenderer, BorderLayout.CENTER);
 			pane.add(menu, BorderLayout.NORTH);
 			
-			//gameFrame.getContentPane().add(gameRenderer);
 			gameRenderer.setPreferredSize(new Dimension(640,480));
 			gameFrame.pack();
 			gameFrame.setVisible(true);
@@ -232,11 +228,7 @@ public class Digger extends JFrame {
 	
 	//This method is likely junk
 	public static void gameStart() {
-		
-
 		gameStart = true;
-		
-	
 	}
 	
 	//Basic setter/getter methods for sensitive fields and other utility functions
@@ -263,15 +255,6 @@ public class Digger extends JFrame {
 	//Christ, this method was a mess to implement.
 	//This basically just clears everything off the tickable registry and clears it from the renderer IF it is governed by gameClock
 	public static boolean clearTickableRegistry() {
-//		gameClock.doGameTicks = false;
-//		for (int i=0;i<tickableRegistry.size();i++) {
-//			if (tickableRegistry.get(i) instanceof objectMonster) {
-//				int[] objectCoordinates = ((objectMonster) tickableRegistry.get(i)).returnCoordinates();
-//				//Figure out better casting method later
-//				gameGrid.yGrid.get(objectCoordinates[1]).get(objectCoordinates[0]).setObjectType("null");
-//				System.out.println("Deleted tickable entity at (" + objectCoordinates[0] + "," + objectCoordinates[1] + ")");
-//			}
-//		}
 		for (int i=0;i<gameHeight;i++){
 			for (int j=0;j<gameWidth;j++) {
 				String objectType = gameGrid.yGrid.get(i).get(j).getObjectType();
@@ -291,10 +274,7 @@ public class Digger extends JFrame {
 				}
 			}
 		}
-//		System.out.println(tickableRegistry.size());
 		tickableRegistry.clear();
-		
-//		gameClock.doGameTicks = true;
 		return true;
 	}
 	public static int[] returnHeroCoordinates() {
@@ -317,9 +297,14 @@ public class Digger extends JFrame {
 		dead = state;
 	}
 	
-	public static void removeHeroLives(){
-			if(lives>=1){
-			lives = lives - 1;}
+	public static void removeHeroLives() {
+			if (lives>=1) {
+				lives = lives - 1;
+			}
+	}
+	
+	public static void addHeroLives(int addLives) {
+		lives = lives + addLives;
 	}
 	
 	public static boolean getHeroDead(){

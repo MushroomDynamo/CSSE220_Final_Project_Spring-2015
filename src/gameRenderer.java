@@ -13,6 +13,7 @@ public class gameRenderer extends JPanel {
 			ArrayList<objectDrawable> xGrid = gameGrid.yGrid.get(i);
 			for (int j=0;j<xGrid.size();j++) {
 				String objectType = xGrid.get(j).getObjectType();
+				//Just check what stuff is in the grid and paint the necessary stuff to the screen
 				if (objectType == "null") {
 					g2d.setColor(Color.black);
 					g2d.fillRect(j*32, i*32, (j*32)+32, (i*32)+32);
