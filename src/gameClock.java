@@ -93,14 +93,42 @@ public class gameClock implements Runnable {
 							int[] heroCoordinates = Digger.returnHeroCoordinates();
 							int[] monsterCoordinates = ((objectMonster) objectToTick).returnCoordinates();
 							if (heroCoordinates[0] > monsterCoordinates[0]) {
-								((objectMonster) objectToTick).shiftToCoordinate(monsterCoordinates[0]+1,monsterCoordinates[1],"monster");
+								if (gameGrid.yGrid.get(monsterCoordinates[1]).get(monsterCoordinates[0]+1).getObjectType() == "moneybag" || gameGrid.yGrid.get(monsterCoordinates[1]).get(monsterCoordinates[0]+1).getObjectType() == "monster" || gameGrid.yGrid.get(monsterCoordinates[1]).get(monsterCoordinates[0]+1).getObjectType() == "monster2" || gameGrid.yGrid.get(monsterCoordinates[1]).get(monsterCoordinates[0]+1).getObjectType() == "moneybag_lethal") {
+									if (heroCoordinates[1] > monsterCoordinates[1]) {
+										((objectMonster) objectToTick).shiftToCoordinate(monsterCoordinates[0],monsterCoordinates[1]+1,"monster");
+									} else if (heroCoordinates[1] < monsterCoordinates[1]) {
+										((objectMonster) objectToTick).shiftToCoordinate(monsterCoordinates[0],monsterCoordinates[1]-1,"monster");
+									}
+								}
+								else ((objectMonster) objectToTick).shiftToCoordinate(monsterCoordinates[0]+1,monsterCoordinates[1],"monster");
 							} else if (heroCoordinates[0] < monsterCoordinates[0]) {
-								((objectMonster) objectToTick).shiftToCoordinate(monsterCoordinates[0]-1,monsterCoordinates[1],"monster");
-							} else {
-								if (heroCoordinates[1] > monsterCoordinates[1]) {
-									((objectMonster) objectToTick).shiftToCoordinate(monsterCoordinates[0],monsterCoordinates[1]+1,"monster");
+								if (gameGrid.yGrid.get(monsterCoordinates[1]).get(monsterCoordinates[0]-1).getObjectType() == "moneybag" || gameGrid.yGrid.get(monsterCoordinates[1]).get(monsterCoordinates[0]-1).getObjectType() == "monster" || gameGrid.yGrid.get(monsterCoordinates[1]).get(monsterCoordinates[0]-1).getObjectType() == "monster2" || gameGrid.yGrid.get(monsterCoordinates[1]).get(monsterCoordinates[0]-1).getObjectType() == "moneybag_lethal") {
+									if (heroCoordinates[1] > monsterCoordinates[1]) {
+										((objectMonster) objectToTick).shiftToCoordinate(monsterCoordinates[0],monsterCoordinates[1]+1,"monster");
 								} else if (heroCoordinates[1] < monsterCoordinates[1]) {
 									((objectMonster) objectToTick).shiftToCoordinate(monsterCoordinates[0],monsterCoordinates[1]-1,"monster");
+								}
+							}
+							else ((objectMonster) objectToTick).shiftToCoordinate(monsterCoordinates[0]-1,monsterCoordinates[1],"monster");
+							} else {
+								if (heroCoordinates[1] > monsterCoordinates[1]) {
+									if (gameGrid.yGrid.get(monsterCoordinates[1]+1).get(monsterCoordinates[0]).getObjectType() == "moneybag" || gameGrid.yGrid.get(monsterCoordinates[1]+1).get(monsterCoordinates[0]).getObjectType() == "monster" || gameGrid.yGrid.get(monsterCoordinates[1]+1).get(monsterCoordinates[0]).getObjectType() == "monster2" || gameGrid.yGrid.get(monsterCoordinates[1]+1).get(monsterCoordinates[0]).getObjectType() == "moneybag_lethal") {
+										if (heroCoordinates[0] > monsterCoordinates[0]) {
+											((objectMonster) objectToTick).shiftToCoordinate(monsterCoordinates[0]+1,monsterCoordinates[1],"monster");
+									} else if (heroCoordinates[0] < monsterCoordinates[0]) {
+										((objectMonster) objectToTick).shiftToCoordinate(monsterCoordinates[0]-1,monsterCoordinates[1],"monster");
+									}
+								}
+								else ((objectMonster) objectToTick).shiftToCoordinate(monsterCoordinates[0],monsterCoordinates[1]+1,"monster");
+								} else if (heroCoordinates[1] < monsterCoordinates[1]) {
+									if (gameGrid.yGrid.get(monsterCoordinates[1]-1).get(monsterCoordinates[0]).getObjectType() == "moneybag" || gameGrid.yGrid.get(monsterCoordinates[1]-1).get(monsterCoordinates[0]).getObjectType() == "monster" || gameGrid.yGrid.get(monsterCoordinates[1]-1).get(monsterCoordinates[0]).getObjectType() == "monster2" || gameGrid.yGrid.get(monsterCoordinates[1]-1).get(monsterCoordinates[0]).getObjectType() == "moneybag_lethal") {
+										if (heroCoordinates[0] > monsterCoordinates[0]) {
+											((objectMonster) objectToTick).shiftToCoordinate(monsterCoordinates[0]+1,monsterCoordinates[1],"monster");
+									} else if (heroCoordinates[0] < monsterCoordinates[0]) {
+										((objectMonster) objectToTick).shiftToCoordinate(monsterCoordinates[0]-1,monsterCoordinates[1],"monster");
+									}
+								}
+								else ((objectMonster) objectToTick).shiftToCoordinate(monsterCoordinates[0],monsterCoordinates[1]-1,"monster");
 								} else {
 									Digger.setHeroDead(true);
 									Digger.removeHeroLives();
@@ -247,8 +275,7 @@ public class gameClock implements Runnable {
 								if (Digger.Hero.yPos == 0){
 									if(gameGrid.yGrid.get(Digger.gameHeight-1).get(Digger.Hero.xPos).getObjectType() == "moneybag_lethal"){
 										Digger.setHeroDead(true);
-									}
-									else if(gameGrid.yGrid.get(Digger.gameHeight-1).get(Digger.Hero.xPos).getObjectType() == "moneybag"){
+									} else if (gameGrid.yGrid.get(Digger.gameHeight-1).get(Digger.Hero.xPos).getObjectType() == "moneybag"){
 										bagCollision = true;
 									}
 								} else if (gameGrid.yGrid.get(Digger.Hero.yPos-1).get(Digger.Hero.xPos).getObjectType() == "moneybag_lethal"){
@@ -260,6 +287,7 @@ public class gameClock implements Runnable {
 									Digger.Hero.shiftToCoordinate(Digger.Hero.xPos,Digger.Hero.yPos-1,"hero");
 								}
 							} else if (bufferedAction == "down") {
+								bagCollision = false;
 								if (Digger.Hero.yPos == Digger.gameHeight-1) {
 									if (gameGrid.yGrid.get(0).get(Digger.Hero.xPos).getObjectType() == "emerald") {
 										this.points = this.points + 50;
@@ -271,8 +299,12 @@ public class gameClock implements Runnable {
 									this.points = this.points + 50;
 								} else if (gameGrid.yGrid.get(Digger.Hero.yPos+1).get(Digger.Hero.xPos).getObjectType() == "gold") {
 									this.points = this.points + 200;
+								}else if (gameGrid.yGrid.get(Digger.Hero.yPos+1).get(Digger.Hero.xPos).getObjectType() == "moneybag") {
+									bagCollision = true;
 								}
+								if (!bagCollision){
 								Digger.Hero.shiftToCoordinate(Digger.Hero.xPos,Digger.Hero.yPos+1,"hero");
+								}
 							} else if (bufferedAction == "attack") {
 								for (int j=0;j<Digger.dumpTickableRegistry().size();j++) {
 									Object objectToTick1 = Digger.dumpTickableRegistry().get(j);
