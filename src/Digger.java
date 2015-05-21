@@ -159,7 +159,7 @@ public class Digger extends JFrame {
 			try {
 				Thread.sleep((long) .001);
 			} catch (InterruptedException exception) {
-				// TODO Auto-generated catch-block stub.
+				
 				exception.printStackTrace();
 			}
 		}
@@ -213,25 +213,7 @@ public class Digger extends JFrame {
 
 	public static void gameStart() {
 		
-//		new Digger();
-//		gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//		gameGrid.instantiateGameGrid(gameFrame,gameWidth,gameHeight);		
-//		
-//		
-//		pane = gameFrame.getContentPane();
-//		pane.setLayout(new BorderLayout());
-//		pane.add(gameRenderer, BorderLayout.CENTER);
-//		pane.add(menu, BorderLayout.NORTH);
-//		
-//		//gameFrame.getContentPane().add(gameRenderer);
-//		gameRenderer.setPreferredSize(new Dimension(640,480));
-//		gameFrame.pack();
-//		gameFrame.setVisible(true);
-//		
-//		
-//		levelManager.readLevelFile("lvl0.txt");
-//		gameClockThread.start();
-//		gameAudioThread.start();
+
 		gameStart = true;
 		
 	
