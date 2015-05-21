@@ -171,7 +171,8 @@ public class Digger extends JFrame {
 			try {
 				Thread.sleep((long) .001);
 			} catch (InterruptedException exception) {
-				//Gotta keep that IDE chugging along, more auto-generated catch blocks
+
+				//Gotta keep that IDE chugging along, more auto-generated catch blocks.
 				exception.printStackTrace();
 			}
 		}

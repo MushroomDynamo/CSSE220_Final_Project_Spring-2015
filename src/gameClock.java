@@ -226,19 +226,34 @@ public class gameClock implements Runnable {
 										this.points = this.points + 50;
 									} else if (gameGrid.yGrid.get(Digger.Hero.yPos-1).get(Digger.Hero.xPos).getObjectType() == "gold") 
 										this.points = this.points + 200;
-									}
-								Digger.Hero.shiftToCoordinate(Digger.Hero.xPos,Digger.Hero.yPos-1,"hero");
-							} else if (bufferedAction == "down") {
-								if (Digger.Hero.yPos == Digger.gameHeight-1){
-									if(gameGrid.yGrid.get(0).get(Digger.Hero.xPos).getObjectType() == "emerald"){
+									} else if (gameGrid.yGrid.get(Digger.Hero.yPos-1).get(Digger.Hero.xPos).getObjectType() == "emerald"){
 										this.points = this.points + 50;
-									}
-									if(gameGrid.yGrid.get(0).get(Digger.Hero.xPos).getObjectType() == "gold"){
+									} else if (gameGrid.yGrid.get(Digger.Hero.yPos-1).get(Digger.Hero.xPos).getObjectType() == "gold"){
 										this.points = this.points + 200;
 									}
-								} else if (gameGrid.yGrid.get(Digger.Hero.yPos+1).get(Digger.Hero.xPos).getObjectType() == "emerald"){
+								if (Digger.Hero.yPos == 0) {
+									if (gameGrid.yGrid.get(Digger.gameHeight-1).get(Digger.Hero.xPos).getObjectType() == "moneybag_lethal") {
+										//Digger.setHeroDead(true);
+									} else if(gameGrid.yGrid.get(Digger.gameHeight-1).get(Digger.Hero.xPos).getObjectType() == "moneybag") {
+										//break; cant move
+									}
+								} else if (gameGrid.yGrid.get(Digger.Hero.yPos-1).get(Digger.Hero.xPos).getObjectType() == "moneybag_lethal") {
+									//Digger.setHeroDead(true);
+								} else if (gameGrid.yGrid.get(Digger.Hero.yPos-1).get(Digger.Hero.xPos).getObjectType() == "moneybag") {
+									//break; cant move
+								}
+								Digger.Hero.shiftToCoordinate(Digger.Hero.xPos,Digger.Hero.yPos-1,"hero");
+							} else if (bufferedAction == "down") {
+								if (Digger.Hero.yPos == Digger.gameHeight-1) {
+									if (gameGrid.yGrid.get(0).get(Digger.Hero.xPos).getObjectType() == "emerald") {
+										this.points = this.points + 50;
+									}
+									if(gameGrid.yGrid.get(0).get(Digger.Hero.xPos).getObjectType() == "gold") {
+										this.points = this.points + 200;
+									}
+								} else if (gameGrid.yGrid.get(Digger.Hero.yPos+1).get(Digger.Hero.xPos).getObjectType() == "emerald") {
 									this.points = this.points + 50;
-								} else if (gameGrid.yGrid.get(Digger.Hero.yPos+1).get(Digger.Hero.xPos).getObjectType() == "gold"){
+								} else if (gameGrid.yGrid.get(Digger.Hero.yPos+1).get(Digger.Hero.xPos).getObjectType() == "gold") {
 									this.points = this.points + 200;
 								}
 								Digger.Hero.shiftToCoordinate(Digger.Hero.xPos,Digger.Hero.yPos+1,"hero");
@@ -294,6 +309,16 @@ public class gameClock implements Runnable {
 									} else {
 										//Falling logic
 										if (objectType == "monster" || objectType == "monster2") {
+											for (int j=0;j<Digger.dumpTickableRegistry().size();j++) {
+												Object objectToTick2 = Digger.dumpTickableRegistry().get(j);
+												if (objectToTick instanceof objectMonster) {
+													int[] monsterCoordinates = ((objectMonster) objectToTick).returnCoordinates();
+													if ((bagCoordinates[0] == monsterCoordinates[0]) && (bagCoordinates[1] == monsterCoordinates[1])) {
+														gameGrid.yGrid.get(monsterCoordinates[1]).get(monsterCoordinates[0]).setObjectType("null");
+														Digger.dumpTickableRegistry().remove(j);
+													}
+												}
+											}
 											System.out.println("shoobily doobily");
 										} else if (objectType == "hero") {
 											System.out.println("shoobily doobily doodily flanders");
