@@ -365,7 +365,7 @@ public class gameClock implements Runnable {
 				levelManager.refresh(Digger.returnLevelList()[Digger.returnLevelPosition()]);
 				Digger.setHeroDead(false);
 				this.doGameTicks = true;
-				}
+			}
 			try {
 				Thread.sleep(Digger.frameInterval);
 			} catch (InterruptedException e) {
