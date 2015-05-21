@@ -370,16 +370,20 @@ public class gameClock implements Runnable {
 										moneyBag.updateTickActionInterval(100);
 									} else {
 										//Falling logic
-										if (objectType == "monster" || objectType == "monster2") {
+										if (gameGrid.yGrid.get(bagCoordinates[1]).get(bagCoordinates[0]).getObjectType() == "monster" || gameGrid.yGrid.get(bagCoordinates[1]).get(bagCoordinates[0]).getObjectType() == "monster2"){
+										//if (objectType == "monster" || objectType == "monster2") {
 											for (int j=0;j<Digger.dumpTickableRegistry().size();j++) {
 												Object objectToTick2 = Digger.dumpTickableRegistry().get(j);
-												if (objectToTick instanceof objectMonster) {
-													int[] monsterCoordinates = ((objectMonster) objectToTick).returnCoordinates();
-													if ((bagCoordinates[0] == monsterCoordinates[0]) && (bagCoordinates[1] == monsterCoordinates[1])) {
+												if (objectToTick2 instanceof objectMonster) { // never enters this loop
+													System.out.println("is a monster");
+													int[] monsterCoordinates = ((objectMonster) objectToTick2).returnCoordinates();
+													if ((bagCoordinates[0] == monsterCoordinates[0]) && (bagCoordinates[1] == monsterCoordinates[1]-1)) {
 														gameGrid.yGrid.get(monsterCoordinates[1]).get(monsterCoordinates[0]).setObjectType("null");
 														Digger.dumpTickableRegistry().remove(j);
+														System.out.println("remove j");
 													}
 												}
+												System.out.println(j);
 											}
 											System.out.println("shoobily doobily");
 										} else if (objectType == "hero") {
