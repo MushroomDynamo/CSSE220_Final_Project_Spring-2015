@@ -59,6 +59,8 @@ public class Digger extends JFrame {
 	public static BufferedImage playerImage;
 	public static BufferedImage monsterImage;
 	public static BufferedImage monster2Image;
+	public static BufferedImage titlescreen1Image;
+	public static BufferedImage titlescreen2Image;
 	//End texture fields
 	
 	public Digger() {
@@ -76,6 +78,8 @@ public class Digger extends JFrame {
 			playerImage = ImageIO.read(new File(texturepath + "player.png"));
 			monsterImage = ImageIO.read(new File(texturepath + "monster.png"));
 			monster2Image = ImageIO.read(new File(texturepath + "monster2.png"));
+			titlescreen1Image = ImageIO.read(new File(texturepath + "digger_titlescreen.png"));
+			titlescreen2Image = ImageIO.read(new File(texturepath + "digger_titlescreen2.png"));
 		} catch (IOException e1) {
 			//This is pretty much here just to keep Eclipse happy
 			e1.printStackTrace();
