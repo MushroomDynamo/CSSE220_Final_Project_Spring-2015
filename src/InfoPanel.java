@@ -1,10 +1,11 @@
 import java.awt.Color;
 import java.awt.FlowLayout;
-
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class InfoPanel extends JPanel{
+public class InfoPanel extends JPanel {
+	
+	//Some basic stuff to display the hero's lives and score at the top of the screen.
 	
 	public JLabel heroLives = new JLabel();
 	public JLabel gameScore = new JLabel();

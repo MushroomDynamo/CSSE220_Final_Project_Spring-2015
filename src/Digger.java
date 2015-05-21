@@ -16,8 +16,14 @@ import javax.swing.KeyStroke;
 
 public class Digger extends JFrame {
 	
+	//Digger (based on the 1980s game of the same name)
+	//Authors: Zachary Goldasich, Jaynatha Shankar, Daniel Brodie
+	
+	//Fixed seed for random movements--ensures that random movements, when compounded with various coordinate pairs, are always the same
 	public static int seed = 24367599;
 	
+	//Set up basic game windows, boolean debounces, and the level list
+	//Also handle how fast the game renders/ticks (the two are bound together)
 	public static JFrame gameFrame = new JFrame("Digger");
 	public static gameRenderer gameRenderer = new gameRenderer();
 	public static InfoPanel menu = new InfoPanel();
@@ -35,14 +41,16 @@ public class Digger extends JFrame {
 	private static boolean gameStart = false;
 	private static Container pane;
 	
+	//Set up and initialize game-clock and audio threads
 	static gameClock gameClock = new gameClock();
 	static gameAudio gameAudio = new gameAudio();
 	static Thread gameClockThread = new Thread(gameClock);
 	static Thread gameAudioThread = new Thread(gameAudio);
 	
+	//Store the player's next movement before the next game tick
 	public static String bufferedAction = "null";
 	
-	//Texture fields
+	//Texture fields (due to try/catch blocks being required by Eclipse we can't just load the images right here)
 	public static BufferedImage dirtImage;
 	public static BufferedImage emeraldImage;
 	public static BufferedImage moneybagImage;
@@ -69,10 +77,11 @@ public class Digger extends JFrame {
 			monsterImage = ImageIO.read(new File(texturepath + "monster.png"));
 			monster2Image = ImageIO.read(new File(texturepath + "monster2.png"));
 		} catch (IOException e1) {
-			// TODO Auto-generated catch block
+			//This is pretty much here just to keep Eclipse happy
 			e1.printStackTrace();
 		}
-
+		
+		//Set things up to store necessary keybinds
 		gameRenderer.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_UP, 0), "up");
 		gameRenderer.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_LEFT, 0), "left");
 		gameRenderer.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_RIGHT, 0), "right");
@@ -81,7 +90,8 @@ public class Digger extends JFrame {
 		gameRenderer.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_D, 0), "regress_level");
 		gameRenderer.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_SPACE, 0), "attack");
 		gameRenderer.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_P, 0), "pause");
-
+		
+		//Set the bufferedAction with certain keybinds, execute actions directly with others
 		gameRenderer.getActionMap().put("right", new AbstractAction() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -152,14 +162,14 @@ public class Digger extends JFrame {
 		mainMenu mainFrame = new mainMenu();
 		
 		mainFrame.setSize(600, 600);
-		mainFrame.setTitle("LightsOut- Jayanth Shankar");
+		mainFrame.setTitle("Digger - Title Screen");
 		mainFrame.setVisible(true);
 		
 		while(!gameStart){
 			try {
 				Thread.sleep((long) .001);
 			} catch (InterruptedException exception) {
-				// TODO Auto-generated catch-block stub.
+				//Gotta keep that IDE chugging along, more auto-generated catch blocks
 				exception.printStackTrace();
 			}
 		}
@@ -170,6 +180,7 @@ public class Digger extends JFrame {
 			
 			new Digger();
 			gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+			//Construct the game grid that stores all of the necessary information about where to render objects to the screen
 			gameGrid.instantiateGameGrid(gameFrame,gameWidth,gameHeight);		
 			
 			
@@ -183,12 +194,14 @@ public class Digger extends JFrame {
 			gameFrame.pack();
 			gameFrame.setVisible(true);
 			
-			
+			//Load the first level
 			levelManager.readLevelFile("lvl0.txt");
 			gameClockThread.start();
 			gameAudioThread.start();
 			gameStart = true;
 			
+			//Re-render the game frame constantly with a framerate of 1/frameInterval fps
+			//Break if shutdown boolean is set to true
 			while (true) {
 				pane.repaint();
 				try {
@@ -200,6 +213,7 @@ public class Digger extends JFrame {
 					break;
 				}
 			}
+			//Ran out of lives? No continuing for you, sonny!
 			gameClockThread.stop();
 			System.out.println("You are dead.");
 			gameFrame.setVisible(false);
@@ -210,7 +224,8 @@ public class Digger extends JFrame {
 		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		gameStart = false;
 	}
-
+	
+	//This method is likely junk
 	public static void gameStart() {
 		
 //		new Digger();
@@ -236,7 +251,8 @@ public class Digger extends JFrame {
 		
 	
 	}
-
+	
+	//Basic setter/getter methods for sensitive fields and other utility functions
 	public int returnLevel(){
 		return levelPosition;
 	}
@@ -244,16 +260,21 @@ public class Digger extends JFrame {
 	public static void closeGame(){
 		shutdown = true;
 	 	}
-
+	
+	//Whenever an object is instantiated it must be inserted into the tickableRegistry ArrayList in order for gameClock to govern over it
+	//All tickable objects call this method in their constructor methods in order to cut down on hassle
 	public static boolean insertObjectIntoTickableRegistry(Object object) {
 		tickableRegistry.add(object);
 		return true;
 	}
 	
+	//Expose the tickableRegistry for operation
 	public static ArrayList<Object> dumpTickableRegistry() {
 		return tickableRegistry;
 	}
 	
+	//Christ, this method was a mess to implement.
+	//This basically just clears everything off the tickable registry and clears it from the renderer IF it is governed by gameClock
 	public static boolean clearTickableRegistry() {
 //		gameClock.doGameTicks = false;
 //		for (int i=0;i<tickableRegistry.size();i++) {

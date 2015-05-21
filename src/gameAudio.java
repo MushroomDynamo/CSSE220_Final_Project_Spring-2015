@@ -8,6 +8,8 @@ import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
 public class gameAudio implements Runnable {
+	
+	//A whole bunch of boilerplate code to loop the game soundtrack over...and over...and over...and over...Yeesh.
 
 	@Override
 	public void run() {
