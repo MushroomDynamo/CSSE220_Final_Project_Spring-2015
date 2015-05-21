@@ -3,6 +3,9 @@ import java.util.Random;
 
 public class gameClock implements Runnable {
 	
+	//This one's where all the fun stuff happens!
+	//If it's not a static, non-moving object, chances are the code governing how it works is in here
+	
 	private int measuredTickClock = 0;
 	public int tickLoopCounter = 1;
 	public boolean doGameTicks = true;
@@ -14,6 +17,8 @@ public class gameClock implements Runnable {
 	@Override
 	public void run() {
 		while (!Thread.interrupted()) {
+			//Increment the tick clock and wrap it back around if the value exceeds 1 sec
+			//Whether an object ticks depends on its tickActionInterval and the current measuredTickClock (determined via modulo)
 			this.measuredTickClock = this.measuredTickClock + Digger.frameInterval;
 			if (this.measuredTickClock == 1000) {
 				this.measuredTickClock = 0;
@@ -29,6 +34,7 @@ public class gameClock implements Runnable {
 				Digger.menu.setLifeLabel(Digger.getHeroLives());
 				Digger.menu.setgameScore(this.points);
 				
+				//Advance the level if all emeralds are collected by one means or another
 				this.allEmeraldsCollected = true;
 				for (int b=0;b<gameGrid.yGrid.size();b++) {
 					ArrayList<objectDrawable> xGrid = gameGrid.yGrid.get(b);
@@ -48,7 +54,8 @@ public class gameClock implements Runnable {
 						levelManager.readLevelFile(levelList[levelPosition]);
 						}
 					}
-
+				
+				//Iterate through the entire tickableRegistry and handle every object that needs ticking
 				for (int i=0;i<Digger.dumpTickableRegistry().size();i++) {
 					//Monster logic in here
 					Object objectToTick = Digger.dumpTickableRegistry().get(i);
@@ -73,6 +80,9 @@ public class gameClock implements Runnable {
 						}
 					}
 					
+					//If a monster, but also a digging monster, then AI is easy!
+					//Moves left or right to get to the hero's x-coordinate, then moves vertically to close in for the kill.
+					//Basically impossible to defeat or evade without abusing screen-wrapping.
 					if ((objectToTick instanceof objectMonster) & (!(objectToTick instanceof objectMonsterNonDigging))) {
 						int tickInterval = ((objectMonster) objectToTick).returnTickActionInterval();
 						if (this.measuredTickClock % tickInterval == 0) {
@@ -98,6 +108,8 @@ public class gameClock implements Runnable {
 							}
 								}
 					} else if (objectToTick instanceof objectMonsterNonDigging) {
+						//If the monster can't dig, then move it around and rotate it 90 degrees when it hits a dead end
+						//Not the smartest monster logic so they move pretty fast to compensate for it--they'll definitely getcha if you don't pay attention
 								int[] heroCoordinates = Digger.returnHeroCoordinates();
 								int[] monsterCoordinates = ((objectMonster) objectToTick).returnCoordinates();
 								objectMonsterNonDigging monsterNonDigging = ((objectMonsterNonDigging) objectToTick);
@@ -172,6 +184,7 @@ public class gameClock implements Runnable {
 								}
 							}
 					} else if (objectToTick instanceof objectHero) {
+						//Essentially this block of code reads the bufferedAction field of Digger and moves the hero around based on what it sees
 						int tickInterval = ((objectHero) objectToTick).returnTickActionInterval();
 						if (this.measuredTickClock % tickInterval == 0) {
 							String bufferedAction = Digger.bufferedAction;
@@ -259,6 +272,7 @@ public class gameClock implements Runnable {
 								}
 							}
 						}
+					//Is it a moneybag? Then do some moneybag stuff (falling, manslaughter, etc)
 					} else if (objectToTick instanceof objectMoneyBag) {
 						objectMoneyBag moneyBag = ((objectMoneyBag) objectToTick);
 						int tickInterval = moneyBag.returnTickActionInterval();
@@ -328,6 +342,7 @@ public class gameClock implements Runnable {
 				}
 			}
 			
+			//Is the hero dead? Stop the game from ticking, remove the hero, call respawn methods where necessary
 			if(Digger.getHeroDead()){
 				this.doGameTicks = false;
 				try {

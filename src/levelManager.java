@@ -7,6 +7,9 @@ public abstract class levelManager {
 	
 	private static String path;
 	
+	//This classfile is fairly straightforward. Read in the appropriate level file, check each ascii character code (48 = 0), then:
+	//Add the corresponding object type to the game grid and if it's a tickable object, instantiate it with coordinates
+	//The other two methods in here are basically stripped-down versions of readLevelFile(levelName) that only refresh certain objects
 	public static void readLevelFile(String levelName) {
 		try {
 			path = new java.io.File(".").getCanonicalPath();

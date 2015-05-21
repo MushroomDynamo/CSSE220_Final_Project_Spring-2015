@@ -1,5 +1,6 @@
 
 public class objectMoneyBag extends objectMovable {
+	//A bit slow, but the hero PROBABLY wants time to get out of the way, yes?
 	protected int tickActionInterval = 500;
 	public boolean falling = false;
 	
