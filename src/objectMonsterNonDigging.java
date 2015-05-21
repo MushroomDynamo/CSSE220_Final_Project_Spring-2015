@@ -1,6 +1,7 @@
 
 public class objectMonsterNonDigging extends objectMonster {
 	
+	//These things are FAST. Why? They're dumb as bricks!
 	protected int tickActionInterval = 160;
 	public int lastAction = 0;
 	public boolean foundMovement = false;

@@ -17,7 +17,6 @@ public class objectMovable {
 			return true;
 		} 
 			return false;
-		
 	}
 	
 	//In case we want to check what kind of object, if any, is at a provided coordinate pair
