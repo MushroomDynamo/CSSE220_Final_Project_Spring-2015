@@ -230,10 +230,16 @@ public class gameClock implements Runnable {
 									this.points = this.points + 50;
 								} else if (gameGrid.yGrid.get(Digger.Hero.yPos).get(Digger.Hero.xPos+1).getObjectType() == "gold") {
 									this.points = this.points + 200;
-								}
-									else if (gameGrid.yGrid.get(Digger.Hero.yPos).get(Digger.Hero.xPos+1).getObjectType() == "moneybag"){
-										gameGrid.yGrid.get(Digger.Hero.yPos).get(Digger.Hero.xPos+2).setObjectType("moneybag");
+								} else if (gameGrid.yGrid.get(Digger.Hero.yPos).get(Digger.Hero.xPos+1).getObjectType() == "moneybag"){
+									objectMoneyBag moneyBag;
+									for (int j=1;j<Digger.dumpTickableRegistry().size();j++) {
+										int[] coordinates = ((objectMovable) Digger.dumpTickableRegistry().get(j)).returnCoordinates();
+										if (coordinates[0] == Digger.Hero.xPos+1 && coordinates[1] == Digger.Hero.yPos) {
+											moneyBag = (objectMoneyBag) Digger.dumpTickableRegistry().get(j);
+											moneyBag.shiftToCoordinate(Digger.Hero.xPos+2,Digger.Hero.yPos,"moneybag");
 										}
+									}
+								}
 								Digger.Hero.shiftToCoordinate(Digger.Hero.xPos+1,Digger.Hero.yPos,"hero");
 							} else if (bufferedAction == "left") {
 								if (Digger.Hero.xPos == 0) {
@@ -247,9 +253,15 @@ public class gameClock implements Runnable {
 									this.points = this.points + 50;
 								} else if (gameGrid.yGrid.get(Digger.Hero.yPos).get(Digger.Hero.xPos-1).getObjectType() == "gold") {
 									this.points = this.points + 200;
-								}
-								else if (gameGrid.yGrid.get(Digger.Hero.yPos).get(Digger.Hero.xPos-1).getObjectType() == "moneybag"){
-									gameGrid.yGrid.get(Digger.Hero.yPos).get(Digger.Hero.xPos-2).setObjectType("moneybag");
+								} else if (gameGrid.yGrid.get(Digger.Hero.yPos).get(Digger.Hero.xPos-1).getObjectType() == "moneybag"){
+									objectMoneyBag moneyBag;
+									for (int j=1;j<Digger.dumpTickableRegistry().size();j++) {
+										int[] coordinates = ((objectMovable) Digger.dumpTickableRegistry().get(j)).returnCoordinates();
+										if (coordinates[0] == Digger.Hero.xPos-1 && coordinates[1] == Digger.Hero.yPos) {
+											moneyBag = (objectMoneyBag) Digger.dumpTickableRegistry().get(j);
+											moneyBag.shiftToCoordinate(Digger.Hero.xPos-2,Digger.Hero.yPos,"moneybag");
+										}
+									}
 								}
 								Digger.Hero.shiftToCoordinate(Digger.Hero.xPos-1,Digger.Hero.yPos,"hero");
 							} else if (bufferedAction == "up") {
