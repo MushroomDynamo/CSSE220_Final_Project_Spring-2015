@@ -17,7 +17,7 @@ import javax.swing.KeyStroke;
 public class Digger extends JFrame {
 	
 	//Digger (based on the 1980s game of the same name)
-	//Authors: Zachary Goldasich, Jaynatha Shankar, Daniel Brodie
+	//Authors: Zachary Goldasich, Jayanth Shankar, Daniel Brodie
 	
 	//Fixed seed for random movements--ensures that random movements, when compounded with various coordinate pairs, are always the same
 	public static int seed = 24367599;
@@ -63,7 +63,7 @@ public class Digger extends JFrame {
 	public static BufferedImage titlescreen2Image;
 	//End texture fields
 	
-	public Digger() {
+	public Digger() {	
 		
 		//Load textures
 		String texturepath;
