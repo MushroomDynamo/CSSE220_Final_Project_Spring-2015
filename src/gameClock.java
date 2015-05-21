@@ -4,7 +4,7 @@ import java.util.Random;
 public class gameClock implements Runnable {
 	
 	private int measuredTickClock = 0;
-	private int tickLoopCounter = 1;
+	public int tickLoopCounter = 1;
 	public boolean doGameTicks = true;
 	public Random randomGenerator = new Random();
 	private int points = 0;
