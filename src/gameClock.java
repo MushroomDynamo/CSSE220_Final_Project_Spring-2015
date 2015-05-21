@@ -64,7 +64,7 @@ public class gameClock implements Runnable {
 					Object objectToTick = Digger.dumpTickableRegistry().get(i);
 					
 					randomGenerator.setSeed(System.currentTimeMillis());
-					int newInt = randomGenerator.nextInt(1999);
+					int newInt = randomGenerator.nextInt(5999);
 					if (newInt == 56 && this.changedMonsterThisStep == false) {
 						if (objectToTick instanceof objectMonster) {
 							if (objectToTick instanceof objectMonsterNonDigging) {
