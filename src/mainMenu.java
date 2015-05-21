@@ -2,18 +2,12 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.image.BufferedImage;
-
 import javax.swing.JButton;
 import javax.swing.JFrame;
 
-
-
-
 public class mainMenu extends JFrame{
 
-	private static final long serialVersionUID = 1L;
 	private JButton startButton;
-		
 	
 	BufferedImage myPicture = Digger.titlescreen1Image;
 	TitlePanel titlePanel = new TitlePanel();
