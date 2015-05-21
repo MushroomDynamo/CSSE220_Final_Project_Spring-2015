@@ -297,9 +297,14 @@ public class Digger extends JFrame {
 		dead = state;
 	}
 	
-	public static void removeHeroLives(){
-			if(lives>=1){
-			lives = lives - 1;}
+	public static void removeHeroLives() {
+			if (lives>=1) {
+				lives = lives - 1;
+			}
+	}
+	
+	public static void addHeroLives(int addLives) {
+		lives = lives + addLives;
 	}
 	
 	public static boolean getHeroDead(){

@@ -52,6 +52,7 @@ public class gameClock implements Runnable {
 						//Don't let this happen!
 					} else {
 					System.out.println("level "+levelPosition);
+					Digger.addHeroLives(1);
 					Digger.clearTickableRegistry();
 					levelManager.readLevelFile(levelList[levelPosition]);
 					}
@@ -222,13 +223,13 @@ public class gameClock implements Runnable {
 										this.points = this.points + 50;
 									} else if (gameGrid.yGrid.get(Digger.gameHeight-1).get(Digger.Hero.xPos).getObjectType() == "gold") {
 										this.points = this.points + 200;
-									} else if (gameGrid.yGrid.get(Digger.Hero.yPos-1).get(Digger.Hero.xPos).getObjectType() == "emerald") {
+									} else if (gameGrid.yGrid.get(Digger.gameHeight-1).get(Digger.Hero.xPos).getObjectType() == "emerald") {
 										this.points = this.points + 50;
-									} else if (gameGrid.yGrid.get(Digger.Hero.yPos-1).get(Digger.Hero.xPos).getObjectType() == "gold") 
+									} else if (gameGrid.yGrid.get(Digger.gameHeight-1).get(Digger.Hero.xPos).getObjectType() == "gold") 
 										this.points = this.points + 200;
-									} else if (gameGrid.yGrid.get(Digger.Hero.yPos-1).get(Digger.Hero.xPos).getObjectType() == "emerald"){
+									} else if (gameGrid.yGrid.get(Digger.gameHeight-1).get(Digger.Hero.xPos).getObjectType() == "emerald"){
 										this.points = this.points + 50;
-									} else if (gameGrid.yGrid.get(Digger.Hero.yPos-1).get(Digger.Hero.xPos).getObjectType() == "gold"){
+									} else if (gameGrid.yGrid.get(Digger.gameHeight-1).get(Digger.Hero.xPos).getObjectType() == "gold"){
 										this.points = this.points + 200;
 									}
 								if (Digger.Hero.yPos == 0) {
