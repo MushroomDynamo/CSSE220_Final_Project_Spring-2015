@@ -18,6 +18,10 @@ public class objectMoneyBag extends objectMovable {
 		int[] coordinatePair = {this.xPos,this.yPos};
 		return coordinatePair;
 	}
+	
+	public void updateTickActionInterval(int interval) {
+		this.tickActionInterval = interval;
+	}
 
 }
 

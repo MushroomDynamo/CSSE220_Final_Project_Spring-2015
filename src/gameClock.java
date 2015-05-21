@@ -348,6 +348,7 @@ public class gameClock implements Runnable {
 									if (objectType != "ground" && objectType != "emerald" && objectType != "moneybag") {
 										moneyBag.falling = true;
 										gameGrid.yGrid.get(bagCoordinates[1]).get(bagCoordinates[0]).setObjectType("moneybag_lethal");
+										moneyBag.updateTickActionInterval(100);
 									}
 								} else {
 									//Currently, nothing else happens
@@ -366,6 +367,7 @@ public class gameClock implements Runnable {
 										//There is no obstruction under the moneybag, so set to a falling state/texture
 										moneyBag.falling = true;
 										gameGrid.yGrid.get(bagCoordinates[1]).get(bagCoordinates[0]).setObjectType("moneybag_lethal");
+										moneyBag.updateTickActionInterval(100);
 									} else {
 										//Falling logic
 										if (objectType == "monster" || objectType == "monster2") {
@@ -392,6 +394,7 @@ public class gameClock implements Runnable {
 											} else {
 												gameGrid.yGrid.get(bagCoordinates[1]-1).get(bagCoordinates[0]).setObjectType("null");
 												gameGrid.yGrid.get(bagCoordinates[1]).get(bagCoordinates[0]).setObjectType("moneybag_lethal");
+												moneyBag.updateTickActionInterval(100);
 											}
 										}
 									}
