@@ -5,7 +5,7 @@ import java.awt.image.BufferedImage;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 
-public class mainMenu extends JFrame{
+public class mainMenu extends JFrame {
 
 	private JButton startButton;
 	
@@ -18,7 +18,7 @@ public class mainMenu extends JFrame{
 		setBackground(Color.blue);
 		this.startButton = new JButton("Start!");
 		this.startButton.setPreferredSize(new Dimension(50, 50));
-		add(this.startButton,BorderLayout.NORTH);
+		add(this.startButton,BorderLayout.SOUTH);
 		this.startButton.addActionListener(new gameStartListener());
 		add(this.titlePanel,BorderLayout.CENTER);
 		this.titlePanel.setVisible(true);

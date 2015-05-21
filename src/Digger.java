@@ -161,9 +161,21 @@ public class Digger extends JFrame {
 	}
 	
 	public static void main(String[] args){
+		
+		String texturepath;
+		try {
+			texturepath = new java.io.File(".").getCanonicalPath();
+			texturepath = texturepath + "\\texture\\";
+			titlescreen1Image = ImageIO.read(new File(texturepath + "digger_titlescreen.png"));
+			titlescreen2Image = ImageIO.read(new File(texturepath + "digger_titlescreen2.png"));
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+
 		mainMenu mainFrame = new mainMenu();
 		
-		mainFrame.setSize(600, 600);
+		mainFrame.setSize(1188, 600);
 		mainFrame.setTitle("Digger - Title Screen");
 		mainFrame.setVisible(true);
 		
