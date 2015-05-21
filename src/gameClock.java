@@ -13,6 +13,7 @@ public class gameClock implements Runnable {
 	private int points = 0;
 	private boolean allEmeraldsCollected = true;
 	private boolean changedMonsterThisStep = false;
+	private boolean bagCollision = false;
 	
 	@Override
 	public void run() {
@@ -204,6 +205,9 @@ public class gameClock implements Runnable {
 									else if (gameGrid.yGrid.get(Digger.Hero.yPos).get(Digger.Hero.xPos+1).getObjectType() == "gold"){
 										this.points = this.points + 200;
 								}
+									else if (gameGrid.yGrid.get(Digger.Hero.yPos).get(Digger.Hero.xPos+1).getObjectType() == "moneybag"){
+										gameGrid.yGrid.get(Digger.Hero.yPos).get(Digger.Hero.xPos+2).setObjectType("moneybag");
+										}
 								Digger.Hero.shiftToCoordinate(Digger.Hero.xPos+1,Digger.Hero.yPos,"hero");
 							} else if (bufferedAction == "left") {
 								if (Digger.Hero.xPos == 0){
@@ -220,8 +224,12 @@ public class gameClock implements Runnable {
 								else if (gameGrid.yGrid.get(Digger.Hero.yPos).get(Digger.Hero.xPos-1).getObjectType() == "gold"){
 									this.points = this.points + 200;
 								}
+								else if (gameGrid.yGrid.get(Digger.Hero.yPos).get(Digger.Hero.xPos-1).getObjectType() == "moneybag"){
+									gameGrid.yGrid.get(Digger.Hero.yPos).get(Digger.Hero.xPos-2).setObjectType("moneybag");
+								}
 								Digger.Hero.shiftToCoordinate(Digger.Hero.xPos-1,Digger.Hero.yPos,"hero");
 							} else if (bufferedAction == "up") {
+								bagCollision = false;
 								if (Digger.Hero.yPos == 0){
 									if(gameGrid.yGrid.get(Digger.gameHeight-1).get(Digger.Hero.xPos).getObjectType() == "emerald"){
 										this.points = this.points + 50;
@@ -238,19 +246,21 @@ public class gameClock implements Runnable {
 								}
 								if (Digger.Hero.yPos == 0){
 									if(gameGrid.yGrid.get(Digger.gameHeight-1).get(Digger.Hero.xPos).getObjectType() == "moneybag_lethal"){
-										//Digger.setHeroDead(true);
+										Digger.setHeroDead(true);
 									}
 									else if(gameGrid.yGrid.get(Digger.gameHeight-1).get(Digger.Hero.xPos).getObjectType() == "moneybag"){
-										//break; cant move
+										bagCollision = true;
 									}
 								}
 								else if (gameGrid.yGrid.get(Digger.Hero.yPos-1).get(Digger.Hero.xPos).getObjectType() == "moneybag_lethal"){
-									//Digger.setHeroDead(true);
+									Digger.setHeroDead(true);
 								}
 								else if (gameGrid.yGrid.get(Digger.Hero.yPos-1).get(Digger.Hero.xPos).getObjectType() == "moneybag"){
-									//break; cant move
+									bagCollision = true;
 								}
+								if (!bagCollision){
 								Digger.Hero.shiftToCoordinate(Digger.Hero.xPos,Digger.Hero.yPos-1,"hero");
+								}
 							} else if (bufferedAction == "down") {
 								if (Digger.Hero.yPos == Digger.gameHeight-1){
 									if(gameGrid.yGrid.get(0).get(Digger.Hero.xPos).getObjectType() == "emerald"){
