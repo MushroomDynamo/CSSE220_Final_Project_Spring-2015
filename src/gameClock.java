@@ -286,6 +286,7 @@ public class gameClock implements Runnable {
 								if (objectType != "ground" && objectType != "emerald" && objectType != "moneybag") {
 									if (moneyBag.falling == false) {
 										//There is no obstruction under the moneybag, so set to a falling state/texture
+										
 										moneyBag.falling = true;
 										gameGrid.yGrid.get(bagCoordinates[1]).get(bagCoordinates[0]).setObjectType("moneybag_lethal");
 									} else {

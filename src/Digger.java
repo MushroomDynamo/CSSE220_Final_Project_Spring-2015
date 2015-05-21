@@ -164,7 +164,9 @@ public class Digger extends JFrame {
 			}
 		}
 		if(gameStart){
+			
 			System.out.println("Running");
+			mainFrame.dispose();
 			
 			new Digger();
 			gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
