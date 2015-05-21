@@ -46,6 +46,7 @@ public abstract class levelManager {
 					}
 				}
 			}
+			Digger.gameClock.tickLoopCounter = 1;
 			reader.close();
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -82,6 +83,7 @@ public abstract class levelManager {
 					}
 				}
 			}
+			Digger.gameClock.tickLoopCounter = 1;
 			reader.close();
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -111,6 +113,7 @@ public abstract class levelManager {
 					}
 				}
 			}
+			Digger.gameClock.tickLoopCounter = 1;
 			reader.close();
 		} catch (IOException e) {
 			e.printStackTrace();
