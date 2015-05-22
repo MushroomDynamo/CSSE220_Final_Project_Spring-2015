@@ -1,5 +1,13 @@
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
+
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 
 public class gameClock implements Runnable {
 	
@@ -416,6 +424,18 @@ public class gameClock implements Runnable {
 			//Is the hero dead? Stop the game from ticking, remove the hero, call respawn methods where necessary
 			if (Digger.getHeroDead()) {
 				this.doGameTicks = false;
+				
+				try {
+					String audiopath = new java.io.File(".").getCanonicalPath();
+					audiopath = audiopath + "\\audio\\";
+					AudioInputStream inputStream = AudioSystem.getAudioInputStream(new File(audiopath + "dead.wav"));
+					Clip clip = AudioSystem.getClip();
+					clip.open(inputStream);
+			        clip.start();
+				} catch (IOException | UnsupportedAudioFileException | LineUnavailableException e) {
+					e.printStackTrace();
+				}
+				
 				try {
 					Thread.sleep(Digger.frameInterval);
 				} catch (InterruptedException e) {

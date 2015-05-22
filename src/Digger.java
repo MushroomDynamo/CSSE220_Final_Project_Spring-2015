@@ -310,9 +310,9 @@ public class Digger extends JFrame {
 	}
 	
 	public static void removeHeroLives() {
-			if (lives>=1) {
-				lives = lives - 1;
-			}
+		if (lives>=1) {
+			lives = lives - 1;
+		}
 	}
 	
 	public static void addHeroLives(int addLives) {
